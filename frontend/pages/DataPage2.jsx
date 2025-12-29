@@ -44,7 +44,6 @@ const DataPage2 = () => {
   const [indentRows, setIndentRows] = useState([]);
   const [filteredRows, setFilteredRows] = useState([]);
   const [filteredIndentRows, setFilteredIndentRows] = useState([]);
-  const [isDarkMode, setIsDarkMode] = useState(false);
   const [animationKey, setAnimationKey] = useState(0);
   const [excelFile, setExcelFile] = useState(null);
   const [excelData, setExcelData] = useState([]);
@@ -254,20 +253,20 @@ const DataPage2 = () => {
   }, [prismRows]);
 
   const orderStats = useMemo(() => {
-  if (!Array.isArray(prismRows) || prismRows.length === 0) {
-    return { completed: 0, pending: 0 };
-  }
+    if (!Array.isArray(prismRows) || prismRows.length === 0) {
+      return { completed: 0, pending: 0 };
+    }
 
-  const completed = new Set(
-    prismRows.filter(r => r.OrderStatus === "YES").map(r => r.UNIQUE_CODE)
-  ).size;
+    const completed = new Set(
+      prismRows.filter(r => r.OrderStatus === "YES").map(r => r.UNIQUE_CODE)
+    ).size;
 
-  const pending = new Set(
-    prismRows.filter(r => r.OrderStatus === "NO").map(r => r.UNIQUE_CODE)
-  ).size;
+    const pending = new Set(
+      prismRows.filter(r => r.OrderStatus === "NO").map(r => r.UNIQUE_CODE)
+    ).size;
 
-  return { completed, pending };
-}, [prismRows]);
+    return { completed, pending };
+  }, [prismRows]);
 
 
 
@@ -359,17 +358,17 @@ const DataPage2 = () => {
   };
 
   // Match prism rows with filteredRows using ItemCode / UNIQUE_CODE
-const filteredPrismRows = useMemo(() => {
-  if (!Array.isArray(prismRows) || prismRows.length === 0) return [];
+  const filteredPrismRows = useMemo(() => {
+    if (!Array.isArray(prismRows) || prismRows.length === 0) return [];
 
-  const filteredItemCodes = new Set(
-    filteredRows.map(r => String(r.ItemCode))
-  );
+    const filteredItemCodes = new Set(
+      filteredRows.map(r => String(r.ItemCode))
+    );
 
-  return prismRows.filter(pr =>
-    filteredItemCodes.has(String(pr.UNIQUE_CODE))
-  );
-}, [filteredRows, prismRows]);
+    return prismRows.filter(pr =>
+      filteredItemCodes.has(String(pr.UNIQUE_CODE))
+    );
+  }, [filteredRows, prismRows]);
 
 
   // Zoomed component renderer
@@ -490,7 +489,7 @@ const filteredPrismRows = useMemo(() => {
   };
 
   return (
-    <div className={`${isDarkMode ? "dark" : ""} bg-[var(--color-background)] text-[var(--color-foreground)] transition-colors duration-300 relative ${activeComponent ? 'overflow-hidden' : ''}`}>
+    <div className={`bg-[var(--color-background)] text-[var(--color-foreground)] transition-colors duration-300 relative ${activeComponent ? 'overflow-hidden' : ''}`}>
 
       {/* Zoomed Component Overlay */}
       {renderZoomedComponent()}
@@ -506,7 +505,7 @@ const filteredPrismRows = useMemo(() => {
       />
 
 
-     
+
 
       {/* Fixed Filter Bar */}
       <div className={`pt-18 fixed x-1 max-h-[10%] left-0 right-0 z-10 bg-[var(--color-background)]/95 backdrop-blur-sm shadow-sm ${activeComponent ? 'blur-sm' : ''}`}>

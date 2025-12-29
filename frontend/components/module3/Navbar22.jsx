@@ -139,35 +139,10 @@ const NavItemWithDropdown = ({
 
 const Navbar2 = () => {
     const [isOpen, setIsOpen] = useState(false);
-    const [isDarkMode, setIsDarkMode] = useState(false);
     const [openDropdowns, setOpenDropdowns] = useState({});
     const [showUploadForm, setShowUploadForm] = useState(false);
     const [showUploadForm2, setShowUploadForm2] = useState(false);
     const navbarRef = useRef(null);
-
-    // Initialize theme from localStorage or system preference
-    useEffect(() => {
-        // Check if theme is stored in localStorage
-        const storedTheme = localStorage.getItem('theme');
-        if (storedTheme) {
-            setIsDarkMode(storedTheme === 'dark');
-        } else {
-            // If no stored theme, check system preference
-            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            setIsDarkMode(prefersDark);
-        }
-    }, []);
-
-    // Apply theme to document and save to localStorage
-    useEffect(() => {
-        if (isDarkMode) {
-            document.documentElement.classList.add('dark');
-            localStorage.setItem('theme', 'dark');
-        } else {
-            document.documentElement.classList.remove('dark');
-            localStorage.setItem('theme', 'light');
-        }
-    }, [isDarkMode]);
 
     // Close navbar when clicking outside
     useEffect(() => {
@@ -217,49 +192,7 @@ const Navbar2 = () => {
                 <LayoutGrid stroke={isOpen ? "#ef4444" : "#fb923c"} />
             </button>
 
-            {/* Universal Theme Toggle Button - Only visible when navbar is open */}
-            {isOpen && (
-                <button
-                    onClick={() => setIsDarkMode(!isDarkMode)}
-                    className="fixed top-4 right-4 z-50 p-2 clip-angled bg-orange-600 dark:bg-orange-700 hover:bg-orange-500 dark:hover:bg-orange-600 shadow-md shadow-orange-500/20 hover:shadow-lg hover:shadow-orange-500/30 transition-all duration-300 transform"
-                    style={{
-                        animation: 'slideIn 0.3s ease-out'
-                    }}
-                    aria-label="Toggle theme"
-                >
-                    {isDarkMode ? (
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-5 w-5 text-yellow-300"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                        >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
-                            />
-                        </svg>
-                    ) : (
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-5 w-5 text-gray-800"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                        >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
-                            />
-                        </svg>
-                    )}
-                </button>
-            )}
+
 
             {/* Navbar Overlay */}
             {isOpen && (
@@ -383,27 +316,7 @@ const Navbar2 = () => {
                         </div>
                     </nav>
 
-                    {/* Navbar Footer - Reduced padding and icon size */}
-                    <div className="p-3 border-t border-orange-800/30">
-                        <div className="flex items-center justify-between">
-                            <span className="text-xs text-orange-500 dark:text-orange-400">Theme</span>
-                            <button
-                                onClick={() => setIsDarkMode(!isDarkMode)}
-                                className="p-1 clip-angled text-orange-500 hover:text-orange-300 dark:text-orange-400 dark:hover:text-orange-200 focus:outline-none"
-                                aria-label="Toggle theme"
-                            >
-                                {isDarkMode ? (
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-yellow-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                                    </svg>
-                                ) : (
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-gray-800" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-                                    </svg>
-                                )}
-                            </button>
-                        </div>
-                    </div>
+
                 </div>
             </div>
 

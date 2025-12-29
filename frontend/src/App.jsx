@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import './App.css';
 import { ThemeProvider } from "./context/ThemeContext";
-import ThemeToggle from "./components/ThemeToggle";
 import GlobalLoader from "./components/GlobalLoader";
 import Navbar from "../components/module1/Navbar"; // Global Navbar for all pages
 
