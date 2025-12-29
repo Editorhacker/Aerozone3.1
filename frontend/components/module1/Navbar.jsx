@@ -20,6 +20,7 @@ const NAV_ITEMS = [
     id: "module3",
     children: [
       { to: "/Module3Page1", id: "Module3Page1", label: "PRISM", icon: "📋" },
+      { to: "/Module3Page2", id: "Module3Page2", label: "ANOTHER PAGE", icon: "📄" },
     ],
   },
   {
@@ -76,13 +77,15 @@ const Navbar = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 w-full z-50 bg-transparent py-3 ${!isHomePage ? 'backdrop-blur-md' : ''}`}
+      className={`fixed top-0 left-0 w-full z-50 bg-transparent pt-2.5 pb-0 ${!isHomePage ? 'backdrop-blur-md' : ''}`}
     >
       <div className="w-full px-4 sm:px-6 lg:px-8 flex justify-between items-center">
         {/* Logo */}
-        <Link to="/" className="flex items-center space-x-4">
-          <img src="/logo.jpg" alt="Aerozone" className="h-12 w-auto object-contain" />
+        <Link to="/" className="flex items-center space-x-3">
+          <img src="/logo-new.png" alt="AEROZON" className="h-10 w-auto object-contain" />
+          <span className="text-4xl font-bold text-gray-900 dark:text-white tracking-wide leading-none">AEROZON</span>
         </Link>
+
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-1" ref={dropdownRef}>
@@ -179,10 +182,10 @@ const Navbar = () => {
           }`}
       >
         {/* Menu Header */}
-        <div className="flex items-center justify-between p-5 border-b border-cyan-500/20">
-          <div className="flex items-center gap-3">
-            <img src="/logo.jpg" alt="Aerozone" className="h-10 w-auto object-contain" />
-            <span className="text-xs text-cyan-300/60 font-mono">NAVIGATION</span>
+        <div className="flex items-center justify-between p-4 border-b border-cyan-500/20">
+          <div className="flex items-center gap-2">
+            <img src="/logo-new.png" alt="AEROZON" className="h-8 w-auto object-contain" />
+            <span className="text-3xl font-bold text-gray-900 dark:text-white leading-none">AEROZON</span>
           </div>
           <button
             onClick={() => setIsMobileMenuOpen(false)}
@@ -279,6 +282,7 @@ const Navbar = () => {
           </div>
         </div>
       </div>
+
 
     </header>
   );
