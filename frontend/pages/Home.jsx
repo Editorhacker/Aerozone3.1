@@ -5,8 +5,8 @@
 import React, { useEffect, useRef } from "react";
 // Navbar is now global in App.jsx
 import { gsap } from "gsap";
-import astronaut from "../assets/astronaut.png";
-import earth from "../assets/earth.png";
+import astronaut from "../src/assets/astronaut.png";
+import earth from "../src/assets/earth.png";
 
 export default function Home() {
   const astronautRef = useRef(null);
