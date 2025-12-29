@@ -36,7 +36,7 @@ export default function BarLineChart({ filters }) {
           return;
         }
 
-        const res = await fetch("http://localhost:5000/api/data/get-data");
+        const res = await fetch("https://aerozone3-1.onrender.com/api/data/get-data");
         const data = await res.json();
 
         // Parse and group by Month-Year

@@ -77,8 +77,8 @@ const DataPage2 = () => {
     const fetchData = async () => {
       try {
         const [dataRes, indentRes] = await Promise.all([
-          fetch("http://localhost:5000/api/data/get-data"),
-          fetch("http://localhost:5000/api/data/get-indent")
+          fetch("https://aerozone3-1.onrender.com/api/data/get-data"),
+          fetch("https://aerozone3-1.onrender.com/api/data/get-indent")
         ]);
 
         const data = await dataRes.json();
@@ -100,7 +100,7 @@ const DataPage2 = () => {
   useEffect(() => {
     const fetchPrismData = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/data/prism");
+        const res = await fetch("https://aerozone3-1.onrender.com/api/data/prism");
         const data = await res.json();
 
         const processed = Array.isArray(data)
