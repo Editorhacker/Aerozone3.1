@@ -20,7 +20,6 @@ const NAV_ITEMS = [
     id: "module3",
     children: [
       { to: "/Module3Page1", id: "Module3Page1", label: "PRISM", icon: "📋" },
-      { to: "/Module3Page2", id: "Module3Page2", label: "ANOTHER PAGE", icon: "📄" },
     ],
   },
   {
