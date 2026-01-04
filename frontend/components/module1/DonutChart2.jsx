@@ -61,9 +61,9 @@ const OrderStatusDonut = ({ orderStats }) => {
   };
 
   return (
-  <div className="bg-[var(--color-background)] dark:bg-[var(--color-card)] border border-[var(--color-border)] w-62 rounded-[var(--radius)] p-4 flex flex-col items-center shadow-[var(--shadow-sm)] hover:shadow-[var(--shadow-md)] transition-all duration-300">
+  <div className="bg-[var(--color-background)] dark:bg-[var(--color-card)] border border-[var(--color-border)] w-62 rounded-[var(--radius)] p-2 flex flex-col items-center shadow-[var(--shadow-sm)] hover:shadow-[var(--shadow-md)] transition-all duration-300">
       <h2 className="text-md font-semibold mb-2">Order Status</h2>
-
+    
       <div className="relative flex justify-center items-center w-[90px] md:w-[110px] lg:w-[140px] h-[60px] md:h-[80px] lg:h-[100px]">
           <Doughnut data={data} options={options} />
         <div className="absolute inset-0 flex flex-col items-center justify-center">

@@ -135,7 +135,7 @@ export default function ProjectCylinder({ rows = [] }) {
                         <div className="w-2 h-2 rounded-full" style={{ backgroundColor: item.color }} />
                         <div className="flex-1 min-w-0">
                             <div className="text-[10px] text-gray-400 truncate">{item.label}</div>
-                            <div className="text-xs font-bold text-white tabular-nums">{Math.round(item.value).toLocaleString()}</div>
+                            <div className="text-[11px] font-bold text-white tabular-nums">{Math.round(item.value).toLocaleString()}</div>
                         </div>
                     </div>
                 ))}

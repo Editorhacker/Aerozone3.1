@@ -65,7 +65,7 @@ const OrderStatusDonut = ({ filteredRows = [] }) => {
             Order Status
           </h2>
 
-      <div className="relative flex justify-center items-center w-[100px] md:w-[120px] lg:w-[150px] ">
+      <div className="relative flex justify-center items-center w-[90px] md:w-[110px] lg:w-[140px] ">
             <Doughnut
               data={{
                 labels: ["Completed", "Pending"],
@@ -103,7 +103,7 @@ const OrderStatusDonut = ({ filteredRows = [] }) => {
 
             {/* Center Percentage */}
             <div className="absolute inset-0 flex flex-col justify-center items-center pointer-events-none">
-              <span className="text-2xl font-bold text-orange-400 drop-shadow-[0_0_8px_rgba(251,146,60,0.5)]">{percentage}%</span>
+              <span className="text-xl font-bold text-orange-400 drop-shadow-[0_0_8px_rgba(251,146,60,0.5)]">{percentage}%</span>
               <span className="text-sm text-orange-300">
                 {/* {percentage === 100 ? "Completed" : "Pending"} */}
                 Ordered

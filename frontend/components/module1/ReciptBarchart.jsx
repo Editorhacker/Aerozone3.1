@@ -63,9 +63,18 @@ const ReceiptBarChart = ({ rows }) => {
         });
 
         // Generate complete month grids
-        const processedMonthlyData = Object.entries(monthlyGroups)
-            .sort(([a], [b]) => a.localeCompare(b))
-            .map(([key, month]) => {
+const processedMonthlyData = Object.entries(monthlyGroups)
+  .sort(([, a], [, b]) => {
+    // Current month comes first
+    if (a.isCurrentMonth && !b.isCurrentMonth) return -1;
+    if (!a.isCurrentMonth && b.isCurrentMonth) return 1;
+
+    // Otherwise sort by date
+    if (a.year !== b.year) return a.year - b.year;
+    return a.month - b.month;
+  })
+  .map(([key, month]) => {
+
                 const daysInMonth = new Date(month.year, month.month + 1, 0).getDate();
                 const daysGrid = [];
 
@@ -204,7 +213,7 @@ const ReceiptBarChart = ({ rows }) => {
     return (
         <div className="max-w-full bg-[var(--color-card)] rounded-[var(--radius)] shadow-md p-4 transition-all duration-300">
             <div className="flex flex-row justify-between items-center mb-1">
-                <h2 className="text-sm text-wrap font-semibold  text-[var(--color-foreground)]">
+                <h2 className="text-xs text-wrap font-semibold  text-[var(--color-foreground)]">
                     Planned Receipts
                 </h2>
                 <div className="flex flex-row items-center gap-2  text-xs">
@@ -227,15 +236,15 @@ const ReceiptBarChart = ({ rows }) => {
             {/* Scroll Container */}
             <div
                 ref={containerRef}
-                className="relative overflow-y-auto scrollbar-hide rounded-md pb-2 mb-1"
-                style={{ maxHeight: '220px' }}
+                className="relative overflow-y-auto scrollbar-hide rounded-sm pb-2 "
+                style={{ maxHeight: '180px' }}
             >
                 <div className="flex flex-col space-y-6">
                     {monthRows.map((row, rowIndex) => (
                         <div key={rowIndex} className="flex flex-col align-middle mb-1">
                             {row.map((month) => (
                                 <div key={month.monthName} className="flex-shrink-0">
-                                    <h3 className={`text-center text-md font-semibold mt-1 mb-1 ${month.isCurrentMonth ? 'text-red-500' : 'text-[var(--color-foreground)]'}`}>
+                                    <h3 className={`text-center text-md font-semibold mt-1 -mb-1  ${month.isCurrentMonth ? 'text-red-500' : 'text-[var(--color-foreground)]'}`}>
                                         {month.monthName}
                                     </h3>
                                     <div className="grid grid-cols-7 gap-1">
@@ -260,7 +269,7 @@ const ReceiptBarChart = ({ rows }) => {
                                                     key={`${day.monthKey}-${day.day}`}
                                                     data-day={`${day.monthKey}-${day.day}`}
                                                     className={`
-                                                        relative p-1 text-center text-sm rounded cursor-pointer transition-all duration-300 ease-out
+                                                        relative p-1 text-center text-xs rounded cursor-pointer transition-all duration-300 ease-out
                                                         transform hover:scale-105 hover:z-10
                                                         ${day.isToday ?
                                                             `bg-red-500 text-white font-bold shadow-md
@@ -338,7 +347,7 @@ const ReceiptBarChart = ({ rows }) => {
                     {/* Tooltip content */}
                     <div className="relative">
                         <div className="flex items-center justify-between mb-2">
-                            <p className="font-semibold text-sm text-[var(--color-foreground)]">
+                            <p className="font-semibold text-xs text-[var(--color-foreground)]">
                                 {hoveredDay.fullDate}
                             </p>
                             {hoveredDay.isToday && (
@@ -351,12 +360,12 @@ const ReceiptBarChart = ({ rows }) => {
                         {hoveredDay.hasOrder ? (
                             <div className="flex items-center space-x-2">
                                 <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
-                                <p className="text-blue-600 dark:text-blue-400 text-sm font-medium">
+                                <p className="text-blue-600 dark:text-blue-400 text-xs font-medium">
                                     Quantity: <span className="font-bold">{hoveredDay.qty.toLocaleString()}</span>
                                 </p>
                             </div>
                         ) : (
-                            <p className="text-[var(--color-muted-foreground)] text-sm italic">
+                            <p className="text-[var(--color-muted-foreground)] text-xs italic">
                                 No orders scheduled
                             </p>
                         )}

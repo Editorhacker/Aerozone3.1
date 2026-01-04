@@ -67,7 +67,7 @@ const PlannedOrderDonut = ({ plannedStats = {} }) => {
   };
 
   return (
-    <div className="bg-[var(--color-background)] dark:bg-[var(--color-card)] border border-[var(--color-border)] w-62 rounded-[var(--radius)] p-4 flex flex-col items-center shadow-[var(--shadow-sm)] hover:shadow-[var(--shadow-md)] transition-all duration-300">
+    <div className="bg-[var(--color-background)] dark:bg-[var(--color-card)] border border-[var(--color-border)] w-62 rounded-[var(--radius)] p-2 flex flex-col items-center shadow-[var(--shadow-sm)] hover:shadow-[var(--shadow-md)] transition-all duration-300">
 
       <h2 className="text-md font-semibold text-[var(--color-foreground)] mb-2 text-center">
         Planned Orders

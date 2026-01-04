@@ -125,7 +125,7 @@ const generateRowId = (row, index) => {
             return (
               <td
                 key={colIndex}
-                className="px-2 py-1 whitespace-nowrap text-xs text-[var(--color-foreground)]"
+                className="px-2 py-1 whitespace-wrap text-[11px] text-[var(--color-foreground)]"
                 onClick={(e) => e.stopPropagation()}
               >
                 <input
@@ -142,7 +142,7 @@ const generateRowId = (row, index) => {
           return (
             <td
               key={colIndex}
-              className="px-2 py-1 whitespace-normal text-center text-xs text-[var(--color-foreground)]"
+              className="px-2 py-1 whitespace-wrap text-center text-[11px] text-[var(--color-foreground)]"
             >
               {row[col.key] ?? ""}
             </td>
@@ -153,7 +153,7 @@ const generateRowId = (row, index) => {
   };
  
    return (
-    <div className=" px-2 text-xs rounded-xl mx-auto">
+    <div className=" -mt-1 px-1 -mb-2 text-xs rounded-xl mx-auto">
       {/* Header + Buttons */}
       <div className="flex justify-between items-center mb-1">
         <div className="flex justify-between items-center">
@@ -161,7 +161,7 @@ const generateRowId = (row, index) => {
             <span className="h-5 w-1 bg-[var(--color-primary)] mr-2"></span>
             DATA 
           </h2>
-          <h4 className="p-2 font-semibold text-white">
+          <h4 className="p-2  text-white">
             Total Rows : {sortedRows.length + prioritizedNotInFilter.length}
             {prioritizedNotInFilter.length > 0 && (
               <span className="ml-2 text-yellow-600 dark:text-yellow-400">
@@ -228,7 +228,7 @@ const generateRowId = (row, index) => {
                 return (
                   <th
                     key={index}
-                    className="px-2 py-1 text-center text-xs  text-[var(--color-muted-foreground)] uppercase tracking-wider"
+                    className="px-1 py-1 text-center text-[11px]  text-[var(--color-muted-foreground)] uppercase tracking-wider"
                   >
                     {col.label}
                   </th>
@@ -236,12 +236,12 @@ const generateRowId = (row, index) => {
               })}
             </tr>
           </thead>
-          <tbody className="bg-[var(--color-card)] text-xs divide-y divide-[var(--color-border)]">
+          <tbody className="bg-[var(--color-card)] text-[11px] divide-y divide-[var(--color-border)]">
             {sortedRows.length === 0 && prioritizedNotInFilter.length === 0 ? (
               <tr>
                 <td
                   colSpan={visibleColumnCount}
-                  className="px-2 py-4 text-center text-[var(--color-muted-foreground)]"
+                  className="px-1 py-3 text-center text-[var(--color-muted-foreground)]"
                 >
                   <div className="flex flex-col items-center">
                     <svg
@@ -259,7 +259,7 @@ const generateRowId = (row, index) => {
                       />
                     </svg>
                     <p className="text-sm font-medium">NO DATA AVAILABLE</p>
-                    <p className="text-xs mt-1">Try adjusting your filters</p>
+                    <p className="text-[11px] mt-1">Try adjusting your filters</p>
                   </div>
                 </td>
               </tr>
@@ -271,7 +271,7 @@ const generateRowId = (row, index) => {
                     <tr className="bg-yellow-100 dark:bg-yellow-900/30">
                       <td 
                         colSpan={visibleColumnCount}
-                        className="px-2 py-1 text-xs  font-semibold text-yellow-800 dark:text-yellow-200"
+                        className="px-2 py-1 text-[11px]   text-yellow-800 dark:text-yellow-200"
                       >
                         Prioritized Items (Not in Current Filter)
                       </td>

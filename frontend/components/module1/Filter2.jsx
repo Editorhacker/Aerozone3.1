@@ -89,7 +89,7 @@ export default function Filters({ filters, setFilters, applyFilters, rows }) {
     <div className="py-1 px-2">
       <div className="flex flex-row md:flex-row items-center gap-2">
         <a href="/">
-          <h1 className="text-2xl font-semibold tracking-wide bg-gradient-to-r from-blue-500 to-blue-700 bg-clip-text text-transparent uppercase drop-shadow-sm">PLANER CHECKER</h1>
+          <h1 className="text-xl font-bold tracking-wide bg-gradient-to-r from-blue-500 to-blue-700 bg-clip-text text-transparent uppercase drop-shadow-sm">PLANER CHECKER</h1>
         </a>
 
 

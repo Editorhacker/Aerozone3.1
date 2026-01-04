@@ -62,7 +62,7 @@ const Magnet = ({
 };
 
 export default function Filters({ filters, setFilters, applyFilters, rows }) {
-    const { search, itemCode, description, refStart, refEnd } = filters;
+    const { search, itemCode, description, refStart, refEnd, projectCode } = filters;
 
     // ✅ Debounced fields
     const debouncedSearch = useDebounce(search);
@@ -79,11 +79,16 @@ export default function Filters({ filters, setFilters, applyFilters, rows }) {
         [rows]
     );
 
+     const projectCodes = useMemo(
+        () => [...new Set(rows.map((r) => r.ProjectCode || r.PROJECT_NO))].filter(Boolean),
+        [rows]
+      );
+    
     return (
-        <div className="mb-1 h-full relative drop-shadow-lg hover:drop-shadow-xl transition-all duration-300 ">
+        <div className=" h-14 relative drop-shadow-lg hover:drop-shadow-xl transition-all duration-300 ">
             <div className="bg-gradient-to-br from-orange-600 to-orange-800 p-[1px] clip-angled h-full">
-                <div className="bg-gray-900 clip-angled  p-1 h-full">
-                    <div className="flex flex-col md:flex-row gap-3 items-center  w-full  ">
+                <div className="bg-gray-900 clip-angled  p-2 h-full">
+                    <div className="flex flex-col md:flex-row gap-2 items-center  w-full  ">
                         <a href="/" className="shrink-0 ">
                             <h1 className="text-2xl font-bold tracking-wide bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600 bg-clip-text text-transparent uppercase drop-shadow-lg shadow-orange-500/50">PRISM</h1>
                         </a>
@@ -110,6 +115,21 @@ export default function Filters({ filters, setFilters, applyFilters, rows }) {
                                 {itemCodes.map((ic) => (
                                     <option key={ic} value={ic} className="bg-gray-800">
                                         {ic}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+
+                        <div className="flex-1 w-full md:w-auto bg-gradient-to-br from-orange-600 to-orange-800  clip-angled p-[0.5px]">
+                            <select
+                                value={projectCode}
+                                onChange={(e) => setFilters(f => ({ ...f, projectCode: e.target.value }))}
+                                className="w-full px-3 py-1.5 clip-angled border border-orange-700/50 bg-gray-800 text-orange-200 placeholder-orange-600 text-sm focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all duration-200"
+                            >
+                                <option value="">All Project Codes</option>
+                                {projectCodes.map((pc) => (
+                                    <option key={pc} value={pc}>
+                                        {pc}
                                     </option>
                                 ))}
                             </select>
@@ -151,7 +171,7 @@ export default function Filters({ filters, setFilters, applyFilters, rows }) {
                         {/* Apply Button */}
                         <button
                             onClick={applyFilters}
-                            className="flex items-center justify-center bg-orange-600 hover:bg-orange-500 text-white p-1.5 clip-angled shadow-md hover:shadow-lg hover:shadow-orange-500/30 transition-all duration-200 hover:scale-105 shrink-0"
+                            className="w-13 h-9 flex items-center justify-center bg-orange-600 hover:bg-orange-500 text-white p-1.5 clip-angled shadow-md hover:shadow-lg hover:shadow-orange-500/30 transition-all duration-200 hover:scale-105 shrink-0"
                         >
                             <Magnet stroke="#ffffff" width={20} height={20} />
                         </button>

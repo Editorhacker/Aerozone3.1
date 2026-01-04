@@ -333,7 +333,7 @@ const Module4Page1 = () => {
 
       {renderZoomedComponent()}
 
-      <div className={`pt-18 px-2 sm:px-4 lg:px-4 pb-2 transition-all duration-300 ${activeComponent ? 'blur-sm' : ''}`}>
+      <div className={`pt-12 px-2 sm:px-3 lg:px-3 pb-2 transition-all duration-300 ${activeComponent ? 'blur-sm' : ''} max-w-screen`}>
         {/* Filter Bar */}
         <div className="mb-1">
           <Filters
@@ -346,7 +346,7 @@ const Module4Page1 = () => {
 
         {/* Metrics Cards Section */}
         <div className="mt-2">
-          <div className="flex flex-row justify-center items-stretch gap-2 w-full mb-2">
+          <div className="flex flex-row justify-center items-stretch gap-2 w-full mb-1">
 
             {/* LEFT: Amount Table */}
             <div className="lg:col-span-1 w-[33%]">
@@ -365,7 +365,7 @@ const Module4Page1 = () => {
 
               {/* PROJECT DISTRIBUTION Cylinder */}
               <div className="w-[25%]">
-                <div className="bg-[#111111] rounded-xl border border-purple-700/30 p-4 shadow-md h-[240px] relative group transition-all duration-300 hover:shadow-lg flex flex-col">
+                <div className="bg-[#111111] rounded-xl border border-purple-700/30 p-4 shadow-md h-[223px] relative group transition-all duration-300 hover:shadow-lg flex flex-col">
                   <div className="flex items-center mb-1">
                     <div className="h-4 w-1 bg-purple-500 mr-2 rounded-sm" />
                     <h2 className="text-[10px] font-semibold text-white uppercase tracking-wider">PROJECT DISTRIBUTION</h2>
@@ -378,7 +378,7 @@ const Module4Page1 = () => {
 
               {/* World Map */}
               <div className="w-[50%]">
-                <div className="bg-[#111111] rounded-xl border border-purple-700/30 p-2 shadow-md h-[240px] relative group transition-all duration-300 hover:shadow-lg flex flex-col">
+                <div className="bg-[#111111] rounded-xl border border-purple-700/30 p-2 shadow-md h-[223px] relative group transition-all duration-300 hover:shadow-lg flex flex-col">
                   <div className="flex items-center justify-between mb-1">
                     <div className="flex items-center">
                       <div className="h-4 w-1 bg-purple-500 mr-2 rounded-sm" />
@@ -403,34 +403,42 @@ const Module4Page1 = () => {
             </div>
           </div>
 
+            <div className="flex flex-row justify-between items-center gap-2 w-full mb-1">
+              <div className="w-[30%] flex flex-row gap-3">
+              <div className="transform transition-transform w-fit h-full duration-200 hover:scale-[1.0] ">
 
+                <Rawmaterial1
+                  value={`${uniqueItemCount}`}
+                  valueColor="text-purple-500"
+                  labelColor="text-[var(--color-muted-foreground)]"
+                />
+              </div>
+              <div className="transform transition-transform w-fit h-full duration-200 hover:scale-[1.0] ">
 
-          <div className="flex flex-row justify-between gap-2  h-full">
+                <Baught1
+                  value={`${uniqueBOICount} `}
+                  valueColor="text-purple-500"
+                  labelColor="text-[var(--color-muted-foreground)]"
+                />
+              </div>
+              </div>
+              <div className=" w-[99%] ">
+                <CustomerName
+                  values={customerValues}
+                  selectedCustomer={selectedCustomer}
+                  onSelectCustomer={setSelectedCustomer}
+                />
+              </div>
+
+            </div>
+          <div className="flex flex-col  gap-1 w-full ">
 
             {/* LEFT COLUMN */}
-            <div className="flex flex-col gap-2 w-[37%] h-full">
-              <div className="flex flex-row gap-2  h-fit">
-                <div className="transform transition-transform w-full h-full duration-200 hover:scale-[1.0] ">
+            <div className="flex flex-row gap-2 h-full w-full">
 
-                  <Rawmaterial1
-                    value={`${uniqueItemCount}`}
-                    valueColor="text-purple-500"
-                    labelColor="text-[var(--color-muted-foreground)]"
-                  />
-                </div>
-                <div className="transform transition-transform w-full h-full duration-200 hover:scale-[1.0] ">
+              <div className="w-[30%] h-3/4 flex flex-row  gap-2 ">
 
-                  <Baught1
-                    value={`${uniqueBOICount} `}
-                    valueColor="text-purple-500"
-                    labelColor="text-[var(--color-muted-foreground)]"
-                  />
-                </div>
-              </div>
-              <div className="w-full h-3/4">
-                <div className="flex flex-row gap-2 h-full">
-
-                  <div className="w-[70%] h-full overflow-hidden">
+                  <div className="w-[90%] h-full overflow-hidden">
                     <MaterialCube rows={filteredRows} />
                   </div>
 
@@ -442,25 +450,9 @@ const Module4Page1 = () => {
                     />
                   </div>
 
-                </div>
+    
               </div>
-            </div>
-
-
-            {/* RIGHT COLUMN */}
-            <div className="flex flex-col gap-2 w-[63%] h-full">
-
-              {/* Customer Name */}
-              <div className="w-full max-w-[100%] h-[60px] shrink-0">
-                <CustomerName
-                  values={customerValues}
-                  selectedCustomer={selectedCustomer}
-                  onSelectCustomer={setSelectedCustomer}
-                />
-              </div>
-
-              {/* Data Table */}
-              <div className="w-[99%]  bg-gray-900 p-2 rounded-[var(--radius)] shadow-md relative overflow-hidden flex flex-col">
+              <div className="w-full bg-gray-900 p-1 rounded-[var(--radius)] shadow-md relative flex flex-col">
 
                 {/* Zoom Button */}
                 <div className="flex justify-end absolute top-2 right-2 z-10">
@@ -473,16 +465,17 @@ const Module4Page1 = () => {
                   </button>
                 </div>
 
-                <div className=" overflow-auto">
+                <div >
                   <DataTable2
                     rows={filteredRows}
                     fullView={activeComponent === "dataTable"}
                   />
                 </div>
               </div>
-
             </div>
 
+
+           
           </div>
 
         </div>

@@ -5,10 +5,10 @@ const CustomerName = ({ values = [], selectedCustomer, onSelectCustomer }) => {
     const uniqueValues = [...new Set(values.filter(Boolean))];
 
     return (
-        <div className="relative w-[99%] group transition-all duration-300 drop-shadow-lg hover:drop-shadow-xl">
+        <div className="relative w-[75%] group transition-all duration-300 drop-shadow-lg hover:drop-shadow-xl">
             <div className="bg-gradient-to-br from-purple-600 to-purple-800 p-[1px] clip-angled h-full">
-                <div className="bg-gray-900 clip-angled p-4 h-15 flex flex-row items-center">
-                    <div className="text-sm text-center font-semibold text-purple-400  mb-1">
+                <div className="bg-gray-900 clip-angled p-4 h-13 flex flex-row items-center">
+                    <div className="text-xs text-center font-semibold text-purple-400  mb-1">
                         Customers
                         <span className="text-purple-300 text-xs ml-2 ">
                             {` (${uniqueValues.length})`}
@@ -18,7 +18,7 @@ const CustomerName = ({ values = [], selectedCustomer, onSelectCustomer }) => {
                         <div className="text-purple-500 text-xs">No data found</div>
                     ) : (
                         <div className="flex flex-row  overflow-x-auto gap-2 py-1 scrollbar-hide">
-                            <div className="flex flex-row  gap-2 mb-2">
+                            <div className="flex flex-row  gap-1 mb-2">
                                 {uniqueValues.map((item, idx) => {
                                     const isActive = selectedCustomer === item;
 
@@ -26,7 +26,7 @@ const CustomerName = ({ values = [], selectedCustomer, onSelectCustomer }) => {
                                         <span
                                             key={idx}
                                             onClick={() => onSelectCustomer(item)}
-                                            className={`px-6 py-1 h-7 whitespace-nowrap text-sm items-center border clip-angled cursor-pointer transition-all
+                                            className={`px-6 py-1 h-7 whitespace-nowrap text-xs items-center border clip-angled cursor-pointer transition-all
                                                 ${isActive
                                                     ? "bg-purple-600 text-white  border-purple-500 scale-105 shadow-md shadow-purple-500/30"
                                                     : "bg-gray-800 border-purple-700/50 hover:bg-purple-900/30 text-purple-300 hover:text-purple-200"

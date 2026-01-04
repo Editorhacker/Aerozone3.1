@@ -6,14 +6,14 @@ const ProjectNumber = ({ values = [], selectedProject, onSelectProject }) => {
 
   return (
     <div className="p-4 bg-[var(--card)] w-full  rounded-lg shadow border  border-[var(--border)]">
-      <div className="text-sm font-semibold text-[var(--primary)] mb-1">
+      <div className="text-xs font-semibold text-[var(--primary)] mb-1">
         Project Numbers
       </div>
 
       {uniqueValues.length === 0 ? (
         <div className="text-[var(--muted-foreground)] text-sm">No data found</div>
       ) : (
-        <div className="flex flex-row gap-2 py-1 max-h-10 overflow-y-auto scrollbar-hide">
+        <div className="flex flex-row gap-2 py-1 max-h-8 overflow-y-auto scrollbar-hide">
           {uniqueValues.map((item, idx) => {
             const isActive = selectedProject === item;
             return (

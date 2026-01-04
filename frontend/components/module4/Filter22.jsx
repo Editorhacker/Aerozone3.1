@@ -62,7 +62,7 @@ const Magnet = ({
 };
 
 export default function Filters({ filters, setFilters, applyFilters, rows }) {
-    const { search, itemCode, description, refStart, refEnd } = filters;
+    const { search, itemCode, description, refStart, refEnd, projectCode } = filters;
 
     // ✅ Debounced fields
     const debouncedSearch = useDebounce(search);
@@ -78,14 +78,18 @@ export default function Filters({ filters, setFilters, applyFilters, rows }) {
         () => [...new Set(rows.map((r) => r.ItemCode || r.ITEM_CODE))].filter(Boolean),
         [rows]
     );
+    const projectCodes = useMemo(
+        () => [...new Set(rows.map((r) => r.ProjectCode || r.PROJECT_CODE))].filter(Boolean),
+        [rows]
+    );
 
     return (
         <div className="mb-1 h-fit relative drop-shadow-lg hover:drop-shadow-xl transition-all duration-300">
             <div className="bg-gradient-to-br from-purple-600 to-purple-900 rounded-lg  p-[1px] h-full">
-                <div className="bg-black rounded-lg p-2 h-full">
-                    <div className="flex flex-col md:flex-row gap-4 items-center w-full">
+                <div className="bg-black rounded-lg p-2 h-13">
+                    <div className="flex flex-col md:flex-row gap-4 items-center w-full h-fit">
                         <a href="/" className="shrink-0">
-                            <h1 className="text-4xl font-bold tracking-wide bg-gradient-to-r from-purple-400 via-purple-500 to-purple-600 bg-clip-text text-transparent uppercase drop-shadow-lg shadow-purple-500/50">ORBIT</h1>
+                            <h1 className="text-3xl font-bold tracking-wide bg-gradient-to-r from-purple-400 via-purple-500 to-purple-600 bg-clip-text text-transparent uppercase drop-shadow-lg shadow-purple-500/50">ORBIT</h1>
                         </a>
 
                         {/* Search */}
@@ -95,7 +99,7 @@ export default function Filters({ filters, setFilters, applyFilters, rows }) {
                                 placeholder="🔍 Search"
                                 value={search}
                                 onChange={(e) => setFilters(f => ({ ...f, search: e.target.value }))}
-                                className="w-full px-3 py-1.5 border border-purple-700/50 bg-[#111111] text-purple-200 placeholder-purple-700 text-sm focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all duration-200"
+                                className="w-full px-3 py-1.5 border border-purple-700/50 bg-[#111111] text-purple-200 placeholder-purple-700 text-xs focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all duration-200"
                             />
                         </div>
 
@@ -104,12 +108,27 @@ export default function Filters({ filters, setFilters, applyFilters, rows }) {
                             <select
                                 value={itemCode}
                                 onChange={(e) => setFilters(f => ({ ...f, itemCode: e.target.value }))}
-                                className="w-full px-3 py-1.5 border border-purple-700/50 bg-[#111111] text-purple-200 text-sm focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all duration-200"
+                                className="w-full px-3 py-1.5 border border-purple-700/50 bg-[#111111] text-purple-200 text-xs focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all duration-200"
                             >
                                 <option value="" className="bg-black">All Item Codes</option>
                                 {itemCodes.map((ic) => (
                                     <option key={ic} value={ic} className="bg-black">
                                         {ic}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+
+                        <div className="flex-1 w-full md:w-auto">
+                            <select
+                                value={projectCode}
+                                onChange={(e) => setFilters(f => ({ ...f, projectCode: e.target.value }))}
+                                className="w-full px-3 py-1.5 border border-purple-700/50 bg-[#111111] text-purple-200 text-xs focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all duration-200"
+                            >
+                                <option value="" className="bg-black">All Project Codes</option>
+                                {projectCodes.map((pc) => (
+                                    <option key={pc} value={pc} className="bg-black">
+                                        {pc}
                                     </option>
                                 ))}
                             </select>
@@ -122,7 +141,7 @@ export default function Filters({ filters, setFilters, applyFilters, rows }) {
                                 placeholder="Description"
                                 value={description}
                                 onChange={(e) => setFilters(f => ({ ...f, description: e.target.value }))}
-                                className="w-full px-3 py-1.5 border border-purple-700/50 bg-[#111111] text-purple-200 placeholder-purple-700 text-sm focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all duration-200"
+                                className="w-full px-3 py-1.5 border border-purple-700/50 bg-[#111111] text-purple-200 placeholder-purple-700 text-xs focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all duration-200"
                             />
                         </div>
 
@@ -133,7 +152,7 @@ export default function Filters({ filters, setFilters, applyFilters, rows }) {
                                 placeholder="Ref B Start"
                                 value={refStart}
                                 onChange={(e) => setFilters(f => ({ ...f, refStart: e.target.value }))}
-                                className="w-full px-3 py-1.5 border border-purple-700/50 bg-[#111111] text-purple-200 placeholder-purple-700 text-sm focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all duration-200"
+                                className="w-full px-3 py-1.5 border border-purple-700/50 bg-[#111111] text-purple-200 placeholder-purple-700 text-xs focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all duration-200"
                             />
                         </div>
 
@@ -144,14 +163,14 @@ export default function Filters({ filters, setFilters, applyFilters, rows }) {
                                 placeholder="Ref B End"
                                 value={refEnd}
                                 onChange={(e) => setFilters(f => ({ ...f, refEnd: e.target.value }))}
-                                className="w-full px-3 py-1.5 border border-purple-700/50 bg-[#111111] text-purple-200 placeholder-purple-700 text-sm focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all duration-200"
+                                className="w-full px-3 py-1.5 border border-purple-700/50 bg-[#111111] text-purple-200 placeholder-purple-700 text-xs focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all duration-200"
                             />
                         </div>
 
                         {/* Apply Button */}
                         <button
                             onClick={applyFilters}
-                            className="flex items-center justify-center rounded-lg bg-purple-600 hover:bg-purple-500 text-white p-1.5 shadow-md hover:shadow-lg hover:shadow-purple-500/30 transition-all duration-200 hover:scale-105 shrink-0"
+                            className="w-10 h-10 flex items-center justify-center rounded-lg bg-purple-600 hover:bg-purple-500 text-white p-1.5 shadow-md hover:shadow-lg hover:shadow-purple-500/30 transition-all duration-200 hover:scale-105 shrink-0"
                         >
                             <Magnet stroke="#ffffff" width={20} height={20} />
                         </button>

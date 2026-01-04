@@ -26,7 +26,7 @@ const MaterialTypeMatrix = ({ rows = [] }) => {
     <div
       className="relative w-full clip-angled bg-gradient-to-br from-orange-600 to-orange-800 p-[1px]"
     >
-      <div className="bg-gray-900 clip-angled h-[235px] flex flex-col p-3">
+      <div className="bg-gray-900 clip-angled h-[224px] flex flex-col p-3">
 
         {/* BOI BAR */}
         <div className="relative h-7 mb-1 border border-orange-500 flex items-center px-3 text-xs font-semibold text-orange-400 overflow-hidden">
@@ -41,7 +41,7 @@ const MaterialTypeMatrix = ({ rows = [] }) => {
               <tr>
                 <th className=" py-1 p-2 border border-orange-500">MATERIAL TYPE</th>
                 {types.map(type => (
-                  <th key={type} className=" p-3 border border-orange-500">
+                  <th key={type} className=" p-3  border border-orange-500">
                     {type}
                   </th>
                 ))}
@@ -58,7 +58,7 @@ const MaterialTypeMatrix = ({ rows = [] }) => {
                   {types.map(type => (
                     <td key={type} className="p-1 border border-orange-500">
                       {hasMatch(type, material) && (
-                        <div className="w-full h-4 rounded bg-orange-500 shadow-inner transition-all duration-300" />
+                        <div className="w-full h-[14px] rounded bg-orange-500 shadow-inner transition-all duration-300" />
                       )}
                     </td>
                   ))}

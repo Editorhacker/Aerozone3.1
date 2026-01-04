@@ -283,9 +283,9 @@ export default function SummaryTable({
   };
 
   return (
-    <div className="relative -mt-2 -mb-1  text-xs mx-auto drop-shadow-lg hover:drop-shadow-xl transition-all duration-300">
+    <div className="relative -mb-1  text-xs mx-auto drop-shadow-lg hover:drop-shadow-xl transition-all duration-300">
       <div className="bg-gradient-to-br from-orange-600 to-orange-800 p-[1px] clip-angled h-full">
-        <div className="bg-gray-900 clip-angled p-4 h-full">
+        <div className="bg-gray-900 clip-angled py-2 p-3 h-full">
           {/* Header + Buttons */}
           <div className="flex justify-between items-center mb-1">
             <div className="flex justify-between items-center">
@@ -306,7 +306,7 @@ export default function SummaryTable({
             <div className="flex gap-2">
               <button
                 onClick={() => setShowColumnSelector(!showColumnSelector)}
-                className="bg-orange-600 hover:bg-orange-500 text-white py-2 px-2 clip-angled text-sm flex items-center shadow-md h-9 w-12 transition-transform duration-200 hover:scale-[1.05] hover:shadow-orange-500/30"
+                className="bg-orange-600 hover:bg-orange-500 text-white py-2 px-2 clip-angled text-sm flex items-center shadow-md h-8 w-12 transition-transform duration-200 hover:scale-[1.05] hover:shadow-orange-500/30"
               >
                 <FileChartColumn
                   width={20}
@@ -363,7 +363,7 @@ export default function SummaryTable({
           )}
 
           {/* Table */}
-          <div className={`${fullView ? "h-[75vh]" : "h-[36vh]"} overflow-y-auto clip-angled `}>
+          <div className={`${fullView ? "h-[75vh]" : "h-[35vh]"} overflow-y-auto clip-angled `}>
             <table className="w-full ">
               <thead className="bg-gray-800 sticky top-0 border-b border-orange-700/50">
                 <tr>

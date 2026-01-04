@@ -23,22 +23,22 @@ export default function ReferenceBList({ rows, selectedRef, onSelectRef }) {
 
   return (
     <div className="p-4 bg-[var(--card)] w-full  rounded-lg shadow border  border-[var(--border)]">
-      <h3 className="text-sm font-semibold mb-1 text-[var(--foreground)]">
+      <h3 className="text-xs font-semibold mb-1 text-[var(--foreground)]">
         Reference B List
       </h3>
 
       {/* Scrollable List Container */}
-      <div className="max-h-9 overflow-y-auto scrollbar-hide pr-1">
+      <div className="max-h-8 overflow-y-auto scrollbar-hide pr-1">
         <ul className="grid grid-cols-4  gap-2">
           {/* ALL BUTTON */}
           <li
             onClick={() => onSelectRef(null)}
-            className={`px-5 py-1 text-sm rounded cursor-pointer transition ${selectedRef === null
+            className={`px-7 py-1 text-xs  w-fit h-fit rounded cursor-pointer transition ${selectedRef === null
                 ? "bg-blue-600 text-white"
                 : "bg-gray-50 hover:bg-blue-300 text-[var(--foreground)] dark:text-white dark:bg-gray-700 dark:hover:bg-blue-400"
               }`}
           >
-            All
+          All
           </li>
 
           {/* Dynamic ReferenceB Values */}
@@ -48,7 +48,7 @@ export default function ReferenceBList({ rows, selectedRef, onSelectRef }) {
               <li
                 key={i}
                 onClick={() => onSelectRef(isActive ? null : ref)}
-                className={`px-5 py-1 text-sm rounded cursor-pointer transition ${isActive
+                className={`px-5 py-1 text-xs w-fit h-fit rounded cursor-pointer transition ${isActive
                     ? "bg-blue-600 text-white"
                     : "bg-gray-50 hover:bg-blue-300 text-[var(--foreground)] dark:text-white dark:bg-gray-700 dark:hover:bg-blue-400"
                   }`}

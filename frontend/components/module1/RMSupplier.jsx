@@ -7,7 +7,7 @@ const RMSupplier = ({  label, suppliers }) => {
 
 label="RM"
   return (
-    <div className="bg-[var(--card)] p-4 py-1 w-full h-34 rounded-md  shadow">
+    <div className="bg-[var(--card)] p-4 py-1 w-full h-30 rounded-md  shadow">
       <div className="text-sm font-semibold text-[var(--color-primary)]">{label} </div>
         <div className="h-[90%] text-xs text-left overflow-y-auto scrollbar-hide text-wrap mt-1">
         {suppliers && Object.entries(suppliers).map(([code, sups]) => (

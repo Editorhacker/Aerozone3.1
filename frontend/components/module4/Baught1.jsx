@@ -8,12 +8,12 @@ const Baught1 = ({
     bare = false
 }) => {
     const content = (
-        <div className={`${bare ? "" : bgColor + " p-3"} text-center rounded-lg h-full relative overflow-hidden flex flex-col items-center justify-center`}>
+        <div className={`${bare ? "" : bgColor + " p-2"} text-center rounded-lg h-13 relative overflow-hidden flex flex-col items-center justify-center`}>
             <div className="relative z-10 ">
-                <div className="text-2xl font-bold text-purple-400 drop-shadow-[0_0_10px_rgba(168,85,247,0.3)] group-hover:drop-shadow-[0_0_15px_rgba(168,85,247,0.5)] transition-all duration-300 flex flex-row items-baseline justify-center gap-2">
-                    {value}<h3 className='text-purple-400 text-lg'>Items</h3>
+                <div className="text-xl font-bold text-purple-400 drop-shadow-[0_0_10px_rgba(168,85,247,0.3)] group-hover:drop-shadow-[0_0_15px_rgba(168,85,247,0.5)] transition-all duration-300 flex flex-row items-baseline justify-center gap-2">
+                    {value}<h3 className='text-purple-400 text-sm'>Items</h3>
                 </div>
-                <div className="text-lg font-semibold text-purple-300 group-hover:text-purple-200 transition-colors duration-300">
+                <div className="text-sm font-semibold text-purple-300 group-hover:text-purple-200 transition-colors duration-300">
                     {label}
                 </div>
             </div>
@@ -23,7 +23,7 @@ const Baught1 = ({
     if (bare) return content;
 
     return (
-        <div className={`relative w-full h-20 group ${hoverScale} transition-all duration-300 drop-shadow-lg `}>
+        <div className={`relative w-40 h-fit group ${hoverScale} transition-all duration-300 drop-shadow-lg `}>
             <div className="bg-gradient-to-br from-purple-600 to-purple-800 p-[1px] h-full rounded-lg">
                 {content}
             </div>

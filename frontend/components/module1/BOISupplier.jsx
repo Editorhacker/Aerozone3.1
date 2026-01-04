@@ -3,7 +3,7 @@ import React from 'react'
 const BOISupplier = ({ label, suppliers }) => {
   label="BOI"
   return (
-    <div className="bg-[var(--card)] p-4 py-1 w-full h-34 rounded-md shadow">
+    <div className="bg-[var(--card)] p-4 py-1 w-full h-30 rounded-md shadow">
 
       <div className="text-[var(--primary)] text-sm font-semibold">
         {label}

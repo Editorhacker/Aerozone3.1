@@ -27,18 +27,18 @@ export default function ReferenceBList({ rows, selectedRef, onSelectRef, classNa
 
     return (
         <div className={`relative  group transition-all duration-300 drop-shadow-lg hover:drop-shadow-xl ${className}`}>
-            <div className="bg-gradient-to-br from-purple-600 to-purple-800 p-[1px] clip-angled h-full w-40">
-                <div className="bg-gray-900 clip-angled p-4 h-full ">
-                    <h3 className="text-[13px] font-semibold mb-3 text-purple-400 text-center">
+            <div className="bg-gradient-to-br from-purple-600 to-purple-800 p-[1px] clip-angled h-full w-fit">
+                <div className="bg-gray-900 clip-angled p-3 h-full text-center  ">
+                    <h3 className="text-[12px] font-semibold -mb-2 text-purple-400 text-center">
                         ReferenceB
-                        <span className="text-purple-300 text-xs ml-2">
+                    </h3>
+                        <span className="text-purple-300 -mt-3 text-[11px] ml-1">
                             ({referenceBValues.length})
                         </span>
-                    </h3>
 
                     {/* Scrollable List Container */}
-                    <div className={`max-h-45 text-center overflow-y-auto scrollbar-hide pr-1 `}>
-                        <ul className="space-y-1  text-sm flex flex-col gap-2">
+                    <div className={`max-h-43 w-18 text-center overflow-y-auto scrollbar-hide  `}>
+                        <ul className="  text-xs flex flex-col gap-2">
                             {/* ALL BUTTON */}
                             <li
                                 onClick={() => onSelectRef(null)}
@@ -57,7 +57,7 @@ export default function ReferenceBList({ rows, selectedRef, onSelectRef, classNa
                                     <li
                                         key={i}
                                         onClick={() => onSelectRef(isActive ? null : ref)}
-                                        className={`px-6 py-1 clip-angled cursor-pointer transition-all duration-200 ${isActive
+                                        className={`px-6 py-1 text-xs clip-angled cursor-pointer transition-all duration-200 ${isActive
                                             ? "bg-purple-600 text-white shadow-md shadow-purple-500/30"
                                             : "bg-gray-800 hover:bg-purple-900/30 text-purple-300 hover:text-purple-200 border border-purple-700/50 h-fit"
                                             }`}

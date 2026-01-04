@@ -33,7 +33,6 @@ const calculateCountryData = (rows) => {
 
     const qty = Number(row.OrderedLineQuantity) || 0;
     const value = Number(row.OrderLineValue) || 0;
-    const uom = (row.UOM || "").toUpperCase();
     const type = row.Type || "";
     const material = extractMaterial(type);
     const customer = row.CustomerName;
@@ -54,9 +53,15 @@ const calculateCountryData = (rows) => {
     map[country].totalValue += value;
     grandTotalValue += value;
 
-    if (uom === "EA") map[country].totalQtyEA += qty;
-    if (uom === "KG") map[country].totalQtyKG += qty;
+   const rawUom = (row.UOM || "").toUpperCase().trim();
+const uom =
+  rawUom.includes("KG") ? "KG" :
+  rawUom.includes("EA") || rawUom.includes("NO") || rawUom.includes("EACH")
+    ? "EA"
+    : "OTHER";
 
+if (uom === "EA") map[country].totalQtyEA += qty;
+if (uom === "KG") map[country].totalQtyKG += qty;
     // Customers
     if (customer) map[country].customers.add(customer);
 
@@ -102,131 +107,141 @@ const WorldMap = ({ rows = [] }) => {
       .filter(Boolean);
   }, [rows]);
 
-  const options = {
-   chart: {
-  map: worldMap,
-  height: 190,
-  backgroundColor: "transparent",
+ const options = {
+  title: {
+    text: null, // 🔥 removes "Chart title"
+  },
 
-  events: {
-    load: function () {
-      this.selectedPoint = null; // ✅ FIX
-    },
+  legend: {
+    enabled: false, // 🔥 removes purple dot + "Global Distribution"
+  },
 
-    click: function () {
-      // ✅ Click on empty space closes locked tooltip
-      if (this.selectedPoint) {
-        this.tooltip.hide();
+  chart: {
+    map: worldMap,
+    height: 170,
+    backgroundColor: "transparent",
+
+    events: {
+      load: function () {
         this.selectedPoint = null;
-      }
+      },
+
+      click: function () {
+        if (this.selectedPoint) {
+          this.tooltip.hide();
+          this.selectedPoint = null;
+        }
+      },
     },
   },
-},
 
-
-tooltip: {
-  useHTML: true,
-  outside: false,
-  followPointer: false,
-  shadow: false,
-
-  style: {
-    fontSize: "11px",
-    zIndex: 10,
+  mapNavigation: {
+    enabled: true,
+    enableMouseWheelZoom: true,
+    enableButtons: false,
   },
 
-formatter: function () {
-  const chart = this.series.chart;
+  tooltip: {
+    useHTML: true,
+    outside: false,
+    followPointer: false,
+    shadow: false,
 
-  // 🔒 If tooltip is locked, ignore hover on other countries
-  if (chart.selectedPoint && chart.selectedPoint !== this.point) {
-    return "";
-  }
+    style: {
+      fontSize: "11px",
+      zIndex: 10,
+      pointerEvents: "auto",
+    },
 
-  const d = this.point.data;
-  if (!d) return "";
+    formatter: function () {
+      const chart = this.series.chart;
+      if (chart.selectedPoint && chart.selectedPoint !== this.point) {
+        return "";
+      }
 
+      const d = this.point.data;
+      if (!d) return "";
 
-    const projects = d.customers.join(", ");
-    const materials = Object.keys(d.materials).join(", ");
-    const types = Object.keys(d.types).join(", ");
+      const projects = d.customers.join(", ");
+      const materials = Object.keys(d.materials).join(", ");
+      const types = Object.keys(d.types).join(", ");
 
-    return `
-      <div style="
-        width:230px;
-        max-height:140px;
-        overflow-y:auto;
-        background:#111827;
-        color:#e5e7eb;
-        padding:8px;
-        border-radius:6px;
-        line-height:1.35;
-      ">
-        <div style="font-weight:600;font-size:12px;margin-bottom:4px">
-          ${d.country}
+      return `
+        <div style="
+          width:230px;
+          max-height:140px;
+          overflow-y:auto;
+          background:#111827;
+          pointer-events:auto;
+          color:#e5e7eb;
+          padding:8px;
+          border-radius:6px;
+          line-height:1.35;
+        ">
+          <div style="font-weight:600;font-size:12px;margin-bottom:4px">
+            ${d.country}
+          </div>
+
+          <div style="border-top:1px solid #374151;margin:4px 0"></div>
+
+          <div style="word-break:break-word;white-space:normal">
+            <b>Projects</b> : ${projects || "-"}
+          </div>
+
+          <div><b>Value</b> : ${d.totalValue.toFixed(2)}</div>
+          <div>
+            <b>Qty</b> :
+            ${d.totalQtyEA} EA
+            ${d.totalQtyKG ? ` | ${d.totalQtyKG} KG` : ""}
+          </div>
+          <div><b>Material</b> : ${materials || "-"}</div>
+          <div style="word-break:break-word;white-space:normal">
+            <b>Type</b> : ${types || "-"}
+          </div>
         </div>
-
-        <div style="border-top:1px solid #374151;margin:4px 0"></div>
-
-       <div style="word-break:break-word;white-space:normal">
-  <b>Projects</b> : ${projects || "-"}
-</div>
-
-        <div><b>Value</b> : ${d.totalValue.toFixed(2)}</div>
-        <div>
-          <b>Qty</b> :
-          ${d.totalQtyEA} EA
-          ${d.totalQtyKG ? ` | ${d.totalQtyKG} KG` : ""}
-        </div>
-        <div><b>Material</b> : ${materials || "-"}</div>
-         <div style="word-break:break-word;white-space:normal"><b>Type</b> : ${types || "-"}</div>
-      </div>
-    `;
+      `;
+    },
   },
-},
 
+  series: [
+    {
+      name: "",
+      data: mapData,
+      joinBy: "hc-key",
+      
 
-    series: [
-  {
-    name: "Global Distribution",
-    data: mapData,
-    joinBy: "hc-key",
+      color: "#9333ea",
+      nullColor: "#374151",
+      borderColor: "#4b5563",
+      borderWidth: 0.5,
 
-    color: "#9333ea",
-    nullColor: "#374151",
-    borderColor: "#4b5563",
-    borderWidth: 0.5,
+      enableMouseTracking: true,
 
-    enableMouseTracking: true,
+      point: {
+        events: {
+          click: function () {
+            const chart = this.series.chart;
 
-    point: {
-      events: {
-        click: function () {
-          const chart = this.series.chart;
+            if (chart.selectedPoint === this) {
+              chart.tooltip.hide();
+              chart.selectedPoint = null;
+              return;
+            }
 
-          // 🔁 Clicking same country toggles tooltip
-          if (chart.selectedPoint === this) {
-            chart.tooltip.hide();
-            chart.selectedPoint = null;
-            return;
-          }
+            chart.tooltip.refresh(this);
+            chart.selectedPoint = this;
+          },
+        },
+      },
 
-          // 🔒 Lock tooltip on this country
-          chart.tooltip.refresh(this);
-          chart.selectedPoint = this;
+      states: {
+        hover: {
+          color: "#7e22ce",
         },
       },
     },
-
-    states: {
-      hover: {
-        color: "#7e22ce",
-      },
-    },
-  },
-],
-
-  };
+  ],
+};
 
   return (
     <HighchartsReact

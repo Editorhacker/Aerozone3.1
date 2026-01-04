@@ -5,8 +5,8 @@ const ProjectNumber = ({ values = [], selectedProject, onSelectProject, bare = f
     const uniqueValues = [...new Set(values.filter(Boolean))];
 
     const content = (
-        <div className={`w-90  flex flex-col max-h-18 ${bare ? "" : "bg-gray-900 clip-angled p-3"}`}>
-            <div className="text-sm font-semibold text-orange-400 mb-1 shrink-0">
+        <div className={`w-90  flex flex-col max-h-17 ${bare ? "" : "bg-gray-900 clip-angled p-3"}`}>
+            <div className="text-xs font-semibold text-orange-400 mb-1 shrink-0">
                 Project Numbers
                 <span className="text-orange-300 text-xs ml-2">
                     {` (${uniqueValues.length})`}

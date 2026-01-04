@@ -14,7 +14,7 @@ export default function ReferenceBList({ rows, selectedRef, onSelectRef, bare = 
     }, [rows]);
 
     if (referenceBValues.length === 0) {
-        if (bare) return <div className="text-orange-500 text-sm italic p-3">0 References</div>; // Simple fallback for bare mode
+        if (bare) return <div className="text-orange-500 text-sm italic p-2">0 References</div>; // Simple fallback for bare mode
         return (
             <div className="relative w-full drop-shadow-lg">
                 <div className="bg-gradient-to-br from-orange-600 to-orange-800 p-[1px] clip-angled">
@@ -27,8 +27,8 @@ export default function ReferenceBList({ rows, selectedRef, onSelectRef, bare = 
     }
 
     const content = (
-        <div className={`w-full flex flex-col max-h-18 ${bare ? "" : "bg-gray-900 clip-angled p-3"}`}>
-            <h3 className="text-sm font-semibold mb-1 text-orange-400 shrink-0">
+        <div className={`w-full flex flex-col max-h-17 ${bare ? "" : "bg-gray-900 clip-angled p-3"}`}>
+            <h3 className="text-xs font-semibold mb-1 text-orange-400 shrink-0">
                 Reference B List
                 <span className="text-orange-300 text-xs ml-2">
                     ({referenceBValues.length})
@@ -37,7 +37,7 @@ export default function ReferenceBList({ rows, selectedRef, onSelectRef, bare = 
 
             {/* Scrollable List Container */}
             <div className="flex-1 overflow-y-auto scrollbar-hide pr-1">
-                <ul className="space-y-1 text-sm grid grid-cols-1 md:grid-cols-4 gap-2">
+                <ul className="space-y-1 text-xs grid grid-cols-1 md:grid-cols-4 gap-2">
                     {/* ALL BUTTON */}
                     <li
                         onClick={() => onSelectRef(null)}

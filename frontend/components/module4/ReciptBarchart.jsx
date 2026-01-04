@@ -65,12 +65,12 @@ const ReceiptBarChart = ({ rows = [] }) => {
     const totalRows = Math.ceil(totalSlots / 7);
 
     return (
-        <div className="bg-[#111111] border border-purple-700/30 rounded-xl shadow-md p-2 w-full h-full flex flex-col will-change-transform">
+        <div className="bg-[#111111] border border-purple-700/30 rounded-xl shadow-md p-2 w-full h-56 flex flex-col will-change-transform">
             {/* Header */}
             <div className="flex items-center justify-between mb-2">
                 <button
                     onClick={goPrevMonth}
-                    className="flex items-center justify-center w-6 h-6 rounded-full text-gray-400 hover:text-white hover:bg-purple-500/20 transition-colors"
+                    className="flex items-center justify-center w-5 h-5 rounded-full text-gray-400 hover:text-white hover:bg-purple-500/20 transition-colors"
                 >
                     ◀
                 </button>
@@ -81,7 +81,7 @@ const ReceiptBarChart = ({ rows = [] }) => {
 
                 <button
                     onClick={goNextMonth}
-                    className="flex items-center justify-center w-6 h-6 rounded-full text-gray-400 hover:text-white hover:bg-purple-500/20 transition-colors"
+                    className="flex items-center justify-center w-5 h-5 rounded-full text-gray-400 hover:text-white hover:bg-purple-500/20 transition-colors"
                 >
                     ▶
                 </button>
@@ -95,7 +95,7 @@ const ReceiptBarChart = ({ rows = [] }) => {
             </div>
 
             {/* Calendar Grid */}
-            <div className="grid grid-cols-7 gap-1 text-sm flex-1">
+            <div className="grid grid-cols-7 gap-1 text-sm ">
                 {Array.from({ length: calendarData.firstDay }).map((_, i) => (
                     <div key={`empty-${i}`} />
                 ))}
@@ -144,7 +144,7 @@ const ReceiptBarChart = ({ rows = [] }) => {
                                     setHoveredDay(null);
                                 }, 50);
                             }}
-                            className={`group relative h-[31px] w-full border rounded flex flex-col items-center justify-center cursor-pointer transition-all duration-200 hover:scale-[1.15] hover:z-20 hover:shadow-lg hover:shadow-purple-500/20
+                            className={`group relative h-[25px] w-full border rounded flex flex-col items-center justify-center cursor-pointer transition-all duration-200 hover:scale-[1.15] hover:z-20 hover:shadow-lg hover:shadow-purple-500/20
                                 ${isToday
                                     ? "border-red-500 bg-red-900/40 shadow-[0_0_8px_rgba(239,68,68,0.4)]"
                                     : qty > 0
@@ -175,7 +175,7 @@ const ReceiptBarChart = ({ rows = [] }) => {
                                         ${alignClass}
                                     `}
                                 >
-                                    <div className="text-[10px] text-gray-400 font-medium uppercase tracking-wider mb-1 whitespace-nowrap">
+                                    <div className="text-xs text-gray-400 font-medium uppercase tracking-wider mb-1 whitespace-nowrap">
                                         {fullDate}
                                     </div>
                                     <div className="text-xs font-bold text-white whitespace-nowrap">

@@ -489,7 +489,7 @@ const DataPage2 = () => {
   };
 
   return (
-    <div className={`bg-[var(--color-background)] text-[var(--color-foreground)] transition-colors duration-300 relative ${activeComponent ? 'overflow-hidden' : ''}`}>
+    <div className={`bg-[var(--color-background)] text-[var(--color-foreground)] transition-colors duration-300 relative ${activeComponent ? 'overflow-hidden' : ''} min-h-screen`}>
 
       {/* Zoomed Component Overlay */}
       {renderZoomedComponent()}
@@ -508,7 +508,7 @@ const DataPage2 = () => {
 
 
       {/* Fixed Filter Bar */}
-      <div className={`pt-18 fixed x-1 max-h-[10%] left-0 right-0 z-10 bg-[var(--color-background)]/95 backdrop-blur-sm shadow-sm ${activeComponent ? 'blur-sm' : ''}`}>
+      <div className={`pt-12 fixed max-h-[10%] left-0 right-0 z-10 bg-[var(--color-background)]/95 backdrop-blur-sm shadow-sm ${activeComponent ? 'blur-sm' : ''}`}>
         <div className="flex justify-center items-center ml-3 px-2">
           <Filters
             filters={filters}
@@ -520,7 +520,7 @@ const DataPage2 = () => {
 
 
         {/* Main Content with Top Padding for Fixed Filter */}
-        <div className={` px-8 x-30 transition-all duration-300 ${activeComponent ? 'blur-sm' : ''}`}>
+        <div className={`  px-6 x-30 transition-all duration-300 ${activeComponent ? 'blur-sm' : ''}`}>
           {/* Metrics Cards Section */}
           <div className="my-14 mt-2">
             {/* Single Row with All Components */}
@@ -562,7 +562,7 @@ const DataPage2 = () => {
               </div>
 
               {/* Supplier Name Component with RMSupplier and BOISupplier */}
-              <div className="bg-[var(--color-card)] h-48 p-4 rounded-[var(--radius)] font-semibold shadow border border-[var(--color-border)] text-center align-middle w-[70%] transform transition-transform duration-200 hover:scale-[1.02]">
+              <div className="bg-[var(--color-card)] h-45 p-3 rounded-[var(--radius)] font-semibold shadow border border-[var(--color-border)] text-center align-middle w-[70%] transform transition-transform duration-200 hover:scale-[1.02]">
                 <h1 >Supplier Name</h1>
                 <div className="flex flex-row gap-1 justify-center">
 
