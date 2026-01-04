@@ -4,9 +4,7 @@ const PlaneLoader = () => {
     return (
         <div className="relative w-48 h-48 flex items-center justify-center">
             {/* Central Loading Text */}
-            <div className="absolute font-bold text-xl tracking-wider text-foreground opacity-80 animate-pulse">
-                LOADING
-            </div>
+          
 
             {/* Rotating Container for Plane 1 */}
             <div className="absolute inset-0 animate-spin-slow">

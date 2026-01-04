@@ -24,9 +24,9 @@ const GlobalLoader = ({ loading }) => {
                     />
                 </div>
             </div>
-            <div className="mt-4 font-bold text-xl tracking-wider text-foreground opacity-80 animate-pulse">
+            {/* <div className="mt-4 font-bold text-xl tracking-wider text-foreground opacity-80 animate-pulse">
                 LOADING
-            </div>
+            </div> */}
         </div>
     );
 };
