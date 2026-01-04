@@ -19,7 +19,7 @@ export default function ReferenceBList({ rows, selectedRef, onSelectRef, bare = 
             <div className="relative w-full drop-shadow-lg">
                 <div className="bg-gradient-to-br from-orange-600 to-orange-800 p-[1px] clip-angled">
                     <div className="bg-gray-900 clip-angled p-4 text-sm text-orange-500 italic">
-                        0
+                        No Reference B values found
                     </div>
                 </div>
             </div>

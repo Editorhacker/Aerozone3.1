@@ -363,7 +363,7 @@ export default function SummaryTable({
           )}
 
           {/* Table */}
-          <div className={`${fullView ? "h-[75vh]" : "h-[30vh]"} overflow-y-auto clip-angled `}>
+          <div className={`${fullView ? "h-[75vh]" : "h-[36vh]"} overflow-y-auto clip-angled `}>
             <table className="w-full ">
               <thead className="bg-gray-800 sticky top-0 border-b border-orange-700/50">
                 <tr>

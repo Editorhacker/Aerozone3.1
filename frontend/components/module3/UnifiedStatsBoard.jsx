@@ -14,9 +14,9 @@ const UnifiedStatsBoard = ({
     setSelectedProject
 }) => {
     return (
-        <div className="h-[250px] w-full transform transition-transform duration-200 hover:scale-[1.02] drop-shadow-lg">
+        <div className="h-[235px] w-full transform transition-transform duration-200 hover:scale-[1.02] drop-shadow-lg">
             <div className="bg-gradient-to-br from-orange-600 to-orange-800 p-[1px] clip-angled h-full">
-                <div className="bg-gray-900 clip-angled p-2 h-full flex flex-col gap-2">
+                <div className="bg-gray-900 clip-angled p-2 h-full flex flex-col gap-1.5">
 
                     {/* Row 1: RM & BOI Stats */}
                     <div className="flex flex-row gap-3 h-[25%] shrink-0">
@@ -51,7 +51,7 @@ const UnifiedStatsBoard = ({
                     </div>
 
                     {/* Row 3: Reference List */}
-                    <div className="flex-1 w-full -mt-2 h-full overflow-hidden">
+                    <div className="flex-1 w-full -mt-1 h-full overflow-hidden">
                         <ReferenceBList
                             rows={filteredRows}
                             selectedRef={selectedRef}

@@ -17,7 +17,7 @@ import RMSupplier from "../components/module1/RMSupplier";
 import BOISupplier from "../components/module1/BOISupplier";
 
 // ZoomIcon component
-const ZoomIcon = ({ width = 15, height = 15, stroke = "#6366f1" }) => (
+const ZoomIcon = ({ width = 18, height = 18, stroke = "#fff" }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={width}
@@ -29,7 +29,7 @@ const ZoomIcon = ({ width = 15, height = 15, stroke = "#6366f1" }) => (
     strokeLinecap="round"
     strokeLinejoin="round"
   >
-    <circle cx="11" cy="11" r="8"></circle>
+    <circle cx="11" cy="11" r="9"></circle>
     <path d="m21 21-4.35-4.35"></path>
     <line x1="11" y1="8" x2="11" y2="14"></line>
     <line x1="8" y1="11" x2="14" y2="11"></line>
@@ -524,11 +524,11 @@ const DataPage2 = () => {
           {/* Metrics Cards Section */}
           <div className="my-14 mt-2">
             {/* Single Row with All Components */}
-            <div className="flex flex-row justify-between items-start gap-4 w-full mb-2">
+            <div className="flex flex-row justify-between items-start gap-2 w-full mb-1">
               {/* Rawmaterial and Baught Components */}
-              <div className="flex flex-col gap-2 ">
-                <div className="flex flex-row gap-4 w-full">
-                  <div className="transform transition-transform w-full duration-200 hover:scale-[1.02]">
+              <div className="flex flex-col gap-1 ">
+                <div className="flex flex-row gap-2 w-full">
+                  <div className="transform transition-transform w-full duration-200 hover:scale-[1]">
                     <Rawmaterial
                       value={`${uniqueItemCount} `}
                       bgColor="bg-[var(--color-card)]"
@@ -536,7 +536,7 @@ const DataPage2 = () => {
                       labelColor="text-[var(--color-muted-foreground)]"
                     />
                   </div>
-                  <div className="transform transition-transform w-full duration-200 hover:scale-[1.02]">
+                  <div className="transform transition-transform w-full duration-200 hover:scale-[1]">
                     <Baught
                       value={`${uniqueBOICount} `}
                       bgColor="bg-[var(--color-card)]"
@@ -562,22 +562,22 @@ const DataPage2 = () => {
               </div>
 
               {/* Supplier Name Component with RMSupplier and BOISupplier */}
-              <div className="bg-[var(--color-card)] p-4 rounded-[var(--radius)] font-semibold shadow border border-[var(--color-border)] text-center align-middle max-w-[30%] transform transition-transform duration-200 hover:scale-[1.02]">
-                <h1 className="mb-1">Supplier Name</h1>
-                <div className="flex flex-row gap-2 justify-center">
+              <div className="bg-[var(--color-card)] h-48 p-4 rounded-[var(--radius)] font-semibold shadow border border-[var(--color-border)] text-center align-middle w-[70%] transform transition-transform duration-200 hover:scale-[1.02]">
+                <h1 >Supplier Name</h1>
+                <div className="flex flex-row gap-1 justify-center">
 
                   <div className="w-[60%]" >
                     <RMSupplier
 
                       value={`${filteredRows.length} `}
-                      label="RM"
+                      
                       suppliers={suppliersByRM}
                     />
                   </div>
                   <div className="w-[60%]">
                     <BOISupplier
                       value={`${filteredRows.length} `}
-                      label="BOI"
+                      
                       suppliers={suppliersByBOI}
                     />
                   </div>
@@ -585,7 +585,7 @@ const DataPage2 = () => {
               </div>
 
               {/* Donut Charts */}
-              <div className="flex flex-row gap-4 w-[50%]">
+              <div className="flex flex-row gap-2 w-[40%]">
                 <div className="transform transition-transform duration-200 hover:scale-[1.02]">
                   <DonutChart plannedStats={plannedStats} />
                 </div>
@@ -598,7 +598,7 @@ const DataPage2 = () => {
             </div>
 
             {/* Split Layout - Left Half: ReferenceBList, ProjectNumber & ReceiptBarChart, Right Half: DataTable2 */}
-            <div className="flex justify-between  items-start gap-4 mb-6">
+            <div className="flex justify-between  items-start gap-2 mb-5">
               {/* Left Half - ReferenceBList, ProjectNumber and ReceiptBarChart */}
               <div className="w-[25%] flex flex-col right-3 ">
 
@@ -615,19 +615,20 @@ const DataPage2 = () => {
                   </div>
                 </div>
                 {/* ReceiptBarChart Component - Added Here */}
-                <div className="mt-2 z-10 transform transition-transform duration-200 hover:scale-[1.02]">
+                <div className="mt-1 z-10 transform transition-transform duration-200 hover:scale-[1.02]">
                   <ReceiptBarChart rows={filteredRows} />
                 </div>
 
               </div>
 
               {/* Right Half - DataTable2 */}
-              <div className="w-[75%] ">
+              <div className="w-[75%]  ">
                 <div className="bg-[var(--color-card)] p-4 rounded-[var(--radius)] shadow-md relative h-full">
-                  <div className="gap-4 right-0 flex justify-end items-center -mt-2">
-                    <button
+                  <div className="fixed -mt-2 gap-2 mr-15 flex right-10 z-10 items-center">
+                   <div className="flex flex-row gap-2">
+                     <button
                       onClick={() => setShowItemInsights(true)}
-                      className=" bottom-24 text-sm left-8 bg-[var(--color-primary)] text-[var(--color-primary-foreground)] px-4 py-2 rounded-[var(--radius)] shadow-lg z-20 transition-transform duration-200 hover:scale-[1.05]"
+                      className="h-fit text-xs font-semibold bg-[var(--color-primary)] text-[var(--color-primary-foreground)] px-4 py-2 rounded-[var(--radius)] shadow-lg z-20 transition-transform duration-200 hover:scale-[1.05]"
                     >
                       Item Insights
                     </button>
@@ -635,17 +636,18 @@ const DataPage2 = () => {
                     {/* Floating Upload Button */}
                     <button
                       onClick={() => setShowUploadModal(true)}
-                      className=" bottom-8 left-8 bg-[var(--color-primary)] text-[var(--color-primary-foreground)] w-10 h-10 rounded-full shadow-lg flex items-center justify-center z-20 transition-transform duration-300 hover:scale-[1.05]"
+                      className=" bg-[var(--color-primary)] text-[var(--color-primary-foreground)] w-9 h-9 rounded-full shadow-lg flex items-center justify-center z-20 transition-transform duration-300 hover:scale-[1.05]"
                       title="Upload Excel File"
                     >
-                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 23 23" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                         <polyline points="17 8 12 3 7 8"></polyline>
                         <line x1="12" y1="3" x2="12" y2="15"></line>
                       </svg>
                     </button>
+                   </div>
                     <button
-                      className="p-2 bg-[var(--color-primary)] rounded-[var(--radius)] text-[var(--color-primary-foreground)] transition-transform duration-200 hover:scale-[1.05] z-10"
+                      className=" p-2  bg-[var(--color-primary)] rounded-[var(--radius)] text-[var(--color-primary-foreground)] transition-transform duration-200 hover:scale-[1.05] z-10"
                       title="Zoom Table"
                       onClick={() => setActiveComponent('dataTable')}
                     >

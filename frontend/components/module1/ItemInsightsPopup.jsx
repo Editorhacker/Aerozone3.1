@@ -181,7 +181,7 @@ const ItemInsightsPopup = ({ rows, indentRows, isOpen, onClose }) => {
     if (total === 0) {
       return (
         <div className="bg-[var(--card)] p-4 rounded-xl shadow-md flex flex-col items-center justify-center h-48">
-          <h3 className="text-sm font-semibold mb-2 text-[var(--foreground)] text-center">{title}</h3>
+          <h3 className="text-xs font-semibold mb-2 text-[var(--foreground)] text-center">{title}</h3>
           <div className="text-[var(--muted-foreground)] text-xs">No data available</div>
         </div>
       );

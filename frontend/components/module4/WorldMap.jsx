@@ -8,48 +8,77 @@ import enLocale from "i18n-iso-countries/langs/en.json";
 countries.registerLocale(enLocale);
 
 /* ---------------------------------------
-   Calculate Country + City Percentage
+   Extract Material from Type
 --------------------------------------- */
-const calculateCountryCityPercentage = (rows) => {
-  const countryTotals = {};
-  const countryCityTotals = {};
-  let grandTotal = 0;
+const extractMaterial = (type = "") => {
+  const t = type.toUpperCase();
+  if (t.includes("SS")) return "SS";
+  if (t.includes("NI")) return "NI";
+  if (t.includes("TI")) return "TI";
+  if (t.includes("AL")) return "AL";
+  if (t.includes("COBALT")) return "COBALT";
+  return "OTHER";
+};
+
+/* ---------------------------------------
+   Aggregate Country-Level Data
+--------------------------------------- */
+const calculateCountryData = (rows) => {
+  const map = {};
+  let grandTotalValue = 0;
 
   rows.forEach((row) => {
-    const qty = Number(row.OrderedLineQuantity) || 0;
     const country = row.Country;
-    const city = row.City;
+    if (!country) return;
 
-    if (!country || !city) return;
+    const qty = Number(row.OrderedLineQuantity) || 0;
+    const value = Number(row.OrderLineValue) || 0;
+    const uom = (row.UOM || "").toUpperCase();
+    const type = row.Type || "";
+    const material = extractMaterial(type);
+    const customer = row.CustomerName;
 
-    // Country total
-    countryTotals[country] = (countryTotals[country] || 0) + qty;
-
-    // City total inside country
-    if (!countryCityTotals[country]) {
-      countryCityTotals[country] = {};
+    if (!map[country]) {
+      map[country] = {
+        country,
+        totalValue: 0,
+        totalQtyEA: 0,
+        totalQtyKG: 0,
+        customers: new Set(),
+        materials: {},
+        types: {},
+      };
     }
 
-    countryCityTotals[country][city] =
-      (countryCityTotals[country][city] || 0) + qty;
+    // Totals
+    map[country].totalValue += value;
+    grandTotalValue += value;
 
-    grandTotal += qty;
+    if (uom === "EA") map[country].totalQtyEA += qty;
+    if (uom === "KG") map[country].totalQtyKG += qty;
+
+    // Customers
+    if (customer) map[country].customers.add(customer);
+
+    // Materials
+    map[country].materials[material] =
+      (map[country].materials[material] || 0) + qty;
+
+    // Types
+    if (type) {
+      map[country].types[type] =
+        (map[country].types[type] || 0) + qty;
+    }
   });
 
-  return Object.keys(countryTotals).map((country) => {
-    const countryQty = countryTotals[country];
-
-    return {
-      country,
-      value: Math.round((countryQty / grandTotal) * 100),
-      cities: Object.entries(countryCityTotals[country]).map(
-        ([city, qty]) => ({
-          city,
-          percentage: Math.round((qty / grandTotal) * 100),
-        })
-      ),
-    };
-  });
+  return Object.values(map).map((item) => ({
+    ...item,
+    customers: Array.from(item.customers),
+    percentage:
+      grandTotalValue === 0
+        ? 0
+        : Math.round((item.totalValue / grandTotalValue) * 100),
+  }));
 };
 
 /* ---------------------------------------
@@ -57,7 +86,7 @@ const calculateCountryCityPercentage = (rows) => {
 --------------------------------------- */
 const WorldMap = ({ rows = [] }) => {
   const mapData = useMemo(() => {
-    const processed = calculateCountryCityPercentage(rows);
+    const processed = calculateCountryData(rows);
 
     return processed
       .map((item) => {
@@ -66,124 +95,138 @@ const WorldMap = ({ rows = [] }) => {
 
         return {
           "hc-key": iso2.toLowerCase(),
-          value: item.value,
-          country: item.country,
-          cities: item.cities,
+          value: item.percentage,
+          data: item,
         };
       })
       .filter(Boolean);
   }, [rows]);
 
   const options = {
-    chart: {
-      map: worldMap,
-      height: 190,
-      backgroundColor: "transparent",
-      events: {
-        click: function () {
-          // 🧹 Click on empty space closes tooltip
-          this.tooltip.hide();
-          this.selectedPoint = null;
-        },
-      },
+   chart: {
+  map: worldMap,
+  height: 190,
+  backgroundColor: "transparent",
+
+  events: {
+    load: function () {
+      this.selectedPoint = null; // ✅ FIX
     },
 
-    title: { text: "" },
-
-    mapNavigation: {
-      enabled: true,
-      enableMouseWheelZoom: true,
-      enableButtons: true,
+    click: function () {
+      // ✅ Click on empty space closes locked tooltip
+      if (this.selectedPoint) {
+        this.tooltip.hide();
+        this.selectedPoint = null;
+      }
     },
+  },
+},
 
-    legend: {
-      enabled: false,
-    },
 
-    tooltip: {
-      useHTML: true,
-      outside: true,
-      followPointer: false,
-      hideDelay: 0,
-      shared: false,
+tooltip: {
+  useHTML: true,
+  outside: false,
+  followPointer: false,
+  shadow: false,
 
-      style: {
-        fontSize: "12px",
-        pointerEvents: "auto",
-      },
+  style: {
+    fontSize: "11px",
+    zIndex: 10,
+  },
 
-      formatter: function () {
-        if (!this.point.cities || !this.point.cities.length) return "";
+formatter: function () {
+  const chart = this.series.chart;
 
-        const cityLines = this.point.cities
-          .map(
-            (c) => `
-            <div style="display:flex;justify-content:space-between;gap:10px">
-              <span>${c.city}</span>
-              <b>${c.percentage}%</b>
-            </div>
-          `
-          )
-          .join("");
+  // 🔒 If tooltip is locked, ignore hover on other countries
+  if (chart.selectedPoint && chart.selectedPoint !== this.point) {
+    return "";
+  }
 
-        return `
-        <div style="
-          min-width:200Px;
-          max-height:220px;
-          overflow-y:auto;
-        ">
-          <div style="font-weight:bold;margin-bottom:4px">
-            ${this.point.country}
-          </div>
-          <hr style="margin:4px 0"/>
-          ${cityLines}
+  const d = this.point.data;
+  if (!d) return "";
+
+
+    const projects = d.customers.join(", ");
+    const materials = Object.keys(d.materials).join(", ");
+    const types = Object.keys(d.types).join(", ");
+
+    return `
+      <div style="
+        width:230px;
+        max-height:140px;
+        overflow-y:auto;
+        background:#111827;
+        color:#e5e7eb;
+        padding:8px;
+        border-radius:6px;
+        line-height:1.35;
+      ">
+        <div style="font-weight:600;font-size:12px;margin-bottom:4px">
+          ${d.country}
         </div>
-      `;
-      },
-    },
+
+        <div style="border-top:1px solid #374151;margin:4px 0"></div>
+
+       <div style="word-break:break-word;white-space:normal">
+  <b>Projects</b> : ${projects || "-"}
+</div>
+
+        <div><b>Value</b> : ${d.totalValue.toFixed(2)}</div>
+        <div>
+          <b>Qty</b> :
+          ${d.totalQtyEA} EA
+          ${d.totalQtyKG ? ` | ${d.totalQtyKG} KG` : ""}
+        </div>
+        <div><b>Material</b> : ${materials || "-"}</div>
+         <div style="word-break:break-word;white-space:normal"><b>Type</b> : ${types || "-"}</div>
+      </div>
+    `;
+  },
+},
+
 
     series: [
-      {
-        name: "Global Share %",
-        data: mapData,
-        joinBy: "hc-key",
+  {
+    name: "Global Distribution",
+    data: mapData,
+    joinBy: "hc-key",
 
-        color: "#9333ea", // purple-600
-        nullColor: "#374151", // gray-700 (dark land)
+    color: "#9333ea",
+    nullColor: "#374151",
+    borderColor: "#4b5563",
+    borderWidth: 0.5,
 
-        borderColor: "#4b5563",
-        borderWidth: 0.5,
+    enableMouseTracking: true,
 
-        enableMouseTracking: true,
+    point: {
+      events: {
+        click: function () {
+          const chart = this.series.chart;
 
-        point: {
-          events: {
-            click: function () {
-              const chart = this.series.chart;
+          // 🔁 Clicking same country toggles tooltip
+          if (chart.selectedPoint === this) {
+            chart.tooltip.hide();
+            chart.selectedPoint = null;
+            return;
+          }
 
-              // 🔁 If same country clicked → toggle off
-              if (chart.selectedPoint === this) {
-                chart.tooltip.hide();
-                chart.selectedPoint = null;
-                return;
-              }
-
-              // 🔓 Open tooltip & lock it
-              chart.tooltip.refresh(this);
-              chart.selectedPoint = this;
-            },
-          },
-        },
-
-        states: {
-          hover: {
-            color: "#7e22ce", // purple-700
-          },
+          // 🔒 Lock tooltip on this country
+          chart.tooltip.refresh(this);
+          chart.selectedPoint = this;
         },
       },
-    ],
-  };
+    },
 
+    states: {
+      hover: {
+        color: "#7e22ce",
+      },
+    },
+  },
+],
+
+  };
 
   return (
     <HighchartsReact

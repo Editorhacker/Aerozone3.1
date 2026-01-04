@@ -80,16 +80,16 @@ export default function Filters({ filters, setFilters, applyFilters, rows }) {
     );
 
     return (
-        <div className="mb-1 h-fit relative drop-shadow-lg hover:drop-shadow-xl transition-all duration-300">
+        <div className="mb-1 h-full relative drop-shadow-lg hover:drop-shadow-xl transition-all duration-300 ">
             <div className="bg-gradient-to-br from-orange-600 to-orange-800 p-[1px] clip-angled h-full">
-                <div className="bg-gray-900 clip-angled p-2 h-full">
-                    <div className="flex flex-col md:flex-row gap-4 items-center w-full">
-                        <a href="/" className="shrink-0">
-                            <h1 className="text-4xl font-bold tracking-wide bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600 bg-clip-text text-transparent uppercase drop-shadow-lg shadow-orange-500/50">PRISM</h1>
+                <div className="bg-gray-900 clip-angled  p-1 h-full">
+                    <div className="flex flex-col md:flex-row gap-3 items-center  w-full  ">
+                        <a href="/" className="shrink-0 ">
+                            <h1 className="text-2xl font-bold tracking-wide bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600 bg-clip-text text-transparent uppercase drop-shadow-lg shadow-orange-500/50">PRISM</h1>
                         </a>
 
                         {/* Search */}
-                        <div className="flex-1 w-full md:w-auto">
+                        <div className="flex-1 w-full md:w-auto bg-gradient-to-br from-orange-600 to-orange-800  clip-angled p-[0.5px]">
                             <input
                                 type="text"
                                 placeholder="🔍 Search"
@@ -100,7 +100,7 @@ export default function Filters({ filters, setFilters, applyFilters, rows }) {
                         </div>
 
                         {/* Item Code Dropdown */}
-                        <div className="flex-1 w-full md:w-auto">
+                        <div className="flex-1 w-full md:w-auto bg-gradient-to-br from-orange-600 to-orange-800  clip-angled p-[0.5px]">
                             <select
                                 value={itemCode}
                                 onChange={(e) => setFilters(f => ({ ...f, itemCode: e.target.value }))}
@@ -116,7 +116,7 @@ export default function Filters({ filters, setFilters, applyFilters, rows }) {
                         </div>
 
                         {/* Description */}
-                        <div className="flex-[2] w-full md:w-auto">
+                        <div className="flex-[2] w-full md:w-auto bg-gradient-to-br from-orange-600 to-orange-800  clip-angled p-[0.5px]">
                             <input
                                 type="text"
                                 placeholder="Description"
@@ -127,7 +127,7 @@ export default function Filters({ filters, setFilters, applyFilters, rows }) {
                         </div>
 
                         {/* Ref Start */}
-                        <div className="w-full md:w-32">
+                        <div className="w-full md:w-32 bg-gradient-to-br from-orange-600 to-orange-800  clip-angled p-[0.5px]">
                             <input
                                 type="number"
                                 placeholder="Ref B Start"
@@ -138,7 +138,7 @@ export default function Filters({ filters, setFilters, applyFilters, rows }) {
                         </div>
 
                         {/* Ref End */}
-                        <div className="w-full md:w-32">
+                        <div className="w-full md:w-32 bg-gradient-to-br from-orange-600 to-orange-800  clip-angled p-[0.5px]">
                             <input
                                 type="number"
                                 placeholder="Ref B End"

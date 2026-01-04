@@ -69,7 +69,7 @@ const PlannedOrderDonut = ({ plannedStats = {} }) => {
   return (
     <div className="bg-[var(--color-background)] dark:bg-[var(--color-card)] border border-[var(--color-border)] w-62 rounded-[var(--radius)] p-4 flex flex-col items-center shadow-[var(--shadow-sm)] hover:shadow-[var(--shadow-md)] transition-all duration-300">
 
-      <h2 className="text-lg font-semibold text-[var(--color-foreground)] mb-2 text-center">
+      <h2 className="text-md font-semibold text-[var(--color-foreground)] mb-2 text-center">
         Planned Orders
       </h2>
 
@@ -78,7 +78,7 @@ const PlannedOrderDonut = ({ plannedStats = {} }) => {
 
         {/* Center Text */}
         <div className="absolute inset-0 flex flex-col justify-center items-center pointer-events-none">
-          <span className="text-lg font-bold text-[var(--color-foreground)]">
+          <span className="text-md font-bold text-[var(--color-foreground)]">
             {percentage}%
           </span>
           <span className="text-xs text-[var(--color-muted-foreground)]">

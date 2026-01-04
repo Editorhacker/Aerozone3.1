@@ -13,7 +13,7 @@ const ProjectNumber = ({ values = [], selectedProject, onSelectProject }) => {
       {uniqueValues.length === 0 ? (
         <div className="text-[var(--muted-foreground)] text-sm">No data found</div>
       ) : (
-        <div className="flex flex-wrap gap-2 py-1 max-h-10 overflow-y-auto scrollbar-hide">
+        <div className="flex flex-row gap-2 py-1 max-h-10 overflow-y-auto scrollbar-hide">
           {uniqueValues.map((item, idx) => {
             const isActive = selectedProject === item;
             return (
@@ -21,7 +21,7 @@ const ProjectNumber = ({ values = [], selectedProject, onSelectProject }) => {
                 key={idx}
                 onClick={() => onSelectProject(item)}
                 className={`
-                  px-3 py-1 text-sm border rounded-md cursor-pointer transition-all
+                  px-3 py-1 text-xs border rounded-md cursor-pointer transition-all
                   ${isActive
                     ? "bg-[var(--primary)] text-[var(--primary-foreground)] border-transparent scale-105"
                     : "bg-white/40 border-gray-300 hover:bg-white/60 text-gray-700 dark:text-white dark:bg-gray-500/20  dark:hover:bg-blue-400"

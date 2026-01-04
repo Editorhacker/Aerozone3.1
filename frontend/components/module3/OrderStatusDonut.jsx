@@ -61,11 +61,11 @@ const OrderStatusDonut = ({ filteredRows = [] }) => {
       <div className="bg-gradient-to-br from-orange-600 to-orange-800 p-[1px] clip-angled h-full">
         <div className="bg-gray-900 clip-angled p-3 flex flex-col items-center h-full w-full">
 
-          <h2 className="text-lg font-semibold text-orange-400 mb-2 text-center">
+          <h2 className="text-md font-semibold text-orange-400 mb-2 text-center">
             Order Status
           </h2>
 
-      <div className="relative flex justify-center items-center w-[110px] md:w-[130px] lg:w-[160px] h-[110px] md:h-[130px] lg:h-[160px]">
+      <div className="relative flex justify-center items-center w-[100px] md:w-[120px] lg:w-[150px] ">
             <Doughnut
               data={{
                 labels: ["Completed", "Pending"],

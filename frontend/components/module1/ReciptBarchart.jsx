@@ -122,46 +122,46 @@ const ReceiptBarChart = ({ rows }) => {
 
 
 
-// --- Tooltip Hover Handlers (Fixed) ---
+    // --- Tooltip Hover Handlers (Fixed) ---
 
-const handleMouseEnter = useCallback((day, event) => {
-    if (tooltipTimeoutRef.current) clearTimeout(tooltipTimeoutRef.current);
+    const handleMouseEnter = useCallback((day, event) => {
+        if (tooltipTimeoutRef.current) clearTimeout(tooltipTimeoutRef.current);
 
-    setHoveredDay(day);
-    updateTooltipPosition(event.clientX, event.clientY);
-}, [updateTooltipPosition]);
+        setHoveredDay(day);
+        updateTooltipPosition(event.clientX, event.clientY);
+    }, [updateTooltipPosition]);
 
-const handleMouseMove = useCallback((event) => {
-    if (!hoveredDay) return;
-    updateTooltipPosition(event.clientX, event.clientY);
-}, [hoveredDay, updateTooltipPosition]);
+    const handleMouseMove = useCallback((event) => {
+        if (!hoveredDay) return;
+        updateTooltipPosition(event.clientX, event.clientY);
+    }, [hoveredDay, updateTooltipPosition]);
 
-const handleMouseLeave = useCallback(() => {
-    if (tooltipTimeoutRef.current) clearTimeout(tooltipTimeoutRef.current);
+    const handleMouseLeave = useCallback(() => {
+        if (tooltipTimeoutRef.current) clearTimeout(tooltipTimeoutRef.current);
 
-    // Slight delay to allow smooth transition when hovering to tooltip
-    tooltipTimeoutRef.current = setTimeout(() => {
-        if (!isHoveringTooltip.current) {
-            setHoveredDay(null);
-        }
-    }, 200);
-}, []);
+        // Slight delay to allow smooth transition when hovering to tooltip
+        tooltipTimeoutRef.current = setTimeout(() => {
+            if (!isHoveringTooltip.current) {
+                setHoveredDay(null);
+            }
+        }, 200);
+    }, []);
 
-const handleTooltipMouseEnter = useCallback(() => {
-    isHoveringTooltip.current = true;
-    if (tooltipTimeoutRef.current) clearTimeout(tooltipTimeoutRef.current);
-}, []);
+    const handleTooltipMouseEnter = useCallback(() => {
+        isHoveringTooltip.current = true;
+        if (tooltipTimeoutRef.current) clearTimeout(tooltipTimeoutRef.current);
+    }, []);
 
-const handleTooltipMouseLeave = useCallback(() => {
-    isHoveringTooltip.current = false;
+    const handleTooltipMouseLeave = useCallback(() => {
+        isHoveringTooltip.current = false;
 
-    // Small delay so user can move back to a nearby cell smoothly
-    tooltipTimeoutRef.current = setTimeout(() => {
-        if (!isHoveringTooltip.current) {
-            setHoveredDay(null);
-        }
-    }, 200);
-}, []);
+        // Small delay so user can move back to a nearby cell smoothly
+        tooltipTimeoutRef.current = setTimeout(() => {
+            if (!isHoveringTooltip.current) {
+                setHoveredDay(null);
+            }
+        }, 200);
+    }, []);
 
 
     // Clean up timeout on unmount
@@ -203,20 +203,21 @@ const handleTooltipMouseLeave = useCallback(() => {
 
     return (
         <div className="max-w-full bg-[var(--color-card)] rounded-[var(--radius)] shadow-md p-4 transition-all duration-300">
-            <div className="flex justify-between items-center mb-1">
-                <h2 className="text-sm font-semibold text-[var(--color-foreground)]">
-                    Planned Receipts 
+            <div className="flex flex-row justify-between items-center mb-1">
+                <h2 className="text-sm text-wrap font-semibold  text-[var(--color-foreground)]">
+                    Planned Receipts
                 </h2>
-                <div className="flex justify-end space-x-2 text-xs">
-                    <div className="flex items-center">
+                <div className="flex flex-row items-center gap-2  text-xs">
+                    <div className="flex items-center gap-1">
                         <div className="w-2 h-2 bg-blue-500  rounded"></div>
-                        <span className="text-[var(--color-foreground)]">Order Date</span>
+                        <span className="text-[var(--color-foreground)]">Order </span>
                     </div>
-                    <div className="flex items-center">
+
+                    <div className="flex items-center gap-1">
                         <div className="w-2 h-2 bg-red-500  rounded"></div>
                         <span className="text-[var(--color-foreground)]">Today</span>
                     </div>
-                    <div className="flex items-center">
+                    <div className="flex items-center gap-1">
                         <div className="w-2 h-2 bg-gray-300 dark:bg-gray-600  rounded"></div>
                         <span className="text-[var(--color-foreground)]">No Order</span>
                     </div>
@@ -226,7 +227,7 @@ const handleTooltipMouseLeave = useCallback(() => {
             {/* Scroll Container */}
             <div
                 ref={containerRef}
-                className="relative overflow-y-auto scrollbar-hide rounded-md pb-4 mb-1"
+                className="relative overflow-y-auto scrollbar-hide rounded-md pb-2 mb-1"
                 style={{ maxHeight: '220px' }}
             >
                 <div className="flex flex-col space-y-6">
@@ -234,7 +235,7 @@ const handleTooltipMouseLeave = useCallback(() => {
                         <div key={rowIndex} className="flex flex-col align-middle mb-1">
                             {row.map((month) => (
                                 <div key={month.monthName} className="flex-shrink-0">
-                                    <h3 className={`text-center font-semibold mt-2 mb-2 ${month.isCurrentMonth ? 'text-red-500' : 'text-[var(--color-foreground)]'}`}>
+                                    <h3 className={`text-center text-md font-semibold mt-1 mb-1 ${month.isCurrentMonth ? 'text-red-500' : 'text-[var(--color-foreground)]'}`}>
                                         {month.monthName}
                                     </h3>
                                     <div className="grid grid-cols-7 gap-1">
@@ -259,8 +260,8 @@ const handleTooltipMouseLeave = useCallback(() => {
                                                     key={`${day.monthKey}-${day.day}`}
                                                     data-day={`${day.monthKey}-${day.day}`}
                                                     className={`
-                                                        relative p-2 text-center text-sm rounded cursor-pointer transition-all duration-300 ease-out
-                                                        transform hover:scale-110 hover:z-10
+                                                        relative p-1 text-center text-sm rounded cursor-pointer transition-all duration-300 ease-out
+                                                        transform hover:scale-105 hover:z-10
                                                         ${day.isToday ?
                                                             `bg-red-500 text-white font-bold shadow-md
                                                              ${isHovered ? 'bg-red-600 shadow-xl ring-2 ring-red-300 ring-opacity-50' : ''}` :
@@ -277,7 +278,7 @@ const handleTooltipMouseLeave = useCallback(() => {
                                                     onMouseEnter={(e) => handleMouseEnter(day, e)}
                                                     onMouseLeave={handleMouseLeave}
                                                     style={{
-                                                        transform: isHovered ? 'scale(1.15)' : 'scale(1)',
+                                                        transform: isHovered ? 'scale(1)' : 'scale(1)',
                                                     }}
                                                 >
                                                     <span className="relative z-10 select-none">{day.day}</span>
@@ -294,8 +295,8 @@ const handleTooltipMouseLeave = useCallback(() => {
                                                     {isHovered && (
                                                         <div className="absolute inset-0 rounded animate-pulse opacity-30">
                                                             <div className={`w-full h-full rounded ${day.isToday ? 'bg-red-400' :
-                                                                    day.hasOrder ? 'bg-blue-400' :
-                                                                        'bg-gray-400'
+                                                                day.hasOrder ? 'bg-blue-400' :
+                                                                    'bg-gray-400'
                                                                 }`}></div>
                                                         </div>
                                                     )}
@@ -316,7 +317,7 @@ const handleTooltipMouseLeave = useCallback(() => {
                     ref={tooltipRef}
                     className="fixed z-[99] bg-[var(--color-popover)] border border-[var(--color-border)] rounded-lg shadow-2xl p-3 min-w-[180px] pointer-events-auto transition-opacity duration-150"
                     style={{
-                        transform: "translate(-60%, -400%)", // keeps it near cursor
+                        transform: "translate(-50%, -650%)", // keeps it near cursor
                         left: `${tooltipPosition.x}px`,
                         top: `${tooltipPosition.y}px`,
                         opacity: 1,

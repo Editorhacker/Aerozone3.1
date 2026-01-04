@@ -62,18 +62,20 @@ const OrderStatusDonut = ({ orderStats }) => {
 
   return (
   <div className="bg-[var(--color-background)] dark:bg-[var(--color-card)] border border-[var(--color-border)] w-62 rounded-[var(--radius)] p-4 flex flex-col items-center shadow-[var(--shadow-sm)] hover:shadow-[var(--shadow-md)] transition-all duration-300">
-      <h2 className="text-lg font-semibold mb-2">Order Status</h2>
+      <h2 className="text-md font-semibold mb-2">Order Status</h2>
 
       <div className="relative flex justify-center items-center w-[90px] md:w-[110px] lg:w-[140px] h-[60px] md:h-[80px] lg:h-[100px]">
           <Doughnut data={data} options={options} />
         <div className="absolute inset-0 flex flex-col items-center justify-center">
-          <span className="text-lg font-bold">{percentage}%</span>
+          <span className="text-md font-bold">{percentage}%</span>
           <span className="text-xs text-muted-foreground">Ordered</span>
         </div>
       </div>
 
-      <p className="text-xs mt-3 text-muted-foreground">
-        Completed: {completed} • Pending: {pending}
+       <p className="text-xs mt-3 text-[var(--color-muted-foreground)]">
+        Completed: <span className="text-[var(--color-foreground)]">{completed}</span>
+        {" "}•{" "}
+        Pending: <span className="text-[var(--color-foreground)]">{pending}</span>
       </p>
     </div>
   );

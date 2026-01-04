@@ -26,22 +26,22 @@ const MaterialTypeMatrix = ({ rows = [] }) => {
     <div
       className="relative w-full clip-angled bg-gradient-to-br from-orange-600 to-orange-800 p-[1px]"
     >
-      <div className="bg-gray-900 clip-angled h-[250px] flex flex-col p-3">
+      <div className="bg-gray-900 clip-angled h-[235px] flex flex-col p-3">
 
         {/* BOI BAR */}
-        <div className="relative h-7 mb-1 border border-orange-500 flex items-center px-3 text-sm font-semibold text-orange-400 overflow-hidden">
+        <div className="relative h-7 mb-1 border border-orange-500 flex items-center px-3 text-xs font-semibold text-orange-400 overflow-hidden">
           BOI
           <div className="absolute left-12 inset-0 bg-orange-500 opacity-80" />
         </div>
 
         {/* TABLE */}
-        <div className="flex-1 overflow-auto border border-orange-500 scrollbar-hide">
-          <table className="w-full border-collapse text-sm">
+        <div className="flex-1 overflow-auto  scrollbar-hide">
+          <table className="w-full border-collapse text-xs">
             <thead className="sticky top-0 bg-orange-700 text-white z-10">
               <tr>
-                <th className="p-1 border border-orange-500">MATERIAL TYPE</th>
+                <th className=" py-1 p-2 border border-orange-500">MATERIAL TYPE</th>
                 {types.map(type => (
-                  <th key={type} className="p-2 border border-orange-500">
+                  <th key={type} className=" p-3 border border-orange-500">
                     {type}
                   </th>
                 ))}
@@ -51,7 +51,7 @@ const MaterialTypeMatrix = ({ rows = [] }) => {
             <tbody>
               {materials.map(material => (
                 <tr key={material} className="hover:bg-orange-900/30 transition">
-                  <td className="border border-orange-500 text-orange-300 text-sm font-semibold text-center">
+                  <td className="border border-orange-500 text-orange-300 text-xs font-semibold text-center">
                     {material}
                   </td>
 

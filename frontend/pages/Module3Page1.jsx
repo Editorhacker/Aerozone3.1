@@ -389,7 +389,7 @@ const Module3Page1 = () => {
 
 
             {/* Main Content with Top Padding for Fixed Filter */}
-            <div className={`pt-18 px-4 sm:px-6 lg:px-8 pb-2 transition-all duration-300 ${activeComponent ? 'blur-sm' : ''}`}>
+            <div className={`pt-15 px-4 sm:px-6 lg:px-8 pb-2 transition-all duration-300 ${activeComponent ? 'blur-sm' : ''}`}>
                 {/* Filter Bar */}
                 <div className="mb-1">
                     <Filters
@@ -402,7 +402,7 @@ const Module3Page1 = () => {
                 {/* Metrics Cards Section */}
                 <div className="mt-1">
                     {/* Grid Layout for Top Components */}
-                    <div className="flex flex-row justify-between gap-2 w-full mb-2 ">
+                    <div className="flex flex-row justify-between gap-2 w-full  ">
 
                         {/* Col 1: Planned Order Donut */}
                         <div className="h-[200px] w-full transform transition-transform duration-200 hover:scale-[1.02]">
@@ -429,7 +429,7 @@ const Module3Page1 = () => {
                         </div>
 
                         {/* Col 4: Material Type Matrix */}
-                        <div className="h-[250px] w-full transform transition-transform duration-200 hover:scale-[1.02]">
+                        <div className="h-[200px] w-full transform transition-transform duration-200 hover:scale-[1.02]">
                             <MaterialTypeMatrix rows={filteredRows} />
                         </div>
 
@@ -437,11 +437,11 @@ const Module3Page1 = () => {
 
 
                     {/* Right Half - DataTable2 */}
-                    <div className="w-full ">
+                    <div className="w-full mt-2 ">
                         <div className="relative  drop-shadow-md">
                             <div className="bg-gradient-to-br from-orange-600 to-orange-800 p-[1px] clip-angled h-full">
                                 <div className="bg-[var(--color-card)] clip-angled py-5 p-3 h-full relative">
-                                    <div className='absolute flex flex-row right-2 top-1 gap-6 z-90 '>
+                                    <div className='absolute flex flex-row right-24 top-7 gap-4 z-90 '>
                                         {/* Floating Upload Button */}
                                         <button
                                             onClick={() => setShowItemInsights(true)}
@@ -453,7 +453,7 @@ const Module3Page1 = () => {
                                         {/* Floating Upload Button */}
                                         <button
                                             onClick={() => setShowUploadModal(true)}
-                                            className="  right-4 bg-gradient-to-br from-orange-600 to-orange-800 clip-angled  w-10 h-10 clip-angled shadow-lg flex items-center justify-center z-20 transition-transform duration-300 hover:scale-[1.05]"
+                                            className="bg-gradient-to-br from-orange-600 to-orange-800 clip-angled w-13 h-9 clip-angled shadow-lg flex items-center justify-center z-20 transition-transform duration-300 hover:scale-[1.05]"
                                             title="Upload Excel File"
                                         >
                                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

@@ -13,7 +13,7 @@ const Baught1 = ({
                 <div className="text-2xl font-bold text-orange-400 drop-shadow-[0_0_10px_rgba(251,146,60,0.3)] group-hover:drop-shadow-[0_0_15px_rgba(251,146,60,0.5)] transition-all duration-300 flex flex-row items-baseline justify-center gap-2">
                     {value}<h3 className='text-orange-400 text-lg'>Items</h3>
                 </div>
-                <div className="text-lg font-semibold text-orange-300 group-hover:text-orange-200 transition-colors duration-300">
+                <div className="text-sm font-semibold text-orange-300 group-hover:text-orange-200 transition-colors duration-300">
                     {label}
                 </div>
             </div>

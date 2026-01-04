@@ -81,8 +81,8 @@ const Navbar = () => {
       <div className="w-full px-4 sm:px-6 lg:px-8 flex justify-between items-center">
         {/* Logo */}
         <Link to="/" className="flex items-center space-x-3">
-          <img src="/logo-new.png" alt="AEROZON" className="h-10 w-auto object-contain" />
-          <span className="text-4xl font-bold text-gray-900 dark:text-white tracking-wide leading-none">AEROZON</span>
+          <img src="/logo-new.png" alt="AEROZON" className="h-9 w-auto object-contain" />
+          <span className="text-3xl font-bold text-gray-900 dark:text-white tracking-wide leading-none">AEROZON</span>
         </Link>
 
 
@@ -114,12 +114,12 @@ const Navbar = () => {
                   </button>
 
                   {openDropdownId === item.id && (
-                    <div className="absolute left-0 mt-2 w-56 bg-white/95 dark:bg-gray-800/95 backdrop-blur-lg rounded-lg shadow-lg py-2 z-10 border border-gray-200 dark:border-gray-700">
+                    <div className="absolute left-0 mt-2 w-full bg-white/95 dark:bg-gray-800/95 backdrop-blur-lg rounded-lg shadow-lg py-2 z-10 border border-gray-200 dark:border-gray-700">
                       {item.children.map((child) => (
                         <Link
                           key={child.id}
                           to={child.to}
-                          className={`block px-4 py-2 text-sm flex items-center ${location.pathname === child.to
+                          className={` px-4 py-2 text-sm flex items-center ${location.pathname === child.to
                             ? "text-cyan-600 dark:text-cyan-300 bg-cyan-500/10"
                             : "text-black dark:text-white hover:text-black dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700/50"
                             }`}
