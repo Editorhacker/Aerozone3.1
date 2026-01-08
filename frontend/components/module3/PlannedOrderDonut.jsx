@@ -48,7 +48,7 @@ const PlannedOrderDonut = ({ plannedStats = {} }) => {
       <div className="bg-gradient-to-br from-orange-600 to-orange-800 p-[1px] clip-angled h-full">
         <div className="bg-gray-900 clip-angled p-3 flex flex-col items-center h-full w-full">
 
-          <h2 className="text-md   font-semibold text-orange-400 mb-2 text-center ">
+          <h2 className="text-md font-semibold text-white mb-2 text-center">
             Planned Order Status
           </h2>
 
@@ -77,6 +77,7 @@ const PlannedOrderDonut = ({ plannedStats = {} }) => {
                     bodyColor: '#fed7aa', // Light orange for body
                     borderColor: '#ea580c', // Orange border
                     borderWidth: 1,
+                    
                   },
                 },
                 elements: {
@@ -90,15 +91,15 @@ const PlannedOrderDonut = ({ plannedStats = {} }) => {
 
             {/* Center Percentage */}
             <div className="absolute inset-0 flex flex-col justify-center items-center pointer-events-none">
-              <span className="text-xl font-bold text-orange-400 drop-shadow-[0_0_8px_rgba(251,146,60,0.5)]">{percentage}%</span>
-              <span className="text-sm text-orange-300">
+              <span className="text-xl font-bold text-white drop-shadow-[0_0_8px_rgba(251,146,60,0.5)]">{percentage}%</span>
+              <span className="text-sm text-gray-300">
                 {/* {percentage === 100 ? "Completed" : "Pending"} */}
                 Ordered
               </span>
             </div>
           </div>
 
-          <p className="text-xs mt-3 text-orange-300">
+          <p className="text-xs mt-3 text-gray-300">
             Completed: <span className="text-green-400">{completed}</span> • Pending: <span className="text-orange-400">{pending}</span>
           </p>
         </div>

@@ -375,7 +375,7 @@ const Module3Page1 = () => {
     };
 
     return (
-        <div className={`dark bg-[#1c1209] text-[var(--color-foreground)] transition-colors duration-300 relative ${activeComponent ? 'overflow-hidden' : ''} min-h-screen`}>
+        <div className={`dark bg-black text-[var(--color-foreground)] transition-colors duration-300 relative ${activeComponent ? 'overflow-hidden' : ''} min-h-screen`}>
 
 
             {renderZoomedComponent()}

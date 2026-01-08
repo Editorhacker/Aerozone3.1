@@ -43,7 +43,7 @@ export default function ReferenceBList({ rows, selectedRef, onSelectRef, bare = 
                         onClick={() => onSelectRef(null)}
                         className={`w-full px-2 py-1 clip-angled cursor-pointer transition-all duration-200 text-center ${selectedRef === null
                             ? "bg-orange-600 text-white shadow-md shadow-orange-500/30"
-                            : "bg-gray-800 hover:bg-orange-900/30 text-orange-300 hover:text-orange-200 border border-orange-700/50"
+                            : "bg-gray-800 hover:bg-orange-900/30 text-white hover:text-orange-200 border border-orange-700/50"
                             }`}
                     >
                         All
@@ -58,7 +58,7 @@ export default function ReferenceBList({ rows, selectedRef, onSelectRef, bare = 
                                 onClick={() => onSelectRef(isActive ? null : ref)}
                                 className={`px-2 py-1 clip-angled cursor-pointer transition-all duration-200 text-center ${isActive
                                     ? "bg-orange-600 text-white shadow-md shadow-orange-500/30"
-                                    : "bg-gray-800 hover:bg-orange-900/30 text-orange-300 hover:text-orange-200 border border-orange-700/50 h-fit"
+                                    : "bg-gray-800 hover:bg-orange-900/30 text-white hover:text-orange-200 border border-orange-700/50 h-fit"
                                     }`}
                             >
                                 {ref}

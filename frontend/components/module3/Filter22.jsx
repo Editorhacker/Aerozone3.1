@@ -100,7 +100,7 @@ export default function Filters({ filters, setFilters, applyFilters, rows }) {
                                 placeholder="🔍 Search"
                                 value={search}
                                 onChange={(e) => setFilters(f => ({ ...f, search: e.target.value }))}
-                                className="w-full px-3 py-1.5 clip-angled border border-orange-700/50 bg-gray-800 text-orange-200 placeholder-orange-600 text-sm focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all duration-200"
+                                className="w-full px-3 py-1.5 clip-angled border border-orange-700/50 bg-gray-800 text-white placeholder-white text-sm focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all duration-200"
                             />
                         </div>
 
@@ -109,7 +109,7 @@ export default function Filters({ filters, setFilters, applyFilters, rows }) {
                             <select
                                 value={itemCode}
                                 onChange={(e) => setFilters(f => ({ ...f, itemCode: e.target.value }))}
-                                className="w-full px-3 py-1.5 clip-angled border border-orange-700/50 bg-gray-800 text-orange-200 text-sm focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all duration-200"
+                                className="w-full px-3 py-1.5 clip-angled border border-orange-700/50 bg-gray-800 text-white text-sm focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all duration-200"
                             >
                                 <option value="" className="bg-gray-800">All Item Codes</option>
                                 {itemCodes.map((ic) => (
@@ -124,7 +124,7 @@ export default function Filters({ filters, setFilters, applyFilters, rows }) {
                             <select
                                 value={projectCode}
                                 onChange={(e) => setFilters(f => ({ ...f, projectCode: e.target.value }))}
-                                className="w-full px-3 py-1.5 clip-angled border border-orange-700/50 bg-gray-800 text-orange-200 placeholder-orange-600 text-sm focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all duration-200"
+                                className="w-full px-3 py-1.5 clip-angled border border-orange-700/50 bg-gray-800 text-white placeholder-white text-sm focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all duration-200"
                             >
                                 <option value="">All Project Codes</option>
                                 {projectCodes.map((pc) => (
@@ -142,7 +142,7 @@ export default function Filters({ filters, setFilters, applyFilters, rows }) {
                                 placeholder="Description"
                                 value={description}
                                 onChange={(e) => setFilters(f => ({ ...f, description: e.target.value }))}
-                                className="w-full px-3 py-1.5 clip-angled border border-orange-700/50 bg-gray-800 text-orange-200 placeholder-orange-600 text-sm focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all duration-200"
+                                className="w-full px-3 py-1.5 clip-angled border border-orange-700/50 bg-gray-800 text-white placeholder-white text-sm focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all duration-200"
                             />
                         </div>
 
@@ -153,7 +153,7 @@ export default function Filters({ filters, setFilters, applyFilters, rows }) {
                                 placeholder="Ref B Start"
                                 value={refStart}
                                 onChange={(e) => setFilters(f => ({ ...f, refStart: e.target.value }))}
-                                className="w-full px-3 py-1.5 clip-angled border border-orange-700/50 bg-gray-800 text-orange-200 placeholder-orange-600 text-sm focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all duration-200"
+                                className="w-full px-3 py-1.5 clip-angled border border-orange-700/50 bg-gray-800 text-white placeholder-white text-sm focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all duration-200"
                             />
                         </div>
 
@@ -164,7 +164,7 @@ export default function Filters({ filters, setFilters, applyFilters, rows }) {
                                 placeholder="Ref B End"
                                 value={refEnd}
                                 onChange={(e) => setFilters(f => ({ ...f, refEnd: e.target.value }))}
-                                className="w-full px-3 py-1.5 clip-angled border border-orange-700/50 bg-gray-800 text-orange-200 placeholder-orange-600 text-sm focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all duration-200"
+                                className="w-full px-3 py-1.5 clip-angled border border-orange-700/50 bg-gray-800 text-white placeholder-white text-sm focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all duration-200"
                             />
                         </div>
 

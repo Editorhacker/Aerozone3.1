@@ -29,7 +29,7 @@ const MaterialTypeMatrix = ({ rows = [] }) => {
       <div className="bg-gray-900 clip-angled h-[224px] flex flex-col p-3">
 
         {/* BOI BAR */}
-        <div className="relative h-7 mb-1 border border-orange-500 flex items-center px-3 text-xs font-semibold text-orange-400 overflow-hidden">
+        <div className="relative h-7 mb-1 border border-orange-500 flex items-center px-3 text-xs font-semibold text-white overflow-hidden">
           BOI
           <div className="absolute left-12 inset-0 bg-orange-500 opacity-80" />
         </div>
@@ -51,7 +51,7 @@ const MaterialTypeMatrix = ({ rows = [] }) => {
             <tbody>
               {materials.map(material => (
                 <tr key={material} className="hover:bg-orange-900/30 transition">
-                  <td className="border border-orange-500 text-orange-300 text-xs font-semibold text-center">
+                  <td className="border border-orange-500 text-white text-xs font-semibold text-center">
                     {material}
                   </td>
 

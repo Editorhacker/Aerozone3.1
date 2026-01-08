@@ -378,7 +378,7 @@ export default function DataTable2({
                 return (
                   <th
                     key={index}
-                    className="px-2 py-1 text-left text-xs font-medium text-[var(--color-muted-foreground)] uppercase tracking-wider"
+                    className="px-2 py-1 text-left text-xs font-semibold text-[var(--color-muted-foreground)] uppercase tracking-wider"
                   >
                     {col.label}
                   </th>

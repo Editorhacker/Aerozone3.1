@@ -89,13 +89,13 @@ export default function SummaryTable({
   onPriorityChange
 }) {
   const columns = [
-    // { key: "UNIQUE_CODE", label: "Unique Code" },
+    { key: "priority", label: "Priority" },
     { key: "ReferenceB", label: "Reference B" },
     // { key: "Category", label: "Category" },
     // { key: "Type", label: "Type" },
     { key: "ProjectNo", label: "Project No" },
     { key: "ItemCode", label: "Item Code" },
-    {key: "Description", label: "Description" },
+    { key: "Description", label: "Description" },
     { key: "OrderedQty", label: "Ordered Qty" },
     { key: "RequiredQty", label: "Required Qty" },
     { key: "UOM", label: "UOM" },
@@ -104,8 +104,9 @@ export default function SummaryTable({
   ];
   // State for managing column visibility - All 12 columns visible by default
   const [visibleColumns, setVisibleColumns] = useState(
-    Array(columns.length).fill(false).map((_, index) => index < 12)
+    Array(columns.length).fill(true) // ✅ simpler & correct
   );
+
   const [showColumnSelector, setShowColumnSelector] = useState(false);
 
   // Use external prioritizedRows if provided, otherwise use internal state
@@ -255,7 +256,7 @@ export default function SummaryTable({
             return (
               <td
                 key={colIndex}
-                className={`px-2 py-1  text-xs text-orange-200 ${col.key === "Description" ? "whitespace-normal break-words" : "whitespace-nowrap text-left"}`}
+                className="px-2 py-1 text-xs text-orange-200 text-center"
                 onClick={(e) => e.stopPropagation()}
               >
                 <input
@@ -263,16 +264,17 @@ export default function SummaryTable({
                   checked={isPrioritized}
                   onChange={(e) => handlePriorityChange(row, e)}
                   onClick={(e) => e.stopPropagation()}
-                  className="h-4 w-4 text-orange-500 focus:ring-orange-500 border-orange-700 rounded"
+                  className="h-4 w-4 cursor-pointer text-orange-500 focus:ring-orange-500 border-orange-700 rounded bg-gray-900"
                 />
               </td>
             );
           }
 
+
           return (
             <td
               key={colIndex}
-              className={`px-2 py-1  text-xs text-orange-200 ${col.key === "Description" ? "w-[300px] max-w-[300px] whitespace-normal break-words" : "whitespace-nowrap text-center"}`}
+              className={`px-2 py-1  text-xs text-white ${col.key === "Description" ? "w-[300px] max-w-[300px] whitespace-normal break-words" : "whitespace-nowrap text-center"}`}
             >
               {row[col.key] ?? ""}
             </td>
@@ -293,7 +295,7 @@ export default function SummaryTable({
                 <span className="h-5 w-1 bg-orange-500 mr-2 shadow-sm shadow-orange-500/50"></span>
                 DATA
               </h2>
-              <h4 className="p-2 font-semibold text-orange-300">
+              <h4 className="p-2 font-semibold text-white">
                 Total Rows : {sortedRows.length + prioritizedNotInFilter.length}
                 {prioritizedNotInFilter.length > 0 && (
                   <span className="ml-2 text-orange-400">
@@ -376,6 +378,7 @@ export default function SummaryTable({
                       >
                         {col.label}
                       </th>
+
                     );
                   })}
                 </tr>

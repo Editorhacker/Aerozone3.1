@@ -26,7 +26,7 @@ const ProjectNumber = ({ values = [], selectedProject, onSelectProject, bare = f
                                     onClick={() => onSelectProject(item)}
                                     className={`w-full px-2 py-1 text-xs border clip-angled cursor-pointer transition-all text-center
                                                     ${isActive ? "bg-orange-600 text-white border-orange-500 scale-105 shadow-md shadow-orange-500/30"
-                                            : "bg-gray-800 border-orange-700/50 hover:bg-orange-900/30 text-orange-300 hover:text-orange-200"
+                                            : "bg-gray-800 border-orange-700/50 hover:bg-orange-900/30 text-white hover:text-orange-200"
                                         }
                         `}
                                 >
