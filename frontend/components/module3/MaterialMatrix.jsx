@@ -3,7 +3,7 @@ import React from "react";
 const materials = ["SS", "AL", "IN", "TI", "COBALT", "OTHER"];
 const types = ["SHEET", "BAR", "PLATE", "TUBE", "BLOCK", "OTHERS"];
 
-const CELL = "w-9 h-7"; // square cell
+const CELL = "w-12 h-7"; // square cell
 const CELLL = "w-9 h-9"
 const MaterialTypeMatrix = ({ rows = [] }) => {
   const boiRows = rows.filter(r => r.Category === "BOI");
@@ -32,29 +32,11 @@ const MaterialTypeMatrix = ({ rows = [] }) => {
         <div className="grid grid-cols-[auto_1fr] gap-2">
 
           {/* 🟧 BOI OUTSIDE TABLE */}
-          <div className="flex flex-col">
-            {/* Header spacer (aligns with table header) */}
-            <div className={CELLL} />
-
-            {/* BOI cell */}
-            <div
-              className={`
-                ${CELLL}
-                border border-orange-500
-                flex flex-col items-center justify-center
-                text-xs font-semibold text-white
-              `}
-            >
-              BOI
-              {hasBOI && (
-                <div className="mt-1 w-3 h-3 rounded-full bg-orange-500 shadow-inner" />
-              )}
-            </div>
-          </div>
+        
 
           {/* 🟦 MATRIX TABLE */}
           <div className="overflow-auto scrollbar-hide">
-            <table className="border-collapse text-[11px] text-white">
+            <table className="border-collapse text-xs text-white">
               <thead className="sticky top-0 bg-orange-700 z-10">
                 <tr>
                   {/* material header */}
