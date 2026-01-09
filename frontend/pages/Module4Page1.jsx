@@ -43,6 +43,7 @@ const Module4Page1 = () => {
   const [filters, setFilters] = useState({
     search: "",
     itemCode: "",
+    projecCode: "",
     description: "",
     refStart: "",
     refEnd: "",
@@ -118,7 +119,7 @@ const Module4Page1 = () => {
 
 
   const applyFilters = () => {
-    const { search, itemCode, description, refStart, refEnd } = filters;
+    const { search, itemCode, description, refStart, refEnd, projectCode } = filters;
 
     const searchTerms = String(search || "")
       .split(/[, ]+/)
@@ -148,6 +149,9 @@ const Module4Page1 = () => {
     const filterRow = (row) => {
 
       if (itemCode && String(row.ItemCode).trim() !== itemCode.trim()) {
+        return false;
+      }
+      if (projectCode && String(row.ProjectCode).trim() !== projectCode.trim()) {
         return false;
       }
 

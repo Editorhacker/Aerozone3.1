@@ -56,6 +56,7 @@ const Module3Page1 = () => {
     const [filters, setFilters] = useState({
         search: "",
         itemCode: "",
+        projectCode: "",
         description: "",
         refStart: "",
         refEnd: "",
@@ -159,7 +160,7 @@ const Module3Page1 = () => {
 
     // Apply filters
     const applyFilters = () => {
-        const { search, itemCode, description, refStart, refEnd } = filters;
+        const { search, itemCode, description, refStart, refEnd, projectCode } = filters;
 
         const searchTerms = (search || "")
             .split(/[, ]+/)
@@ -194,6 +195,12 @@ const Module3Page1 = () => {
             if (itemCode) {
                 const term = itemCode.toLowerCase();
                 if (!String(row.ItemCode || "").toLowerCase().includes(term)) return false;
+            }
+
+            // Project Code exact match
+            if (projectCode) {
+                const term = projectCode.toLowerCase();
+                if (String(row.ProjectCode || row.ProjectNo || "").toLowerCase() !== term) return false;
             }
 
             // Description partial match
@@ -440,7 +447,7 @@ const Module3Page1 = () => {
                     <div className="w-full mt-1 ">
                         <div className="relative  drop-shadow-md">
                             <div className="bg-gradient-to-br from-orange-600 to-orange-800 p-[1px] clip-angled h-full">
-                                <div className="bg-[var(--color-card)] clip-angled p-2 h-full relative">
+                                <div className="bg-black clip-angled p-2 h-full relative">
                                     <div className="fixed mt-2 gap-2 mr-15 flex right-5 z-10 items-center">
                    <div className="flex flex-row gap-2">
                                         <button

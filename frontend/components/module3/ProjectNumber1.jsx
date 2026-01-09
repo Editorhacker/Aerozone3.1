@@ -5,7 +5,7 @@ const ProjectNumber = ({ values = [], selectedProject, onSelectProject, bare = f
     const uniqueValues = [...new Set(values.filter(Boolean))];
 
     const content = (
-        <div className={`w-90  flex flex-col max-h-17 ${bare ? "" : "bg-gray-900 clip-angled p-3"}`}>
+        <div className={`w-90  flex flex-col max-h-17 ${bare ? "" : "bg-black clip-angled p-3"}`}>
             <div className="text-xs font-semibold text-orange-400 mb-1 shrink-0">
                 Project Numbers
                 <span className="text-orange-300 text-xs ml-2">
@@ -21,13 +21,13 @@ const ProjectNumber = ({ values = [], selectedProject, onSelectProject, bare = f
                         {uniqueValues.map((item, idx) => {
                             const isActive = selectedProject === item;
                             return (
+                               
                                 <span
                                     key={idx}
                                     onClick={() => onSelectProject(item)}
-                                    className={`w-full px-2 py-1 text-xs border clip-angled cursor-pointer transition-all text-center
-                                                    ${isActive ? "bg-orange-600 text-white border-orange-500 scale-105 shadow-md shadow-orange-500/30"
-                                            : "bg-gray-800 border-orange-700/50 hover:bg-orange-900/30 text-white hover:text-orange-200"
-                                        }
+                                    className={`w-full px-2 py-1 text-xs border cursor-pointer transition-all text-center  clip-angled ${isActive ? "bg-orange-600 text-white border-orange-500  scale-105 shadow-md shadow-orange-500/30 "
+                                            : "bg-orange-900/60  border-orange-500/50 hover:bg-orange-900 text-white hover:text-orange-200"
+                                        } 
                         `}
                                 >
                                     {item}

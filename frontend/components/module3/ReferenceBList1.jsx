@@ -18,7 +18,7 @@ export default function ReferenceBList({ rows, selectedRef, onSelectRef, bare = 
         return (
             <div className="relative w-full drop-shadow-lg">
                 <div className="bg-gradient-to-br from-orange-600 to-orange-800 p-[1px] clip-angled">
-                    <div className="bg-gray-900 clip-angled p-4 text-sm text-orange-500 italic">
+                    <div className="bg-black/90 clip-angled p-4 text-sm text-orange-500 italic">
                         No Reference B values found
                     </div>
                 </div>
@@ -27,7 +27,7 @@ export default function ReferenceBList({ rows, selectedRef, onSelectRef, bare = 
     }
 
     const content = (
-        <div className={`w-full flex flex-col max-h-17 ${bare ? "" : "bg-gray-900 clip-angled p-3"}`}>
+        <div className={`w-full flex flex-col max-h-17 ${bare ? "" : "bg-black/90 clip-angled p-3"} bg-black`}>
             <h3 className="text-xs font-semibold mb-1 text-orange-400 shrink-0">
                 Reference B List
                 <span className="text-orange-300 text-xs ml-2">
@@ -58,7 +58,7 @@ export default function ReferenceBList({ rows, selectedRef, onSelectRef, bare = 
                                 onClick={() => onSelectRef(isActive ? null : ref)}
                                 className={`px-2 py-1 clip-angled cursor-pointer transition-all duration-200 text-center ${isActive
                                     ? "bg-orange-600 text-white shadow-md shadow-orange-500/30"
-                                    : "bg-gray-800 hover:bg-orange-900/30 text-white hover:text-orange-200 border border-orange-700/50 h-fit"
+                                    : "bg-orange-900/60 hover:bg-orange-900 text-white hover:text-orange-200 border border-orange-700/50 h-fit"
                                     }`}
                             >
                                 {ref}
@@ -75,7 +75,10 @@ export default function ReferenceBList({ rows, selectedRef, onSelectRef, bare = 
     return (
         <div className="relative w-full h-fit group transition-all duration-300 drop-shadow-lg hover:drop-shadow-xl">
             <div className="bg-gradient-to-br from-orange-600 to-orange-800 p-[1px] clip-angled h-full">
+                <div className="bg-black clip-angled">
+
                 {content}
+                </div>
             </div>
         </div>
     );

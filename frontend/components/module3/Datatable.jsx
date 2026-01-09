@@ -242,7 +242,7 @@ export default function SummaryTable({
       <tr
         key={rowId}
         className={`
-          ${index % 2 === 0 ? 'bg-gray-900' : 'bg-gray-800'}
+          ${index % 2 === 0 ? 'bg-black' : 'bg-black'}
           ${isPrioritizedNotInFilter ? 'bg-orange-900/30' : ''}
           ${isPrioritized ? 'bg-orange-900/20' : ''}
           transition-colors duration-200 hover:bg-orange-800/20
@@ -264,7 +264,7 @@ export default function SummaryTable({
                   checked={isPrioritized}
                   onChange={(e) => handlePriorityChange(row, e)}
                   onClick={(e) => e.stopPropagation()}
-                  className="h-4 w-4 cursor-pointer text-orange-500 focus:ring-orange-500 border-orange-700 rounded bg-gray-900"
+                  className="h-4 w-4 cursor-pointer text-orange-500 focus:ring-orange-500 border-orange-700 rounded bg-black"
                 />
               </td>
             );
@@ -287,7 +287,7 @@ export default function SummaryTable({
   return (
     <div className="relative -mb-1  text-xs mx-auto drop-shadow-lg hover:drop-shadow-xl transition-all duration-300">
       <div className="bg-gradient-to-br from-orange-600 to-orange-800 p-[1px] clip-angled h-full">
-        <div className="bg-gray-900 clip-angled py-2 p-3 h-full">
+        <div className="bg-black clip-angled py-2 p-3 h-full">
           {/* Header + Buttons */}
           <div className="flex justify-between items-center mb-1">
             <div className="flex justify-between items-center">
@@ -322,7 +322,7 @@ export default function SummaryTable({
 
           {/* Column Selector */}
           {showColumnSelector && (
-            <div className="mb-4 p-3 bg-gray-800 border border-orange-700/50 clip-angled shadow-md shadow-orange-500/10">
+            <div className="mb-4 p-3 bg-black border border-orange-700/50 clip-angled shadow-md shadow-orange-500/10">
               <div className="flex justify-between items-center mb-2">
                 <h3 className="text-sm font-semibold text-orange-300">
                   Select Columns to Display
@@ -367,7 +367,7 @@ export default function SummaryTable({
           {/* Table */}
           <div className={`${fullView ? "h-[75vh]" : "h-[35vh]"} overflow-y-auto clip-angled `}>
             <table className="w-full ">
-              <thead className="bg-gray-800 sticky top-0 border-b border-orange-700/50">
+              <thead className="bg-black sticky top-0 border-b border-orange-700/50">
                 <tr>
                   {columns.map((col, index) => {
                     if (!visibleColumns[index]) return null;
@@ -383,7 +383,7 @@ export default function SummaryTable({
                   })}
                 </tr>
               </thead>
-              <tbody className="bg-gray-900 divide-y divide-orange-800/30 ">
+              <tbody className="bg-black/30 divide-y divide-white/30 ">
                 {sortedRows.length === 0 && prioritizedNotInFilter.length === 0 ? (
                   <tr>
                     <td

@@ -87,7 +87,13 @@ export default function Filters({ filters, setFilters, applyFilters, rows }) {
 
   return (
     <div className="py-1 px-2">
-      <div className="flex flex-row md:flex-row items-center gap-2">
+     <form
+                        onSubmit={(e) => {
+                            e.preventDefault();
+                            applyFilters();
+                        }}
+                        className="flex flex-col md:flex-row gap-2 items-center w-full"
+                    >
         <a href="/">
           <h1 className="text-xl font-bold tracking-wide bg-gradient-to-r from-blue-500 to-blue-700 bg-clip-text text-transparent uppercase drop-shadow-sm">PLANER CHECKER</h1>
         </a>
@@ -159,12 +165,12 @@ export default function Filters({ filters, setFilters, applyFilters, rows }) {
 
         {/* Apply Button */}
         <button
-          onClick={applyFilters}
+          type="submit"
           className="flex items-center justify-center bg-[var(--primary)] hover:opacity-90 text-[var(--primary-foreground)] p-1.5 rounded-full shadow-md transition"
         >
           <Magnet stroke="var(--primary-foreground)" width={20} height={20} />
         </button>
-      </div>
+      </form>
     </div>
   );
 }

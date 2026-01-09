@@ -16,14 +16,14 @@ const UnifiedStatsBoard = ({
     return (
         <div className="h-[226px] w-full transform transition-transform duration-200 hover:scale-[1.02] drop-shadow-lg">
             <div className="bg-gradient-to-br from-orange-600 to-orange-800 p-[1px] clip-angled h-full">
-                <div className="bg-gray-900 clip-angled p-2 h-full flex flex-col gap-1.5">
+                <div className="bg-black clip-angled p-2 h-full flex flex-col gap-1.5">
 
                     {/* Row 1: RM & BOI Stats */}
                     <div className="flex flex-row gap-2 h-[25%] shrink-0">
                         <div className="w-full h-full">
                             <Rawmaterial
                                 value={`${uniqueItemCount} `}
-                                bgColor="bg-gray-900"
+                                bgColor="bg-black"
                                 valueColor="text-[var(--color-primary)]"
                                 labelColor="text-[var(--color-muted-foreground)]"
                             />
@@ -31,7 +31,7 @@ const UnifiedStatsBoard = ({
                         <div className="w-full h-full">
                             <Baught
                                 value={`${uniqueBOICount} `}
-                                bgColor="bg-gray-900"
+                                bgColor="bg-black"
                                 valueColor="text-[var(--color-primary)]"
                                 labelColor="text-[var(--color-muted-foreground)]"
                             />

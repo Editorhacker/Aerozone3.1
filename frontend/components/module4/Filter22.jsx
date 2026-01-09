@@ -87,7 +87,14 @@ export default function Filters({ filters, setFilters, applyFilters, rows }) {
         <div className="mb-1 h-fit relative drop-shadow-lg hover:drop-shadow-xl transition-all duration-300">
             <div className="bg-gradient-to-br from-purple-600 to-purple-900 rounded-lg  p-[1px] h-full">
                 <div className="bg-black rounded-lg p-2 h-13">
-                    <div className="flex flex-col md:flex-row gap-4 items-center w-full h-fit">
+                    <form
+                        onSubmit={(e) => {
+                            e.preventDefault();
+                            applyFilters();
+                        }}
+                        className="flex flex-col md:flex-row gap-2 items-center w-full"
+                    >
+
                         <a href="/" className="shrink-0">
                             <h1 className="text-3xl font-bold tracking-wide bg-gradient-to-r from-purple-400 via-purple-500 to-purple-600 bg-clip-text text-transparent uppercase drop-shadow-lg shadow-purple-500/50">ORBIT</h1>
                         </a>
@@ -169,12 +176,12 @@ export default function Filters({ filters, setFilters, applyFilters, rows }) {
 
                         {/* Apply Button */}
                         <button
-                            onClick={applyFilters}
+                            type="submit"
                             className="w-10 h-10 flex items-center justify-center rounded-lg bg-purple-600 hover:bg-purple-500 text-white p-1.5 shadow-md hover:shadow-lg hover:shadow-purple-500/30 transition-all duration-200 hover:scale-105 shrink-0"
                         >
                             <Magnet stroke="#ffffff" width={20} height={20} />
                         </button>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>

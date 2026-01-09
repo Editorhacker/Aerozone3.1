@@ -79,16 +79,22 @@ export default function Filters({ filters, setFilters, applyFilters, rows }) {
         [rows]
     );
 
-     const projectCodes = useMemo(
+    const projectCodes = useMemo(
         () => [...new Set(rows.map((r) => r.ProjectCode || r.PROJECT_NO))].filter(Boolean),
         [rows]
-      );
-    
+    );
+
     return (
         <div className=" h-14 relative drop-shadow-lg hover:drop-shadow-xl transition-all duration-300 ">
             <div className="bg-gradient-to-br from-orange-600 to-orange-800 p-[1px] clip-angled h-full">
-                <div className="bg-gray-900 clip-angled  p-2 h-full">
-                    <div className="flex flex-col md:flex-row gap-2 items-center  w-full  ">
+                <div className="bg-black clip-angled  p-2 h-full">
+                    <form
+                        onSubmit={(e) => {
+                            e.preventDefault();
+                            applyFilters();
+                        }}
+                        className="flex flex-col md:flex-row gap-2 items-center w-full"
+                    >
                         <a href="/" className="shrink-0 ">
                             <h1 className="text-2xl font-bold tracking-wide bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600 bg-clip-text text-transparent uppercase drop-shadow-lg shadow-orange-500/50">PRISM</h1>
                         </a>
@@ -100,7 +106,7 @@ export default function Filters({ filters, setFilters, applyFilters, rows }) {
                                 placeholder="🔍 Search"
                                 value={search}
                                 onChange={(e) => setFilters(f => ({ ...f, search: e.target.value }))}
-                                className="w-full px-3 py-1.5 clip-angled border border-orange-700/50 bg-gray-800 text-white placeholder-white text-sm focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all duration-200"
+                                className="w-full px-3 py-1.5 clip-angled border border-orange-700/50 bg-black text-white placeholder-white text-sm focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all duration-200"
                             />
                         </div>
 
@@ -109,11 +115,11 @@ export default function Filters({ filters, setFilters, applyFilters, rows }) {
                             <select
                                 value={itemCode}
                                 onChange={(e) => setFilters(f => ({ ...f, itemCode: e.target.value }))}
-                                className="w-full px-3 py-1.5 clip-angled border border-orange-700/50 bg-gray-800 text-white text-sm focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all duration-200"
+                                className="w-full px-3 py-1.5 clip-angled border border-orange-700/50 bg-black text-white text-sm focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all duration-200"
                             >
-                                <option value="" className="bg-gray-800">All Item Codes</option>
+                                <option value="" className="bg-black">All Item Codes</option>
                                 {itemCodes.map((ic) => (
-                                    <option key={ic} value={ic} className="bg-gray-800">
+                                    <option key={ic} value={ic} className="bg-black">
                                         {ic}
                                     </option>
                                 ))}
@@ -124,9 +130,9 @@ export default function Filters({ filters, setFilters, applyFilters, rows }) {
                             <select
                                 value={projectCode}
                                 onChange={(e) => setFilters(f => ({ ...f, projectCode: e.target.value }))}
-                                className="w-full px-3 py-1.5 clip-angled border border-orange-700/50 bg-gray-800 text-white placeholder-white text-sm focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all duration-200"
+                                className="w-full px-3 py-1.5 clip-angled border border-orange-700/50 bg-black text-white placeholder-white text-sm focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all duration-200"
                             >
-                                <option value="">All Project Codes</option>
+                                <option value="" className="bg-black">All Project Codes</option>
                                 {projectCodes.map((pc) => (
                                     <option key={pc} value={pc}>
                                         {pc}
@@ -142,7 +148,7 @@ export default function Filters({ filters, setFilters, applyFilters, rows }) {
                                 placeholder="Description"
                                 value={description}
                                 onChange={(e) => setFilters(f => ({ ...f, description: e.target.value }))}
-                                className="w-full px-3 py-1.5 clip-angled border border-orange-700/50 bg-gray-800 text-white placeholder-white text-sm focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all duration-200"
+                                className="w-full px-3 py-1.5 clip-angled border border-orange-700/50 bg-black text-white placeholder-white text-sm focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all duration-200"
                             />
                         </div>
 
@@ -153,7 +159,7 @@ export default function Filters({ filters, setFilters, applyFilters, rows }) {
                                 placeholder="Ref B Start"
                                 value={refStart}
                                 onChange={(e) => setFilters(f => ({ ...f, refStart: e.target.value }))}
-                                className="w-full px-3 py-1.5 clip-angled border border-orange-700/50 bg-gray-800 text-white placeholder-white text-sm focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all duration-200"
+                                className="w-full px-3 py-1.5 clip-angled border border-orange-700/50 bg-black text-white placeholder-white text-sm focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all duration-200"
                             />
                         </div>
 
@@ -164,18 +170,18 @@ export default function Filters({ filters, setFilters, applyFilters, rows }) {
                                 placeholder="Ref B End"
                                 value={refEnd}
                                 onChange={(e) => setFilters(f => ({ ...f, refEnd: e.target.value }))}
-                                className="w-full px-3 py-1.5 clip-angled border border-orange-700/50 bg-gray-800 text-white placeholder-white text-sm focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all duration-200"
+                                className="w-full px-3 py-1.5 clip-angled border border-orange-700/50 bg-black text-white placeholder-white text-sm focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all duration-200"
                             />
                         </div>
 
                         {/* Apply Button */}
                         <button
-                            onClick={applyFilters}
+                            type="submit"
                             className="w-13 h-9 flex items-center justify-center bg-orange-600 hover:bg-orange-500 text-white p-1.5 clip-angled shadow-md hover:shadow-lg hover:shadow-orange-500/30 transition-all duration-200 hover:scale-105 shrink-0"
                         >
                             <Magnet stroke="#ffffff" width={20} height={20} />
                         </button>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>

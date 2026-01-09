@@ -10,7 +10,7 @@ export default function DataTable2({
 }) {
   // ✅ Column definitions (keys = your row object fields)
   const columns = [
-    // { key: "ReferenceB", label:" Reference B "},
+    { key: "priority", label: "Priority" },
     { key: "ProjectCode", label: "Project Code" },
     { key: "ItemCode", label: "Item Code" },
     { key: "ItemShortDescription", label: "Description" },
@@ -26,9 +26,10 @@ export default function DataTable2({
 
     ];
 
-   const [visibleColumns, setVisibleColumns] = useState(
-     Array(columns.length).fill(false).map((_, index) => index < 12)
-   );
+  const [visibleColumns, setVisibleColumns] = useState(
+      Array(columns.length).fill(true) // ✅ simpler & correct
+    );
+  
    const [showColumnSelector, setShowColumnSelector] = useState(false);
  
    // Use external prioritizedRows if provided, otherwise use internal state
@@ -36,10 +37,34 @@ export default function DataTable2({
    const prioritizedRows = onPriorityChange ? externalPrioritizedRows : internalPrioritizedRows;
  
    // Generate a unique ID for each row based on key fields
-const generateRowId = (row, index) => {
-  const base = `${row.ItemCode || ""}|${row.PONo || ""}|${row.Date || ""}|${row.SupplierName || ""}`;
-  return btoa(base + "|" + index);  // always unique
+const generateRowId = (row) => {
+  if (row.UNIQUE_CODE) return row.UNIQUE_CODE;
+  if (row.id) return row.id;
+
+  const key = `${row.ItemCode || ""}|${row.PONo || ""}|${row.SupplierName || ""}`;
+  return btoa(key);
 };
+
+
+const handlePriorityChange = (row, event) => {
+  if (event) event.stopPropagation();
+
+  const rowId = generateRowId(row);
+  const newMap = new Map(prioritizedRows);
+
+  if (newMap.has(rowId)) {
+    newMap.delete(rowId);
+  } else {
+    newMap.set(rowId, { ...row });
+  }
+
+  if (onPriorityChange) {
+    onPriorityChange(newMap);
+  } else {
+    setInternalPrioritizedRows(newMap);
+  }
+};
+
 
  
  
@@ -60,7 +85,7 @@ const generateRowId = (row, index) => {
      const notInFilter = [];
  
      prioritizedRows.forEach((row, rowId) => {
-       const isInFilter = filteredRows.some(filterRow => generateRowId(filterRow) === rowId);
+const isInFilter = filteredRows.some(filterRow => generateRowId(filterRow) === rowId);
        if (isInFilter) {
          inFilter.push(row);
        } else {
@@ -79,10 +104,11 @@ const generateRowId = (row, index) => {
    // Sort rows based on priority
    const sortedRows = useMemo(() => {
      // First, get all non-prioritized rows from the current filter
-     const nonPrioritizedRows = filteredRows.filter((row , index) => {
-       const rowId = generateRowId(row , index );
-       return !prioritizedRowIds.has(rowId);
-     });
+     const nonPrioritizedRows = filteredRows.filter((row) => {
+  const rowId = generateRowId(row);
+  return !prioritizedRowIds.has(rowId);
+});
+
  
      // Combine prioritized rows (in filter) with non-prioritized rows
      return [...prioritizedInFilter, ...nonPrioritizedRows];
@@ -104,7 +130,7 @@ const generateRowId = (row, index) => {
  
    // Render a table row
    const renderTableRow = (row, index, isPrioritizedNotInFilter = false) => {
-     const rowId = generateRowId(row , index);
+     const rowId = generateRowId(row );
      const isPrioritized = prioritizedRowIds.has(rowId);
  
      return (
@@ -121,11 +147,11 @@ const generateRowId = (row, index) => {
           if (!visibleColumns[colIndex]) return null;
           
           // Special handling for the Priority column
-          if (col.key === "priority") {
+           if (col.key === "priority") {
             return (
               <td
                 key={colIndex}
-                className="px-2 py-1 whitespace-wrap text-[11px] text-[var(--color-foreground)]"
+                className="px-2 py-1 text-xs text-orange-200 text-center"
                 onClick={(e) => e.stopPropagation()}
               >
                 <input
@@ -133,11 +159,12 @@ const generateRowId = (row, index) => {
                   checked={isPrioritized}
                   onChange={(e) => handlePriorityChange(row, e)}
                   onClick={(e) => e.stopPropagation()}
-                  className="h-4 w-4 text-[var(--color-primary)] focus:ring-[var(--color-primary)] border-[var(--color-border)] rounded"
+                  className="h-4 w-4 cursor-pointer text-orange-500 focus:ring-orange-500 border-orange-700 rounded bg-gray-900"
                 />
               </td>
             );
           }
+
           
           return (
             <td
@@ -228,7 +255,7 @@ const generateRowId = (row, index) => {
                 return (
                   <th
                     key={index}
-                    className="px-1 py-1 text-center text-[11px]  text-[var(--color-muted-foreground)] uppercase tracking-wider"
+                    className="px-1 py-1 text-center  font-semibold text-[12px]  text-[var(--color-muted-foreground)] uppercase tracking-wider"
                   >
                     {col.label}
                   </th>

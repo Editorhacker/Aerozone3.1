@@ -47,7 +47,7 @@ const OrderStatusDonut = ({ filteredRows = [] }) => {
     return (
       <div className="relative w-full drop-shadow-lg">
         <div className="bg-gradient-to-br from-orange-600 to-orange-800 p-[1px] clip-angled">
-          <div className="bg-gray-900 clip-angled p-4 flex flex-col items-center text-center">
+          <div className="bg-black clip-angled p-4 flex flex-col items-center text-center">
             <p className="text-orange-400 text-sm">No Order Status Data</p>
             <p className="text-orange-500 text-xs">Try clearing filters</p>
           </div>
@@ -59,7 +59,7 @@ const OrderStatusDonut = ({ filteredRows = [] }) => {
   return (
     <div className="relative w-full group transition-all duration-300 drop-shadow-lg hover:drop-shadow-xl">
       <div className="bg-gradient-to-br from-orange-600 to-orange-800 p-[1px] clip-angled h-full">
-        <div className="bg-gray-900 clip-angled p-3 flex flex-col items-center h-full w-full">
+        <div className="bg-black clip-angled p-3 flex flex-col items-center h-full w-full">
 
           <h2 className="text-md font-semibold text-white mb-2 text-center">
             Order Status
