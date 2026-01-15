@@ -3,7 +3,7 @@ import React from "react";
 const materials = ["SS", "AL", "IN", "TI", "COBALT", "OTHER"];
 const types = ["SHEET", "BAR", "PLATE", "TUBE", "BLOCK", "OTHERS"];
 
-const CELL = "w-12 h-7"; // square cell
+const CELL = "w-15 h-7"; // square cell
 const CELLL = "w-9 h-9"
 const MaterialTypeMatrix = ({ rows = [] }) => {
   const boiRows = rows.filter(r => r.Category === "BOI");
@@ -25,19 +25,18 @@ const MaterialTypeMatrix = ({ rows = [] }) => {
   const hasBOI = boiRows.length > 0;
 
   return (
-    <div className="relative clip-angled bg-gradient-to-br from-orange-600 to-orange-800 p-[1px]">
+    <div className="relative w-[400px] clip-angled bg-gradient-to-br from-orange-600 to-orange-800 p-[1px]">
       <div className="clip-angled bg-black p-3">
 
         {/* GRID LAYOUT */}
         <div className="grid grid-cols-[auto_1fr] gap-2">
 
-          {/* 🟧 BOI OUTSIDE TABLE */}
         
 
           {/* 🟦 MATRIX TABLE */}
           <div className="overflow-auto scrollbar-hide">
-            <table className="border-collapse text-xs text-white">
-              <thead className="sticky top-0 bg-orange-700 z-10">
+            <table className="border-collapse text-[12px] text-white">
+              <thead className="sticky top-0 bg-black z-10">
                 <tr>
                   {/* material header */}
                   <th className={`border border-orange-500 ${CELL}`} />
@@ -45,7 +44,7 @@ const MaterialTypeMatrix = ({ rows = [] }) => {
                   {types.map(type => (
                     <th
                       key={type}
-                      className={`border border-orange-500 ${CELL} text-[10px] text-center`}
+                      className={`border  border-orange-500 ${CELL} text-[12px] text-center`}
                     >
                       {type}
                     </th>

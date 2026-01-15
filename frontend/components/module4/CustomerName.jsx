@@ -7,10 +7,10 @@ const CustomerName = ({ values = [], selectedCustomer, onSelectCustomer }) => {
     return (
         <div className="relative w-276 group transition-all duration-300 drop-shadow-lg hover:drop-shadow-xl">
             <div className="bg-gradient-to-br from-purple-600 to-purple-800 p-[1px] clip-angled h-full">
-                <div className="bg-gray-900 clip-angled p-4 h-13 flex flex-row items-center">
+                <div className="bg-black clip-angled p-4 h-13 flex flex-row items-center">
                     <div className="text-xs text-center font-bold text-white mb-1">
                         Customers
-                        <span className="text-purple-300 text-xs ml-2 ">
+                        <span className=" text-xs ml-2 ">
                             {` (${uniqueValues.length})`}
                         </span>
                     </div>
@@ -29,7 +29,7 @@ const CustomerName = ({ values = [], selectedCustomer, onSelectCustomer }) => {
                                             className={`px-6 py-1 h-7 whitespace-nowrap text-xs font-semibold items-center border clip-angled cursor-pointer transition-all
                                                 ${isActive
                                                     ? "bg-purple-600 text-white  border-purple-500 scale-105 shadow-md shadow-purple-500/30"
-                                                    : "bg-gray-800 border-purple-700/50 hover:bg-purple-900/30 text-purple-300 hover:text-purple-200"
+                                                    : "bg-purple-800/30 hover:transition-transform duration-700 border-purple-700/50 hover:bg-purple-900/80 text-purple-300 hover:text-purple-200"
                                                 }
                                             `}
                                         >

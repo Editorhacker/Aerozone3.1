@@ -67,7 +67,7 @@ const OrderStatusDonut = ({ filteredRows = [] }) => {
 
       <div className="relative flex justify-center items-center w-[90px] md:w-[110px] lg:w-[140px]  ">
 
-        <div className="z-50 flex justify-center items-center w-[90px] md:w-[110px] lg:w-[140px]">
+        <div className="z-50 flex justify-center items-center w-[80px] md:w-[100px] lg:w-[130px] h-[90px] md:h-[110px] lg:h-[140px]">
             <Doughnut
               data={{
                 labels: ["Completed", "Pending"],

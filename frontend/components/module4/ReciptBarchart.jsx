@@ -65,7 +65,7 @@ const ReceiptBarChart = ({ rows = [] }) => {
     const totalRows = Math.ceil(totalSlots / 7);
 
     return (
-        <div className="bg-[#111111] border border-purple-700/30 rounded-xl shadow-md p-2 w-full h-56 flex flex-col will-change-transform">
+        <div className="bg-black border border-purple-700/80 rounded-xl shadow-md p-2 w-full h-56 flex flex-col will-change-transform">
             {/* Header */}
             <div className="flex items-center justify-between mb-2">
                 <button

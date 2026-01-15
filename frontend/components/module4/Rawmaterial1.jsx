@@ -3,7 +3,7 @@ import React from 'react';
 const Rawmaterial1 = ({
     value = "123 RM",
     label = "RM",
-    bgColor = "bg-gray-900",
+    bgColor = "bg-black",
     hoverScale = "hover:scale-105",
     bare = false
 }) => {

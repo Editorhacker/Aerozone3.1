@@ -76,7 +76,7 @@ export default function ProjectCylinder({ rows = [] }) {
     const liquidTop = segments.length > 0 ? Math.min(...segments.map(s => s.yStart)) : bottomY;
 
     return (
-        <div className="flex items-center gap-6 h-full w-full justify-between">
+        <div className="flex items-center gap-6 h-full w-full justify-between ">
             <div className="flex-shrink-0">
                 <svg viewBox={`0 0 ${width} ${height}`} className="w-22 h-40" style={{ filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.25))' }}>
                     <defs>
@@ -129,9 +129,9 @@ export default function ProjectCylinder({ rows = [] }) {
                 </svg>
             </div>
 
-            <div className="flex-1 space-y-2 overflow-y-auto max-h-[200px] scrollbar-hide">
+            <div className="flex-1 space-y-1 overflow-y-auto max-h-[200px] scrollbar-hide">
                 {percentages.map((item, idx) => (
-                    <div key={idx} className="flex items-center gap-2">
+                    <div key={idx} className="flex items-center gap-1">
                         <div className="w-2 h-2 rounded-full" style={{ backgroundColor: item.color }} />
                         <div className="flex-1 min-w-0">
                             <div className="text-[10px] text-gray-400 truncate">{item.label}</div>

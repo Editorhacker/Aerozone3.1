@@ -78,6 +78,30 @@ const handlePriorityChange = (row, event) => {
        });
      });
    }, [rows]);
+
+   // ✅ Deduplicate + aggregate duplicate rows
+const aggregatedRows = useMemo(() => {
+  const map = new Map();
+
+  filteredRows.forEach((row) => {
+    const id = generateRowId(row);
+
+    if (!map.has(id)) {
+      map.set(id, {
+        ...row,
+        OrderedLineQuantity: Number(row.OrderedLineQuantity) || 0,
+        OrderLineValue: Number(row.OrderLineValue) || 0,
+      });
+    } else {
+      const existing = map.get(id);
+      existing.OrderedLineQuantity += Number(row.OrderedLineQuantity) || 0;
+      existing.OrderLineValue += Number(row.OrderLineValue) || 0;
+    }
+  });
+
+  return Array.from(map.values());
+}, [filteredRows]);
+
  
    // Separate prioritized rows into those in the current filter and those not
    const { prioritizedInFilter, prioritizedNotInFilter } = useMemo(() => {
@@ -85,7 +109,7 @@ const handlePriorityChange = (row, event) => {
      const notInFilter = [];
  
      prioritizedRows.forEach((row, rowId) => {
-const isInFilter = filteredRows.some(filterRow => generateRowId(filterRow) === rowId);
+const isInFilter = aggregatedRows.some(filterRow => generateRowId(filterRow) === rowId);
        if (isInFilter) {
          inFilter.push(row);
        } else {
@@ -94,7 +118,7 @@ const isInFilter = filteredRows.some(filterRow => generateRowId(filterRow) === r
      });
  
      return { prioritizedInFilter: inFilter, prioritizedNotInFilter: notInFilter };
-   }, [filteredRows, prioritizedRows]);
+   }, [aggregatedRows, prioritizedRows]);
  
    // Create a Set of prioritized row IDs for quick lookup
    const prioritizedRowIds = useMemo(() => {
@@ -104,7 +128,7 @@ const isInFilter = filteredRows.some(filterRow => generateRowId(filterRow) === r
    // Sort rows based on priority
    const sortedRows = useMemo(() => {
      // First, get all non-prioritized rows from the current filter
-     const nonPrioritizedRows = filteredRows.filter((row) => {
+     const nonPrioritizedRows = aggregatedRows.filter((row) => {
   const rowId = generateRowId(row);
   return !prioritizedRowIds.has(rowId);
 });
@@ -112,9 +136,9 @@ const isInFilter = filteredRows.some(filterRow => generateRowId(filterRow) === r
  
      // Combine prioritized rows (in filter) with non-prioritized rows
      return [...prioritizedInFilter, ...nonPrioritizedRows];
-   }, [filteredRows, prioritizedInFilter, prioritizedRowIds]);
+   }, [aggregatedRows, prioritizedInFilter, prioritizedRowIds]);
  
- 
+
  
    // Toggle column visibility
    const toggleColumn = (index) => {
@@ -137,10 +161,10 @@ const isInFilter = filteredRows.some(filterRow => generateRowId(filterRow) === r
       <tr
         key={rowId}
         className={`
-          ${index % 2 === 0 ? 'bg-[var(--color-card)]' : 'bg-[var(--color-muted)]'}
+          ${index % 2 === 0 ? 'bg-black' : 'bg-black'}
           ${isPrioritizedNotInFilter ? 'bg-yellow-500 dark:bg-yellow-900/20' : ''}
           ${isPrioritized ? 'bg-blue-500 dark:bg-blue-900/20' : ''}
-          transition-colors duration-200
+          transition-colors duration-500 hover:bg-purple-900/40 cursor-pointer
         `}
       >
         {columns.map((col, colIndex) => {
@@ -159,7 +183,7 @@ const isInFilter = filteredRows.some(filterRow => generateRowId(filterRow) === r
                   checked={isPrioritized}
                   onChange={(e) => handlePriorityChange(row, e)}
                   onClick={(e) => e.stopPropagation()}
-                  className="h-4 w-4 cursor-pointer text-orange-500 focus:ring-orange-500 border-orange-700 rounded bg-gray-900"
+                  className="h-4 w-4 cursor-pointer text-orange-500 focus:ring-orange-500 border-orange-700 rounded bg-black"
                 />
               </td>
             );
@@ -169,7 +193,7 @@ const isInFilter = filteredRows.some(filterRow => generateRowId(filterRow) === r
           return (
             <td
               key={colIndex}
-              className="px-2 py-1 whitespace-wrap text-center text-[11px] text-[var(--color-foreground)]"
+              className="px-1 py-1 font-normal text-wrap text-center  text-[11px] text-white/90"
             >
               {row[col.key] ?? ""}
             </td>
@@ -247,15 +271,15 @@ const isInFilter = filteredRows.some(filterRow => generateRowId(filterRow) === r
 
       {/* Table */}
       <div className={`${fullView ? "h-[75vh]" : "h-[29vh]"} overflow-y-auto rounded-md scrollbar-hide `}>
-        <table className="w-full">
-          <thead className="bg-[var(--color-muted)] sticky top-0 ">
+        <table className="w-full ">
+          <thead className="bg-black border-b border-purple-700/80 z-10 sticky top-0 ">
             <tr>
               {columns.map((col, index) => {
                 if (!visibleColumns[index]) return null;
                 return (
                   <th
                     key={index}
-                    className="px-1 py-1 text-center  font-semibold text-[12px]  text-[var(--color-muted-foreground)] uppercase tracking-wider"
+                    className="px-1 py-1  text-center font-bold text-[12px] text-purple-500 uppercase tracking-wider"
                   >
                     {col.label}
                   </th>
@@ -263,12 +287,12 @@ const isInFilter = filteredRows.some(filterRow => generateRowId(filterRow) === r
               })}
             </tr>
           </thead>
-          <tbody className="bg-[var(--color-card)] text-[11px] divide-y divide-[var(--color-border)]">
+          <tbody className="bg-black text-[11px] divide-y divide-white/30">
             {sortedRows.length === 0 && prioritizedNotInFilter.length === 0 ? (
               <tr>
                 <td
                   colSpan={visibleColumnCount}
-                  className="px-1 py-3 text-center text-[var(--color-muted-foreground)]"
+                  className="px-2 py-3 text-center text-[var(--color-muted-foreground)]"
                 >
                   <div className="flex flex-col items-center">
                     <svg

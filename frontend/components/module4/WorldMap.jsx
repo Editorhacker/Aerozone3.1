@@ -36,6 +36,7 @@ const calculateCountryData = (rows) => {
     const type = row.Type || "";
     const material = extractMaterial(type);
     const customer = row.CustomerName;
+    const supplier = row.SupplierName;
 
     if (!map[country]) {
       map[country] = {
@@ -44,6 +45,7 @@ const calculateCountryData = (rows) => {
         totalQtyEA: 0,
         totalQtyKG: 0,
         customers: new Set(),
+        suppliers: new Set(),
         materials: {},
         types: {},
       };
@@ -64,6 +66,14 @@ if (uom === "EA") map[country].totalQtyEA += qty;
 if (uom === "KG") map[country].totalQtyKG += qty;
     // Customers
     if (customer) map[country].customers.add(customer);
+    // Suppliers
+   
+if (supplier) {
+  map[country].suppliers.add(
+    supplier.trim().replace(/\s+/g, " ")
+  );
+}
+
 
     // Materials
     map[country].materials[material] =
@@ -79,11 +89,14 @@ if (uom === "KG") map[country].totalQtyKG += qty;
   return Object.values(map).map((item) => ({
     ...item,
     customers: Array.from(item.customers),
+    suppliers: Array.from(item.suppliers),
     percentage:
       grandTotalValue === 0
         ? 0
         : Math.round((item.totalValue / grandTotalValue) * 100),
   }));
+  
+
 };
 
 /* ---------------------------------------
@@ -143,9 +156,13 @@ const WorldMap = ({ rows = [] }) => {
 
   tooltip: {
     useHTML: true,
-    outside: false,
-    followPointer: false,
-    shadow: false,
+     backgroundColor: "transparent", // ✅ removes white box
+  borderWidth: 0,                  // ✅ removes border
+  borderRadius: 0,
+  shadow: false,                   // ✅ no shadow
+  padding: 0,                      // ✅ remove spacing
+  outside: false,
+  followPointer: false,
 
     style: {
       fontSize: "11px",
@@ -165,6 +182,7 @@ const WorldMap = ({ rows = [] }) => {
       const projects = d.customers.join(", ");
       const materials = Object.keys(d.materials).join(", ");
       const types = Object.keys(d.types).join(", ");
+      const suppliers = d.suppliers ? d.suppliers.join(", ") : "";
 
       return `
         <div style="
@@ -187,6 +205,10 @@ const WorldMap = ({ rows = [] }) => {
           <div style="word-break:break-word;white-space:normal">
             <b>Projects</b> : ${projects || "-"}
           </div>
+         <div style="word-break:break-word;white-space:normal">
+  <b>Suppliers</b> : ${suppliers || "-"}
+</div>
+
 
           <div><b>Value</b> : ${d.totalValue.toFixed(2)}</div>
           <div>

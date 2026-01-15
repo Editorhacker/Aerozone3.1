@@ -73,7 +73,7 @@ const PlannedOrderDonut = ({ plannedStats = {} }) => {
         Planned Orders
       </h2>
 
-      <div className="relative flex justify-center items-center w-[90px] md:w-[110px] lg:w-[140px] h-[60px] md:h-[80px] lg:h-[100px]">
+      <div className="relative flex justify-center items-center w-[80px] md:w-[100px] lg:w-[130px] h-[60px] md:h-[80px] lg:h-[100px]">
         <Doughnut data={data} options={options} />
 
         {/* Center Text */}

@@ -10,6 +10,7 @@ import ReceiptBarChart from "../components/module4/ReciptBarchart";
 import MaterialCube from "../components/module4/MaterialCube";
 import ProjectCylinder from "../components/module4/ProjectCylinder";
 import WorldMap from "../components/module4/WorldMap";
+import Typecubescence from "../components/module4/Typecubescence";
 
 const ZoomIcon = ({ width = 18, height = 18, stroke = "#fff" }) => (
   <svg
@@ -369,7 +370,7 @@ const Module4Page1 = () => {
 
               {/* PROJECT DISTRIBUTION Cylinder */}
               <div className="w-[25%]">
-                <div className="bg-[#111111] rounded-xl border border-purple-700/30 p-4 shadow-md h-[223px] relative group transition-all duration-300 hover:shadow-lg flex flex-col">
+                <div className="bg-black rounded-xl border border-purple-700/80 p-4 shadow-md h-[223px] relative group transition-all duration-300 hover:shadow-lg flex flex-col">
                   <div className="flex items-center mb-1">
                     <div className="h-4 w-1 bg-purple-500 mr-2 rounded-sm" />
                     <h2 className="text-[10px] font-semibold text-white uppercase tracking-wider">PROJECT DISTRIBUTION</h2>
@@ -382,7 +383,7 @@ const Module4Page1 = () => {
 
               {/* World Map */}
               <div className="w-[50%]">
-                <div className="bg-[#111111] rounded-xl border border-purple-700/30 p-2 shadow-md h-[223px] relative group transition-all duration-300 hover:shadow-lg flex flex-col">
+                <div className="bg-black rounded-xl border border-purple-700/80 p-2 shadow-md h-[223px] relative group transition-all duration-300 hover:shadow-lg flex flex-col">
                   <div className="flex items-center justify-between mb-1">
                     <div className="flex items-center">
                       <div className="h-4 w-1 bg-purple-500 mr-2 rounded-sm" />
@@ -390,7 +391,7 @@ const Module4Page1 = () => {
                     </div>
 
                     {/* Live Status Badge */}
-                    <div className="flex items-center gap-2 px-2 py-0.5 bg-purple-500/10 border border-purple-500/20 rounded-full">
+                    <div className="flex items-center gap-2 px-2 py-0.5 bg-black border border-purple-500/20 rounded-full">
                       <div className="relative w-1.5 h-1.5">
                         <div className="absolute inset-0 rounded-full bg-purple-500 animate-pulse" />
                         <div className="absolute inset-0 rounded-full bg-purple-500 animate-ping opacity-75" />
@@ -398,7 +399,7 @@ const Module4Page1 = () => {
                       <span className="text-[8px] font-bold text-purple-400 uppercase tracking-tighter">Live</span>
                     </div>
                   </div>
-                  <div className="bg-[#111111] rounded-xl border border-purple-700/20
+                    <div className="bg-black rounded-xl border border-purple-700/80
        p-1 shadow-md h-full flex flex-col">
                     <WorldMap rows={filteredRows} />
                   </div>
@@ -442,8 +443,8 @@ const Module4Page1 = () => {
 
               <div className="w-[30%] h-3/4 flex flex-row  gap-2 ">
 
-                  <div className="w-[90%] h-full overflow-hidden">
-                    <MaterialCube rows={filteredRows} />
+                  <div className="w-[80%] h-full overflow-hidden">
+                    <Typecubescence rows={filteredRows} />
                   </div>
 
                   <div className="w-[30%] h-full overflow-hidden">
@@ -456,7 +457,7 @@ const Module4Page1 = () => {
 
     
               </div>
-              <div className="w-full bg-gray-900 p-1 rounded-[var(--radius)] shadow-md relative flex flex-col">
+              <div className="w-full bg-black border border-purple-700/80 p-2 rounded-[var(--radius)] shadow-md relative flex flex-col">
 
                 {/* Zoom Button */}
                 <div className="flex justify-end absolute top-2 right-2 z-10">
@@ -473,6 +474,7 @@ const Module4Page1 = () => {
                   <DataTable2
                     rows={filteredRows}
                     fullView={activeComponent === "dataTable"}
+                    
                   />
                 </div>
               </div>

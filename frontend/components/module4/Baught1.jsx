@@ -3,7 +3,7 @@ import React from 'react';
 const Baught1 = ({
     value = "52 BOI",
     label = "BOI",
-    bgColor = "bg-gray-900",
+    bgColor = "bg-black",
     hoverScale = "hover:scale-105",
     bare = false
 }) => {
