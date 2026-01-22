@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import DataTable2 from "../components/module3/DataTable";
+import DataTable from "../components/module3/DataTable";
 import Rawmaterial1 from "../components/module3/Rawmaterial1";
 import ReferenceBList from "../components/module3/ReferenceBList1";
 import Baught1 from "../components/module3/Baught1";
@@ -262,7 +262,7 @@ const Module4Page1 = () => {
         valueColor="text-purple-500"
         labelColor="text-[var(--color-muted-foreground)]"
       />,
-      dataTable: <DataTable2 rows={filteredRows} />,
+      dataTable: <DataTable rows={filteredRows} />,
     };
 
     // Special handling for dataTable to show full width
@@ -471,7 +471,7 @@ const Module4Page1 = () => {
                 </div>
 
                 <div >
-                  <DataTable2
+                  <DataTable
                     rows={filteredRows}
                     fullView={activeComponent === "dataTable"}
                     
