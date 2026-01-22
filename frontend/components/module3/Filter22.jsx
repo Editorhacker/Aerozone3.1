@@ -16,7 +16,7 @@ const Magnet = ({
     width = 28,
     height = 28,
     strokeWidth = 2,
-    stroke = "#fb923c", // Changed to orange
+    stroke = "#9333ea", // Changed to purple-600
 }) => {
     const controls = useAnimation();
     return (
@@ -78,16 +78,15 @@ export default function Filters({ filters, setFilters, applyFilters, rows }) {
         () => [...new Set(rows.map((r) => r.ItemCode || r.ITEM_CODE))].filter(Boolean),
         [rows]
     );
-
     const projectCodes = useMemo(
-        () => [...new Set(rows.map((r) => r.ProjectCode || r.PROJECT_NO))].filter(Boolean),
+        () => [...new Set(rows.map((r) => r.ProjectCode || r.PROJECT_CODE))].filter(Boolean),
         [rows]
     );
 
     return (
-        <div className=" h-14 relative drop-shadow-lg hover:drop-shadow-xl transition-all duration-300 ">
-            <div className="bg-gradient-to-br from-orange-600 to-orange-800 p-[1px] clip-angled h-full">
-                <div className="bg-black clip-angled  p-2 h-full">
+        <div className="mb-1 h-fit relative drop-shadow-lg hover:drop-shadow-xl transition-all duration-300">
+            <div className="bg-gradient-to-br from-purple-600 to-purple-900 rounded-lg  p-[1px] h-full">
+                <div className="bg-black rounded-lg p-2 h-13">
                     <form
                         onSubmit={(e) => {
                             e.preventDefault();
@@ -95,27 +94,28 @@ export default function Filters({ filters, setFilters, applyFilters, rows }) {
                         }}
                         className="flex flex-col md:flex-row gap-2 items-center w-full"
                     >
-                        <a href="/" className="shrink-0 ">
-                            <h1 className="text-2xl font-bold tracking-wide bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600 bg-clip-text text-transparent uppercase drop-shadow-lg shadow-orange-500/50">PRISM</h1>
+
+                        <a href="/" className="shrink-0">
+                            <h1 className="text-3xl font-bold tracking-wide bg-gradient-to-r from-purple-400 via-purple-500 to-purple-600 bg-clip-text text-transparent uppercase drop-shadow-lg shadow-purple-500/50">ORBIT</h1>
                         </a>
 
                         {/* Search */}
-                        <div className="flex-1 w-full md:w-auto bg-gradient-to-br from-orange-600 to-orange-800  clip-angled p-[0.5px]">
+                        <div className="flex-1 w-full md:w-auto">
                             <input
                                 type="text"
                                 placeholder="🔍 Search"
                                 value={search}
                                 onChange={(e) => setFilters(f => ({ ...f, search: e.target.value }))}
-                                className="w-full px-3 py-1.5 clip-angled border border-orange-700/50 bg-black text-white placeholder-white text-sm focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all duration-200"
+                                className="w-full px-3 py-1.5 border border-purple-700/50 bg-[#111111] text-purple-200 placeholder-purple-700 text-xs focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all duration-200"
                             />
                         </div>
 
                         {/* Item Code Dropdown */}
-                        <div className="flex-1 w-full md:w-auto bg-gradient-to-br from-orange-600 to-orange-800  clip-angled p-[0.5px]">
+                        <div className="flex-1 w-full md:w-auto">
                             <select
                                 value={itemCode}
                                 onChange={(e) => setFilters(f => ({ ...f, itemCode: e.target.value }))}
-                                className="w-full px-3 py-1.5 clip-angled border border-orange-700/50 bg-black text-white text-sm focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all duration-200"
+                                className="w-full px-3 py-1.5 border border-purple-700/50 bg-[#111111] text-purple-200 text-xs focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all duration-200"
                             >
                                 <option value="" className="bg-black">All Item Codes</option>
                                 {itemCodes.map((ic) => (
@@ -126,15 +126,15 @@ export default function Filters({ filters, setFilters, applyFilters, rows }) {
                             </select>
                         </div>
 
-                        <div className="flex-1 w-full md:w-auto bg-gradient-to-br from-orange-600 to-orange-800  clip-angled p-[0.5px]">
+                        <div className="flex-1 w-full md:w-auto">
                             <select
                                 value={projectCode}
                                 onChange={(e) => setFilters(f => ({ ...f, projectCode: e.target.value }))}
-                                className="w-full px-3 py-1.5 clip-angled border border-orange-700/50 bg-black text-white placeholder-white text-sm focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all duration-200"
+                                className="w-full px-3 py-1.5 border border-purple-700/50 bg-[#111111] text-purple-200 text-xs focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all duration-200"
                             >
                                 <option value="" className="bg-black">All Project Codes</option>
                                 {projectCodes.map((pc) => (
-                                    <option key={pc} value={pc}>
+                                    <option key={pc} value={pc} className="bg-black">
                                         {pc}
                                     </option>
                                 ))}
@@ -142,42 +142,42 @@ export default function Filters({ filters, setFilters, applyFilters, rows }) {
                         </div>
 
                         {/* Description */}
-                        <div className="flex-[2] w-full md:w-auto bg-gradient-to-br from-orange-600 to-orange-800  clip-angled p-[0.5px]">
+                        <div className="flex-[2] w-full md:w-auto">
                             <input
                                 type="text"
                                 placeholder="Description"
                                 value={description}
                                 onChange={(e) => setFilters(f => ({ ...f, description: e.target.value }))}
-                                className="w-full px-3 py-1.5 clip-angled border border-orange-700/50 bg-black text-white placeholder-white text-sm focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all duration-200"
+                                className="w-full px-3 py-1.5 border border-purple-700/50 bg-[#111111] text-purple-200 placeholder-purple-700 text-xs focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all duration-200"
                             />
                         </div>
 
                         {/* Ref Start */}
-                        <div className="w-full md:w-32 bg-gradient-to-br from-orange-600 to-orange-800  clip-angled p-[0.5px]">
+                        <div className="w-full md:w-32">
                             <input
                                 type="number"
                                 placeholder="Ref B Start"
                                 value={refStart}
                                 onChange={(e) => setFilters(f => ({ ...f, refStart: e.target.value }))}
-                                className="w-full px-3 py-1.5 clip-angled border border-orange-700/50 bg-black text-white placeholder-white text-sm focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all duration-200"
+                                className="w-full px-3 py-1.5 border border-purple-700/50 bg-[#111111] text-purple-200 placeholder-purple-700 text-xs focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all duration-200"
                             />
                         </div>
 
                         {/* Ref End */}
-                        <div className="w-full md:w-32 bg-gradient-to-br from-orange-600 to-orange-800  clip-angled p-[0.5px]">
+                        <div className="w-full md:w-32">
                             <input
                                 type="number"
                                 placeholder="Ref B End"
                                 value={refEnd}
                                 onChange={(e) => setFilters(f => ({ ...f, refEnd: e.target.value }))}
-                                className="w-full px-3 py-1.5 clip-angled border border-orange-700/50 bg-black text-white placeholder-white text-sm focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all duration-200"
+                                className="w-full px-3 py-1.5 border border-purple-700/50 bg-[#111111] text-purple-200 placeholder-purple-700 text-xs focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all duration-200"
                             />
                         </div>
 
                         {/* Apply Button */}
                         <button
                             type="submit"
-                            className="w-13 h-9 flex items-center justify-center bg-orange-600 hover:bg-orange-500 text-white p-1.5 clip-angled shadow-md hover:shadow-lg hover:shadow-orange-500/30 transition-all duration-200 hover:scale-105 shrink-0"
+                            className="w-10 h-10 flex items-center justify-center rounded-lg bg-purple-600 hover:bg-purple-500 text-white p-1.5 shadow-md hover:shadow-lg hover:shadow-purple-500/30 transition-all duration-200 hover:scale-105 shrink-0"
                         >
                             <Magnet stroke="#ffffff" width={20} height={20} />
                         </button>

@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 
-export default function ReferenceBList({ rows, selectedRef, onSelectRef, bare = false }) {
+export default function ReferenceBList({ rows, selectedRef, onSelectRef, className }) {
     // Extract unique ReferenceB values from current filtered rows
     const referenceBValues = useMemo(() => {
         const unique = new Set();
@@ -14,70 +14,60 @@ export default function ReferenceBList({ rows, selectedRef, onSelectRef, bare = 
     }, [rows]);
 
     if (referenceBValues.length === 0) {
-        if (bare) return <div className="text-orange-500 text-sm italic p-2">0 References</div>; // Simple fallback for bare mode
         return (
-            <div className="relative w-full drop-shadow-lg">
-                <div className="bg-gradient-to-br from-orange-600 to-orange-800 p-[1px] clip-angled">
-                    <div className="bg-black/90 clip-angled p-4 text-sm text-orange-500 italic">
-                        No Reference B values found
+            <div className="relative w-fit drop-shadow-lg">
+                <div className="bg-gradient-to-br from-purple-600 to-purple-800 p-[1px] clip-angled">
+                    <div className="bg-gray-900 clip-angled p-4 text-sm text-purple-500 italic">
+                        No ReferenceB values found.
                     </div>
                 </div>
             </div>
         );
     }
 
-    const content = (
-        <div className={`w-full flex flex-col max-h-17 ${bare ? "" : "bg-black/90 clip-angled p-3"} bg-black`}>
-            <h3 className="text-xs font-semibold mb-1 text-orange-400 shrink-0">
-                Reference B List
-                <span className="text-orange-300 text-xs ml-2">
-                    ({referenceBValues.length})
-                </span>
-            </h3>
+    return (
+        <div className={`relative  group transition-all duration-300 drop-shadow-lg hover:drop-shadow-xl ${className}`}>
+            <div className="bg-gradient-to-br from-purple-600 to-purple-800 p-[1px] clip-angled h-59 w-fit">
+                <div className="bg-black clip-angled p-3 h-full text-center  ">
+                    <h3 className="text-[12px] font-semibold -mb-2 text-white text-center">
+                        ReferenceB
+                    </h3>
+                        <span className="text-white -mt-3 text-[11px] ml-1">
+                            ({referenceBValues.length})
+                        </span>
 
-            {/* Scrollable List Container */}
-            <div className="flex-1 overflow-y-auto scrollbar-hide pr-1">
-                <ul className="space-y-1 text-xs grid grid-cols-1 md:grid-cols-4 gap-2">
-                    {/* ALL BUTTON */}
-                    <li
-                        onClick={() => onSelectRef(null)}
-                        className={`w-full px-2 py-1 clip-angled cursor-pointer transition-all duration-200 text-center ${selectedRef === null
-                            ? "bg-orange-600 text-white shadow-md shadow-orange-500/30"
-                            : "bg-gray-800 hover:bg-orange-900/30 text-white hover:text-orange-200 border border-orange-700/50"
-                            }`}
-                    >
-                        All
-                    </li>
-
-                    {/* Dynamic ReferenceB Values */}
-                    {referenceBValues.map((ref, i) => {
-                        const isActive = selectedRef === ref;
-                        return (
+                    {/* Scrollable List Container */}
+                    <div className={`max-h-43 w-18 text-center overflow-y-auto scrollbar-hide  `}>
+                        <ul className="  text-xs flex flex-col gap-2">
+                            {/* ALL BUTTON */}
                             <li
-                                key={i}
-                                onClick={() => onSelectRef(isActive ? null : ref)}
-                                className={`px-2 py-1 clip-angled cursor-pointer transition-all duration-200 text-center ${isActive
-                                    ? "bg-orange-600 text-white shadow-md shadow-orange-500/30"
-                                    : "bg-orange-900/60 hover:bg-orange-900 text-white hover:text-orange-200 border border-orange-700/50 h-fit"
+                                onClick={() => onSelectRef(null)}
+                                className={`px-6 py-1  clip-angled cursor-pointer transition-all duration-200 ${selectedRef === null
+                                    ? "bg-purple-600 text-white shadow-md shadow-purple-500/30"
+                                    : "bg-purple-800/30 hover:bg-purple-900/30 text-purple-300 hover:text-purple-200 border border-purple-700/50"
                                     }`}
                             >
-                                {ref}
+                                All
                             </li>
-                        );
-                    })}
-                </ul>
-            </div>
-        </div>
-    );
 
-    if (bare) return content;
-
-    return (
-        <div className="relative w-full h-fit group transition-all duration-300 drop-shadow-lg hover:drop-shadow-xl">
-            <div className="bg-gradient-to-br from-orange-600 to-orange-800 p-[1px] clip-angled h-full">
-                <div className="bg-black clip-angled">
-
-                {content}
+                            {/* Dynamic ReferenceB Values */}
+                            {referenceBValues.map((ref, i) => {
+                                const isActive = selectedRef === ref;
+                                return (
+                                    <li
+                                        key={i}
+                                        onClick={() => onSelectRef(isActive ? null : ref)}
+                                        className={`px-6 py-1 text-xs clip-angled cursor-pointer transition-all duration-200 ${isActive
+                                            ? "bg-purple-600 text-white shadow-md shadow-purple-500/30 "
+                                            : "bg-purple-800/30 hover:transition-transform duration-700 hover:bg-purple-900/90 text-purple-300 hover:text-purple-200 border border-purple-700/50 h-fit"
+                                            }`}
+                                    >
+                                        {ref}
+                                    </li>
+                                );
+                            })}
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>

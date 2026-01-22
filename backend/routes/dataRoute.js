@@ -310,4 +310,40 @@ router.get("/orbit", async (req, res) => {
 });
 
 
+router.get("/analysis", async (req, res) => {
+  try {
+    const excelSnap = await db.collection("excelData").get();
+
+    const excelData = excelSnap.docs.map(doc => {
+      const data = doc.data();
+
+      const orderValue = Number(data.OrderLineValue) || 0;   // ✅ FIXED
+      const orderQty = Number(data.OrderedLineQuantity) || 0;
+
+      const Rate = orderQty !== 0 ? ((orderValue / orderQty ).toFixed(3)): null;
+
+      return {
+        Currency: data.Currency ?? null,
+        ReferenceB: data.ReferenceB ?? null,
+        ItemCode: data.ItemCode ?? null,
+        ItemShortDescription: data.ItemShortDescription ?? null,
+        ProjectCode: data.ProjectCode ?? null,
+        SupplierName: data.SupplierName ?? null,
+        PONo: data.PONo ?? null,
+        OrderLineValue: orderValue,           // ✅ use parsed number
+        OrderedLineQuantity: orderQty,        // ✅ use parsed number
+        UOM: data.UOM ?? null,
+        PlannedReceiptDate: data.PlannedReceiptDate ?? null,
+        Rate,                                 // ✅ calculated here
+      };
+    });
+
+    res.status(200).json(excelData);
+  } catch (err) {
+    console.error("Error fetching data:", err);
+    res.status(500).send("Error fetching data");
+  }
+});
+
+
 module.exports = router;

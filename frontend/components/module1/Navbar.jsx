@@ -8,8 +8,15 @@ import { Link, useLocation } from "react-router-dom";
 const NAV_ITEMS = [
   { to: "/", label: "Home", id: "home" },
   { to: "/data2", label: "Planer Checker", id: "planner" },
-  { to: "/Module3Page1", label: "Prism", id: "prism" },
-  { to: "/Module4Page1", label: "Orbit", id: "orbit" },
+  { to: "/Module2Page1", label: "Prism", id: "prism" },
+  { to: "/Module3Page1", label: "Orbit", id: "orbit" },
+  {
+    label:"Analysis",
+    id:"Analysis",
+    children:[
+      {to: "/Analysis1page", id:"Analysis",label:"Analysis Page 1"}
+    ]
+  },
 
   {
     label: "Menu",
@@ -17,7 +24,6 @@ const NAV_ITEMS = [
     children: [
       { to: "/data", id: "DataPage", label: "Main Chart", icon: "📊" },
       { to: "/pdf-to-json", id: "PdfJson", label: "PDF to JSON", icon: "📄" },
-      { to: "/Module2", id: "Module2", label: "Module 2", icon: "🧩" },
     ],
   },
 ];
