@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import DataTable from "../components/module3/DataTable";
 import Rawmaterial1 from "../components/module3/Rawmaterial1";
 import ReferenceBList from "../components/module3/ReferenceBList1";
 import Baught1 from "../components/module3/Baught1";
@@ -11,6 +10,7 @@ import MaterialCube from "../components/module3/MaterialCube";
 import ProjectCylinder from "../components/module3/ProjectCylinder";
 import WorldMap from "../components/module3/WorldMap";
 import Typecubescence from "../components/module3/Typecubescence";
+import DataTable2 from "../components/module2/Datatable";
 
 const ZoomIcon = ({ width = 18, height = 18, stroke = "#fff" }) => (
   <svg
