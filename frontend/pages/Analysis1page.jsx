@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import DataTable2 from '../components/module4/DataTable';
 import Filters from '../components/module4/Filter22';
 import AnalysisComboChart from '../components/module4/AnalysisComboChart';
+import TradingViewChart from '../components/module4/TradingViewChart';
 const ZoomIcon = ({ width = 18, height = 18, stroke = "#fff" }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -289,35 +290,36 @@ const Analysis1page = () => {
 
         <div className='flex flex-col gap-2'>
 
-        <div className='w-full flex justify-end'>
-          <div className=' w-[70%]'>
-
-            <AnalysisComboChart data={filteredRows} />
+          <div className='w-full flex gap-2'>
+            <div className='w-1/2 h-80 overflow-hidden rounded-[var(--radius)] shadow-md'>
+              <TradingViewChart />
+            </div>
+            <div className='w-1/2 h-80 overflow-hidden rounded-[var(--radius)] shadow-md'>
+              <AnalysisComboChart data={filteredRows} />
+            </div>
           </div>
 
-        </div>
+          <div className="w-full bg-[var(--color-muted)] h-80 p-2 rounded-[var(--radius)] shadow-md relative flex flex-col">
 
-        <div className="w-full bg-[var(--color-muted)] h-80 p-2 rounded-[var(--radius)] shadow-md relative flex flex-col">
+            {/* Zoom Button */}
+            <div className="flex justify-end absolute top-2 right-2 z-10">
+              <button
+                className="p-1.5 bg-purple-600 rounded-[var(--radius)] text-white transition-transform duration-200 hover:scale-[1.05]"
+                title="Zoom Table"
+                onClick={() => setActiveComponent("dataTable")}
+              >
+                <ZoomIcon width={14} height={14} />
+              </button>
+            </div>
 
-          {/* Zoom Button */}
-          <div className="flex justify-end absolute top-2 right-2 z-10">
-            <button
-              className="p-1.5 bg-purple-600 rounded-[var(--radius)] text-white transition-transform duration-200 hover:scale-[1.05]"
-              title="Zoom Table"
-              onClick={() => setActiveComponent("dataTable")}
-            >
-              <ZoomIcon width={14} height={14} />
-            </button>
+            <div >
+              <DataTable2
+                rows={filteredRows}
+                fullView={activeComponent === "dataTable"}
+
+              />
+            </div>
           </div>
-
-          <div >
-            <DataTable2
-              rows={filteredRows}
-              fullView={activeComponent === "dataTable"}
-
-            />
-          </div>
-        </div>
         </div>
 
       </div>
