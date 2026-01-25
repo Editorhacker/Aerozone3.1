@@ -262,7 +262,7 @@ const Module4Page1 = () => {
         valueColor="text-purple-500"
         labelColor="text-[var(--color-muted-foreground)]"
       />,
-      dataTable: <DataTable rows={filteredRows} />,
+      dataTable: <DataTable2 rows={filteredRows} />,
     };
 
     // Special handling for dataTable to show full width
@@ -399,7 +399,7 @@ const Module4Page1 = () => {
                       <span className="text-[8px] font-bold text-purple-400 uppercase tracking-tighter">Live</span>
                     </div>
                   </div>
-                    <div className="bg-black rounded-xl border border-purple-700/80
+                  <div className="bg-black rounded-xl border border-purple-700/80
        p-1 shadow-md h-full flex flex-col">
                     <WorldMap rows={filteredRows} />
                   </div>
@@ -408,8 +408,8 @@ const Module4Page1 = () => {
             </div>
           </div>
 
-            <div className="flex flex-row justify-between items-center gap-2 w-full mb-1">
-              <div className="w-[30%] flex flex-row gap-3">
+          <div className="flex flex-row justify-between items-center gap-2 w-full mb-1">
+            <div className="w-[30%] flex flex-row gap-3">
               <div className="transform transition-transform w-fit h-full duration-200 hover:scale-[1.0] ">
 
                 <Rawmaterial1
@@ -426,16 +426,16 @@ const Module4Page1 = () => {
                   labelColor="text-[var(--color-muted-foreground)]"
                 />
               </div>
-              </div>
-              <div className=" w-[99%] ">
-                <CustomerName
-                  values={customerValues}
-                  selectedCustomer={selectedCustomer}
-                  onSelectCustomer={setSelectedCustomer}
-                />
-              </div>
-
             </div>
+            <div className=" w-[99%] ">
+              <CustomerName
+                values={customerValues}
+                selectedCustomer={selectedCustomer}
+                onSelectCustomer={setSelectedCustomer}
+              />
+            </div>
+
+          </div>
           <div className="flex flex-col  gap-1 w-full ">
 
             {/* LEFT COLUMN */}
@@ -443,19 +443,19 @@ const Module4Page1 = () => {
 
               <div className="w-[30%] h-3/4 flex flex-row  gap-2 ">
 
-                  <div className="w-[80%] h-full overflow-hidden">
-                    <Typecubescence rows={filteredRows} />
-                  </div>
+                <div className="w-[80%] h-full overflow-hidden">
+                  <Typecubescence rows={filteredRows} />
+                </div>
 
-                  <div className="w-[30%] h-full overflow-hidden">
-                    <ReferenceBList
-                      rows={filteredRows}
-                      selectedRef={selectedRef}
-                      onSelectRef={(ref) => setSelectedRef(ref)}
-                    />
-                  </div>
+                <div className="w-[30%] h-full overflow-hidden">
+                  <ReferenceBList
+                    rows={filteredRows}
+                    selectedRef={selectedRef}
+                    onSelectRef={(ref) => setSelectedRef(ref)}
+                  />
+                </div>
 
-    
+
               </div>
               <div className="w-full bg-black border border-purple-700/80 p-2 rounded-[var(--radius)] shadow-md relative flex flex-col">
 
@@ -471,17 +471,17 @@ const Module4Page1 = () => {
                 </div>
 
                 <div >
-                  <DataTable
+                  <DataTable2
                     rows={filteredRows}
                     fullView={activeComponent === "dataTable"}
-                    
+
                   />
                 </div>
               </div>
             </div>
 
 
-           
+
           </div>
 
         </div>
