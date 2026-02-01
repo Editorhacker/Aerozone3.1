@@ -100,7 +100,7 @@ export default function StackedBarChart({ rows = [] }) {
 
       <div className="flex items-center gap-2 xl:gap-4 overflow-hidden">
         <motion.div
-          className="flex-shrink-0"
+          className="flex-shrink-0 flex items-center justify-center"
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6 }}
@@ -237,8 +237,8 @@ export default function StackedBarChart({ rows = [] }) {
             <ellipse cx={cx} cy={topY} rx={rx} ry={ry}
               fill="none" stroke="rgba(255,255,255,0.2)" strokeWidth="1" />
 
-            {/* Top shine spot */}
-            <ellipse cx={cx - 8} cy={topY - 2} rx={6} ry={2} fill="rgba(255,255,255,0.15)" />
+            {/* Top shine spot - centered */}
+            <ellipse cx={cx} cy={topY} rx={6} ry={2} fill="rgba(255,255,255,0.15)" />
           </svg>
         </motion.div>
 

@@ -112,7 +112,16 @@ export default function ProjectCylinder({ rows = [] }) {
 
                     {/* Segments */}
                     {segments.map(({ idx, item, yStart, yEnd, h }) => (
-                        <g key={idx} onMouseEnter={() => setHoveredIndex(idx)} onMouseLeave={() => setHoveredIndex(null)}>
+                        <g
+                            key={idx}
+                            onMouseEnter={() => setHoveredIndex(idx)}
+                            onMouseLeave={() => setHoveredIndex(null)}
+                            style={{
+                                opacity: hoveredIndex === null || hoveredIndex === idx ? 1 : 0.3,
+                                transition: "opacity 0.2s ease-in-out",
+                                cursor: "pointer"
+                            }}
+                        >
                             <path d={`M ${cx - rx} ${yStart} L ${cx - rx} ${yEnd} A ${rx} ${ry} 0 0 0 ${cx + rx} ${yEnd} L ${cx + rx} ${yStart} A ${rx} ${ry} 0 0 1 ${cx - rx} ${yStart} Z`} fill={`url(#projectBody${idx})`} />
                             {h > 2 && <ellipse cx={cx} cy={yStart} rx={rx} ry={ry} fill={`url(#projectSurface${idx})`} />}
                         </g>
@@ -131,7 +140,15 @@ export default function ProjectCylinder({ rows = [] }) {
 
             <div className="flex-1 space-y-1 overflow-y-auto max-h-[200px] scrollbar-hide">
                 {percentages.map((item, idx) => (
-                    <div key={idx} className="flex items-center gap-1">
+                    <div
+                        key={idx}
+                        className="flex items-center gap-1 transition-opacity duration-200 cursor-pointer"
+                        onMouseEnter={() => setHoveredIndex(idx)}
+                        onMouseLeave={() => setHoveredIndex(null)}
+                        style={{
+                            opacity: hoveredIndex === null || hoveredIndex === idx ? 1 : 0.3
+                        }}
+                    >
                         <div className="w-2 h-2 rounded-full" style={{ backgroundColor: item.color }} />
                         <div className="flex-1 min-w-0">
                             <div className="text-[10px] text-gray-400 truncate">{item.label}</div>
