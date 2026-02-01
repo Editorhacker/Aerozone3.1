@@ -291,10 +291,10 @@ const Analysis1page = () => {
         <div className='flex flex-col gap-2'>
 
           <div className='w-full flex gap-2'>
-            <div className='w-1/2 h-80 overflow-hidden rounded-[var(--radius)] shadow-md'>
+            <div className='w-1/2 h-70 overflow-hidden rounded-[var(--radius)] shadow-md'>
               <TradingViewChart />
             </div>
-            <div className='w-1/2 h-80 overflow-hidden rounded-[var(--radius)] shadow-md'>
+            <div className='w-1/2 h-70 overflow-hidden rounded-[var(--radius)] shadow-md'>
               <AnalysisComboChart data={filteredRows} />
             </div>
           </div>
