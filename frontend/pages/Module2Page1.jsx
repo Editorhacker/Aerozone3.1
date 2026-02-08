@@ -37,7 +37,7 @@ const ZoomIcon = ({ width = 15, height = 15, stroke = "#6366f1" }) => (
     </svg>
 );
 
-const Module3Page1 = () => {
+const Module2Page1 = () => {
     // State management
     const [rows, setRows] = useState([]);
     const [indentRows, setIndentRows] = useState([]);
@@ -494,4 +494,4 @@ const Module3Page1 = () => {
     );
 };
 
-export default Module3Page1;
+export default Module2Page1;
