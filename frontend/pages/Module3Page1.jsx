@@ -7,6 +7,7 @@ import CustomerName from "../components/module3/CustomerName";
 import AmountTable from "../components/module3/AmountTable";
 import ReceiptBarChart from "../components/module3/ReciptBarchart";
 import DataTable from "components/module3/DataTable";
+
 import ProjectCylinder from "../components/module3/ProjectCylinder";
 import WorldMap from "../components/module3/WorldMap";
 import Typecubescence from "../components/module3/Typecubescence";
