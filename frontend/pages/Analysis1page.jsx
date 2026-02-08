@@ -291,15 +291,15 @@ const Analysis1page = () => {
         <div className='flex flex-col gap-2'>
 
           <div className='w-full flex gap-2'>
-            <div className='w-1/2 h-70 overflow-hidden rounded-[var(--radius)] shadow-md'>
+            <div className='w-1/2 h-60 overflow-hidden rounded-[var(--radius)] border border-white/10 shadow-md'>
               <TradingViewChart />
             </div>
-            <div className='w-1/2 h-70 overflow-hidden rounded-[var(--radius)] shadow-md'>
+            <div className='w-1/2 h-60 overflow-hidden rounded-[var(--radius)] shadow-md'>
               <AnalysisComboChart data={filteredRows} />
             </div>
           </div>
 
-          <div className="w-full bg-[var(--color-muted)] h-80 p-2 rounded-[var(--radius)] shadow-md relative flex flex-col">
+          <div className="w-full bg-[var(--color-muted)] min-h-50 p-2 rounded-[var(--radius)] shadow-md relative flex flex-col">
 
             {/* Zoom Button */}
             <div className="flex justify-end absolute top-2 right-2 z-10">

@@ -81,17 +81,17 @@ const inputClass =
 
   return (
     <div className="mb-1">
-      <div className="bg-zinc-900 border border-white/30 rounded-xl p-2">
+      <div className="bg-zinc-900 border  border-white/30 rounded-xl p-2">
         <form
           onSubmit={(e) => {
             e.preventDefault();
             applyFilters();
           }}
-          className="flex flex-col md:flex-row gap-2 items-center "
+          className="flex flex-col md:flex-row gap-3 justify-between items-center "
         >
           {/* Title */}
           <a href="/" className="shrink-0">
-            <h1 className="text-lg font-semibold tracking-wide text-zinc-100 uppercase">
+            <h1 className="text-xl font-semibold tracking-wide text-zinc-100 uppercase">
               ANALYZE
             </h1>
           </a>

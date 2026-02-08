@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import {
   BarChart,
   Bar,
@@ -12,15 +12,41 @@ import {
 } from "recharts";
 
 export default function AnalysisComboChart({ data = [] }) {
+  const [selectedYear, setSelectedYear] = useState(null);
 
+  /* -------------------- Get Available Years -------------------- */
+  const years = useMemo(() => {
+    const yearSet = new Set();
+
+    data.forEach((row) => {
+      if (!row.PlannedReceiptDate) return;
+      yearSet.add(new Date(row.PlannedReceiptDate).getFullYear());
+    });
+
+    const sortedYears = Array.from(yearSet).sort((a, b) => b - a);
+
+    // auto-select latest year
+    if (!selectedYear && sortedYears.length) {
+      setSelectedYear(sortedYears[0]);
+    }
+
+    return sortedYears;
+  }, [data, selectedYear]);
+
+  /* -------------------- Chart Data (Year Filtered) -------------------- */
   const chartData = useMemo(() => {
+    if (!selectedYear) return [];
+
     const dayMap = new Map();
 
     data.forEach((row) => {
       if (!row.PlannedReceiptDate) return;
 
       const dateObj = new Date(row.PlannedReceiptDate);
-      const dayKey = dateObj.toISOString().split("T")[0]; // YYYY-MM-DD
+      const year = dateObj.getFullYear();
+      if (year !== selectedYear) return;
+
+      const dayKey = dateObj.toISOString().split("T")[0];
 
       const qty = Number(row.OrderedLineQuantity) || 0;
       const value = Number(row.OrderLineValue) || 0;
@@ -41,69 +67,76 @@ export default function AnalysisComboChart({ data = [] }) {
     return Array.from(dayMap.values()).sort(
       (a, b) => new Date(a.date) - new Date(b.date)
     );
-  }, [data]);
-
+  }, [data, selectedYear]);
 
   return (
-    <div className="w-full bg-black border border-zinc-800 p-3 rounded-xl ">
+    <div className="w-full h-60 bg-black border border-zinc-800 p-3 rounded-xl">
 
       {/* Header */}
-      <div className="flex items-center mb-2">
-        <span className="h-4 w-1 bg-zinc-500 mr-2"></span>
-        <h3 className="text-sm font-semibold text-zinc-100 tracking-wide">
-          ORDER VALUE VS QUANTITY (YEAR)
-        </h3>
+      <div className="flex items-center justify-between mb-2">
+        <div className="flex items-center">
+          <span className="h-4 w-1 bg-zinc-500 mr-2"></span>
+          <h3 className="text-sm font-semibold text-zinc-100 tracking-wide">
+            ORDER VALUE VS QUANTITY
+          </h3>
+        </div>
+
+        {/* Year Toggle */}
+        <div className="flex gap-1">
+          {years.map((year) => (
+            <button
+              key={year}
+              onClick={() => setSelectedYear(year)}
+              className={`px-2 py-1 text-xs rounded-md border transition
+                ${
+                  selectedYear === year
+                    ? "bg-zinc-100 text-black border-zinc-100"
+                    : "bg-transparent text-zinc-400 border-zinc-700 hover:text-zinc-100"
+                }`}
+            >
+              {year}
+            </button>
+          ))}
+        </div>
       </div>
 
-      <div className="h-[220px] w-[100%] mx-auto flex justify-center">
-
+      <div className="h-[200px] w-full mx-auto">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={chartData}>
-
-            {/* Grid */}
             <CartesianGrid
               stroke="#52525b"
               strokeDasharray="3 3"
               vertical={false}
             />
 
-            {/* X Axis */}
             <XAxis
-  dataKey="date"
-  tickFormatter={(value) =>
-    new Date(value).toLocaleString("en-US", { month: "short" })
-  }
-  tickCount={chartData.length / 30}   // ~1 per month
-  minTickGap={40}
-  tick={{ fill: "#d4d4d8", fontSize: 11 }}
-  axisLine={{ stroke: "#3f3f46" }}
-  tickLine={{ stroke: "#3f3f46" }}
-/>
+              dataKey="date"
+              tickFormatter={(value) =>
+                new Date(value).toLocaleString("en-US", { month: "short" })
+              }
+              minTickGap={40}
+              tick={{ fill: "#d4d4d8", fontSize: 11 }}
+              axisLine={{ stroke: "#3f3f46" }}
+              tickLine={{ stroke: "#3f3f46" }}
+            />
 
-
-            {/* VALUE Axis */}
             <YAxis
               yAxisId="left"
               tick={{ fill: "#d4d4d8", fontSize: 11 }}
-              tickMargin={2}                 // space between numbers & axis
               axisLine={{ stroke: "#3f3f46" }}
               tickLine={{ stroke: "#3f3f46" }}
               label={{
                 value: "Order Value",
                 angle: -90,
-                position: "insideLeft",       // ✅ valid
-                offset: -2,                   // ✅ positive spacing
+                position: "insideLeft",
                 style: { fill: "#a1a1aa", fontSize: 11 },
               }}
             />
 
-
-            {/* QUANTITY Axis */}
             <YAxis
               yAxisId="right"
               orientation="right"
               tick={{ fill: "#d4d4d8", fontSize: 11 }}
-              tickMargin={2}
               axisLine={{ stroke: "#3f3f46" }}
               tickLine={{ stroke: "#3f3f46" }}
               label={{
@@ -115,7 +148,6 @@ export default function AnalysisComboChart({ data = [] }) {
               }}
             />
 
-            {/* Tooltip */}
             <Tooltip
               labelFormatter={(value) =>
                 new Date(value).toLocaleDateString("en-US", {
@@ -132,18 +164,11 @@ export default function AnalysisComboChart({ data = [] }) {
                 color: "#fafafa",
                 fontSize: "11px",
               }}
-              labelStyle={{ color: "#a1a1aa" }}
+            labelStyle={{ color: "#a1a1aa" }}
             />
 
-            <Legend
-              wrapperStyle={{
-                color: "#e4e4e7",
-                fontSize: "11px",
-                paddingTop: "6px",
-              }}
-            />
+            <Legend wrapperStyle={{ fontSize: "11px", color: "#e4e4e7" }} />
 
-            {/* BAR */}
             <Bar
               yAxisId="right"
               dataKey="totalQuantity"
@@ -153,7 +178,6 @@ export default function AnalysisComboChart({ data = [] }) {
               radius={[4, 4, 0, 0]}
             />
 
-            {/* LINE */}
             <Line
               yAxisId="left"
               type="monotone"
@@ -161,10 +185,9 @@ export default function AnalysisComboChart({ data = [] }) {
               name="Order Value"
               stroke="#fafafa"
               strokeWidth={2}
-              dot={{ r: 3, fill: "#fafafa" }}
+              dot={{ r: 3 }}
               activeDot={{ r: 5 }}
             />
-
           </BarChart>
         </ResponsiveContainer>
       </div>

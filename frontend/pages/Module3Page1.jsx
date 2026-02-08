@@ -10,7 +10,7 @@ import MaterialCube from "../components/module3/MaterialCube";
 import ProjectCylinder from "../components/module3/ProjectCylinder";
 import WorldMap from "../components/module3/WorldMap";
 import Typecubescence from "../components/module3/Typecubescence";
-import DataTable2 from "../components/module2/Datatable";
+import DataTable2 from "../components/module3/DataTable";
 
 const ZoomIcon = ({ width = 18, height = 18, stroke = "#fff" }) => (
   <svg
@@ -408,8 +408,8 @@ const Module4Page1 = () => {
             </div>
           </div>
 
-          <div className="flex flex-row justify-between items-center gap-2 w-full mb-1">
-            <div className="w-[30%] flex flex-row gap-3">
+          <div className="flex flex-row  items-center gap-2 w-full mb-1">
+            <div className="w-[25%] flex flex-row gap-3">
               <div className="transform transition-transform w-fit h-full duration-200 hover:scale-[1.0] ">
 
                 <Rawmaterial1
@@ -427,7 +427,7 @@ const Module4Page1 = () => {
                 />
               </div>
             </div>
-            <div className=" w-[99%] ">
+            <div className=" w-[70%] ">
               <CustomerName
                 values={customerValues}
                 selectedCustomer={selectedCustomer}

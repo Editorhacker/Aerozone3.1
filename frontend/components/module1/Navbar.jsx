@@ -14,7 +14,8 @@ const NAV_ITEMS = [
     label:"Analysis",
     id:"Analysis",
     children:[
-      {to: "/Analysis1page", id:"Analysis",label:"Analysis Page 1"}
+      {to: "/Analysis1page", id:"Analysis",label:"Analysis Page 1"},
+      {to: "/Analysis2page", id:"Analysis",label:"Analysis Page 2"}
     ]
   },
 

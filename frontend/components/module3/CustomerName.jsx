@@ -5,7 +5,7 @@ const CustomerName = ({ values = [], selectedCustomer, onSelectCustomer }) => {
     const uniqueValues = [...new Set(values.filter(Boolean))];
 
     return (
-        <div className="relative w-276 group transition-all duration-300 drop-shadow-lg hover:drop-shadow-xl">
+        <div className="relative w-249 group transition-all duration-300 drop-shadow-lg hover:drop-shadow-xl">
             <div className="bg-gradient-to-br from-purple-600 to-purple-800 p-[1px] clip-angled h-full">
                 <div className="bg-black clip-angled p-4 h-13 flex flex-row items-center">
                     <div className="text-xs text-center font-bold text-white mb-1">

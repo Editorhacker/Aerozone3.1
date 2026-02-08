@@ -12,6 +12,7 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import Module2Page1 from "../pages/Module2Page1";
 import Module3Page1 from "../pages/Module3Page1";
 import Analysis1page from "../pages/Analysis1page";
+import Analysis2page from "../pages/Analysis2page";
 // import Lenis from "@studio-freight/lenis";
 
 function App() {
@@ -77,6 +78,7 @@ function App() {
             <Route path="/Module2Page1" element={<Module2Page1 />} />
             <Route path="/Module3Page1" element={<Module3Page1 />} />
             <Route path="/Analysis1page" element={<Analysis1page/>}/>
+            <Route path="/Analysis2page" element={<Analysis2page/>}/>
           </Routes>
         </div>
       </div>
