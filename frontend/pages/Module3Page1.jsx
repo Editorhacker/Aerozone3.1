@@ -6,11 +6,11 @@ import Filters from "../components/module3/Filter22";
 import CustomerName from "../components/module3/CustomerName";
 import AmountTable from "../components/module3/AmountTable";
 import ReceiptBarChart from "../components/module3/ReciptBarchart";
-
+import DataTable from "components/module3/DataTable";
 import ProjectCylinder from "../components/module3/ProjectCylinder";
 import WorldMap from "../components/module3/WorldMap";
 import Typecubescence from "../components/module3/Typecubescence";
-import DataTable from "../components/module3/DataTable";
+
 
 const ZoomIcon = ({ width = 18, height = 18, stroke = "#fff" }) => (
   <svg
