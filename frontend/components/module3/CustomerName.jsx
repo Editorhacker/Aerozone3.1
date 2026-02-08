@@ -4,6 +4,7 @@ const CustomerName = ({ values = [], selectedCustomer, onSelectCustomer }) => {
     // ✅ Remove duplicates & ignore empty/null/undefined
     const uniqueValues = [...new Set(values.filter(Boolean))];
 
+    
     return (
         <div className="relative w-249 group transition-all duration-300 drop-shadow-lg hover:drop-shadow-xl">
             <div className="bg-gradient-to-br from-purple-600 to-purple-800 p-[1px] clip-angled h-full">
