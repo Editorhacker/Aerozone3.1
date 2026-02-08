@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from "react";
 
 
 
-export default function DataTable2({ 
+export default function DataTable({ 
   rows, 
   fullView = false, 
   prioritizedRows: externalPrioritizedRows = new Map(),
