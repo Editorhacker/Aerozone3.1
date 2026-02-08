@@ -262,7 +262,7 @@ const Module3Page1 = () => {
         valueColor="text-purple-500"
         labelColor="text-[var(--color-muted-foreground)]"
       />,
-      dataTable: <DataTable2 rows={filteredRows} />,
+      dataTable: <DataTable rows={filteredRows} />,
     };
 
     // Special handling for dataTable to show full width
@@ -286,7 +286,7 @@ const Module3Page1 = () => {
 
                 {/* ✅ Force full width & height */}
                 <div className="w-full h-full overflow-auto p-6">
-                  <DataTable2
+                  <DataTable
                     rows={filteredRows}
 
                     fullView={true}   // <--- add this prop
