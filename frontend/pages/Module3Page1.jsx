@@ -10,7 +10,7 @@ import ReceiptBarChart from "../components/module3/ReciptBarchart";
 import ProjectCylinder from "../components/module3/ProjectCylinder";
 import WorldMap from "../components/module3/WorldMap";
 import Typecubescence from "../components/module3/Typecubescence";
-import DataTable2 from "../components/module3/DataTable";
+import DataTable from "../components/module3/DataTable";
 
 const ZoomIcon = ({ width = 18, height = 18, stroke = "#fff" }) => (
   <svg
@@ -471,7 +471,7 @@ const Module4Page1 = () => {
                 </div>
 
                 <div >
-                  <DataTable2
+                  <DataTable
                     rows={filteredRows}
                     fullView={activeComponent === "dataTable"}
 
