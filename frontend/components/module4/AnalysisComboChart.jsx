@@ -43,31 +43,73 @@ export default function AnalysisComboChart({ data = [] }) {
       if (!row.PlannedReceiptDate) return;
 
       const dateObj = new Date(row.PlannedReceiptDate);
-      const year = dateObj.getFullYear();
-      if (year !== selectedYear) return;
+      if (dateObj.getFullYear() !== selectedYear) return;
 
       const dayKey = dateObj.toISOString().split("T")[0];
 
       const qty = Number(row.OrderedLineQuantity) || 0;
       const value = Number(row.OrderLineValue) || 0;
+      const customer = row.CustomerName || "Unknown";
 
       if (!dayMap.has(dayKey)) {
         dayMap.set(dayKey, {
           date: dayKey,
           totalQuantity: 0,
           totalValue: 0,
+          customers: new Set(),
         });
       }
 
       const entry = dayMap.get(dayKey);
       entry.totalQuantity += qty;
       entry.totalValue += value;
+      entry.customers.add(customer);
     });
 
-    return Array.from(dayMap.values()).sort(
-      (a, b) => new Date(a.date) - new Date(b.date)
-    );
+    return Array.from(dayMap.values())
+      .map((d) => ({
+        ...d,
+        rate:
+          d.totalQuantity > 0
+            ? Number((d.totalValue / d.totalQuantity).toFixed(3))
+            : null,
+        customers: Array.from(d.customers),
+      }))
+      .sort((a, b) => new Date(a.date) - new Date(b.date));
   }, [data, selectedYear]);
+
+  const CustomTooltip = ({ active, payload, label }) => {
+    if (!active || !payload?.length) return null;
+
+    const data = payload[0].payload;
+
+    return (
+      <div className="bg-zinc-900 border border-zinc-700 rounded-md p-2 text-xs text-zinc-100 space-y-1">
+        <div className="text-zinc-400">
+          {new Date(label).toLocaleDateString("en-US", {
+            day: "2-digit",
+            month: "short",
+            year: "numeric",
+          })}
+        </div>
+
+        <div> Quantity: <b>{data.totalQuantity}</b></div>
+        <div> Value: <b>{data.totalValue.toLocaleString()}</b></div>
+
+        {data.rate !== null && (
+          <div>Rate: <b>{data.rate}</b></div>
+        )}
+
+        <div>
+          Project{data.customers.length > 1 ? "s" : ""}:
+          <div className="text-zinc-300">
+            {data.customers.join(", ")}
+          </div>
+        </div>
+      </div>
+    );
+  };
+
 
   return (
     <div className="w-full h-60 bg-black border border-zinc-800 p-3 rounded-xl">
@@ -88,10 +130,9 @@ export default function AnalysisComboChart({ data = [] }) {
               key={year}
               onClick={() => setSelectedYear(year)}
               className={`px-2 py-1 text-xs rounded-md border transition
-                ${
-                  selectedYear === year
-                    ? "bg-zinc-100 text-black border-zinc-100"
-                    : "bg-transparent text-zinc-400 border-zinc-700 hover:text-zinc-100"
+                ${selectedYear === year
+                  ? "bg-zinc-100 text-black border-zinc-100"
+                  : "bg-transparent text-zinc-400 border-zinc-700 hover:text-zinc-100"
                 }`}
             >
               {year}
@@ -149,23 +190,10 @@ export default function AnalysisComboChart({ data = [] }) {
             />
 
             <Tooltip
-              labelFormatter={(value) =>
-                new Date(value).toLocaleDateString("en-US", {
-                  day: "2-digit",
-                  month: "short",
-                  year: "numeric",
-                })
-              }
+              content={<CustomTooltip />}
               cursor={false}
-              contentStyle={{
-                backgroundColor: "#18181b",
-                border: "1px solid #27272a",
-                borderRadius: "6px",
-                color: "#fafafa",
-                fontSize: "11px",
-              }}
-            labelStyle={{ color: "#a1a1aa" }}
             />
+
 
             <Legend wrapperStyle={{ fontSize: "11px", color: "#e4e4e7" }} />
 

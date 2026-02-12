@@ -82,7 +82,7 @@ router.post("/upload-excel", upload.single("file"), async (req, res) => {
 
       refNumbers.forEach(refNum => {
         const uniqueCode = `${refNum}${projectCode}${itemCode}`;
-        const typeMaterial = `${Type}${Material}`;
+        const typeMaterial = `${Material}${Type}`;
 
         const docData = {
           UniqueCode: uniqueCode,
@@ -93,6 +93,7 @@ router.post("/upload-excel", upload.single("file"), async (req, res) => {
           Category: row[4] || "",
           SupplierName: row[3] || "",
           PONo: row[5] || "",
+          POPo: row[6] || "",
           Date: formattedDate,
           OrderedLineQuantity: Number(row[19]) || 0,
           UOM: row[16] || "",
@@ -335,6 +336,7 @@ router.get("/analysis", async (req, res) => {
         UOM: data.UOM ?? null,
         PlannedReceiptDate: data.PlannedReceiptDate ?? null,
         Rate,                                 // ✅ calculated here
+        CustomerName: data.CustomerName ?? null,
       };
     });
 
@@ -345,5 +347,42 @@ router.get("/analysis", async (req, res) => {
   }
 });
 
+router.get("/analysistwo", async (req, res)=> {
+  try{
+    const excelSnap = await db.collection("excelData").get();
+
+    const excelData = excelSnap.docs.map(doc => {
+      const data = doc.data();
+
+      return{
+        SupplierName: data.SupplierName ?? null,
+        Category : data.Category ?? null,
+        PONo: data.PONo ?? null,
+        // POPo: data.POPo ?? null,
+        ProjectCode: data.ProjectCode ?? null,
+        ItemCode: data.ItemCode ?? null,
+        ItemShortDescription: data.ItemShortDescription ?? null,
+        Date: data.Date ?? null,
+        Type: data.Type ?? null,
+        OrderLineValue: data.OrderLineValue ?? null,
+        OrderedLineQuantity: data.OrderedLineQuantity ?? null,
+        UOM : data.UOM ?? null,
+        InventoryQuantity: data.InventoryQuantity ?? null,
+
+        ReferenceB:
+          data.ReferenceB ??
+          data["Reference B"] ??
+          data.REFB ??
+          data.REF_B ??
+          data.Reference ??
+          null,
+      }
+    });
+res.status(200).json(excelData);
+  } catch (err) {
+    console.error("🔥 Error fetching Orbit data:", err);
+    res.status(500).send("Error fetching data");
+  }
+});
 
 module.exports = router;

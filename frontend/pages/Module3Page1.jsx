@@ -6,7 +6,7 @@ import Filters from "../components/module3/Filter22";
 import CustomerName from "../components/module3/CustomerName";
 import AmountTable from "../components/module3/AmountTable";
 import ReceiptBarChart from "../components/module3/ReciptBarchart";
-import DataTable from "../components/module3/DataTable";
+import DataTable from "../components/module3/Datatable";
 
 import ProjectCylinder from "../components/module3/ProjectCylinder";
 import WorldMap from "../components/module3/WorldMap";
@@ -45,7 +45,7 @@ const Module3Page1 = () => {
   const [filters, setFilters] = useState({
     search: "",
     itemCode: "",
-    projecCode: "",
+    projectCode: "",
     description: "",
     refStart: "",
     refEnd: "",
@@ -72,7 +72,7 @@ const Module3Page1 = () => {
           }
         }
 
-        const res = await fetch("https://aerozone3-1.onrender.com/api/data/orbit");
+        const res = await fetch("http://localhost:5000/api/data/orbit");
         const data = await res.json();
 
         localStorage.setItem("orbitData", JSON.stringify(data));

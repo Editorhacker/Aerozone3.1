@@ -76,8 +76,8 @@ const DataPage2 = () => {
     const fetchData = async () => {
       try {
         const [dataRes, indentRes] = await Promise.all([
-          fetch("https://aerozone3-1.onrender.com/api/data/get-data"),
-          fetch("https://aerozone3-1.onrender.com/api/data/get-indent")
+          fetch("http://localhost:5000/api/data/get-data"),
+          fetch("http://localhost:5000/api/data/get-indent")
         ]);
 
         const data = await dataRes.json();
@@ -99,7 +99,7 @@ const DataPage2 = () => {
   useEffect(() => {
     const fetchPrismData = async () => {
       try {
-        const res = await fetch("https://aerozone3-1.onrender.com/api/data/prism");
+        const res = await fetch("http://localhost:5000/api/data/prism");
         const data = await res.json();
 
         const processed = Array.isArray(data)
@@ -270,8 +270,6 @@ const DataPage2 = () => {
 
 
 
-
-
   // Apply filters
   const applyFilters = () => {
     const { search, itemCode, description, refStart, refEnd } = filters;
@@ -358,17 +356,17 @@ const DataPage2 = () => {
   };
 
   // Match prism rows with filteredRows using ItemCode / UNIQUE_CODE
-  const filteredPrismRows = useMemo(() => {
-    if (!Array.isArray(prismRows) || prismRows.length === 0) return [];
+  // const filteredPrismRows = useMemo(() => {
+  //   if (!Array.isArray(prismRows) || prismRows.length === 0) return [];
 
-    const filteredItemCodes = new Set(
-      filteredRows.map(r => String(r.ItemCode))
-    );
+  //   const filteredItemCodes = new Set(
+  //     filteredRows.map(r => String(r.ItemCode))
+  //   );
 
-    return prismRows.filter(pr =>
-      filteredItemCodes.has(String(pr.UNIQUE_CODE))
-    );
-  }, [filteredRows, prismRows]);
+  //   return prismRows.filter(pr =>
+  //     filteredItemCodes.has(String(pr.UNIQUE_CODE))
+  //   );
+  // }, [filteredRows, prismRows]);
 
 
   // Zoomed component renderer

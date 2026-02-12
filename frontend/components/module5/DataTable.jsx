@@ -13,15 +13,18 @@ export default function DataTable2({
     { key: "priority", label: "Priority" },
     { key: "ProjectCode", label: "Project Code" },
     { key: "ItemCode", label: "Item Code" },
-    { key: "ItemShortDescription", label: "Description" },
-    { key: "SupplierName", label: "Supplier" }, // Shortened label
+    { key: "Type", label: "Type"},
     { key: "PONo", label: "PO No." },
+    { key: "SupplierName", label: "Supplier" }, // Shortened label
+    { key: "ItemShortDescription", label: "Description" },
+    { key: "Date", label: "Order Date"},
     { key: "OrderedLineQuantity", label: " Qty" },
-    { key: "Rate", label: "Rate" },   // ✅ FIX,
     { key: "UOM", label: "UOM" },
     { key: "OrderLineValue", label: "Order Value" },
-    { key: "Currency", label: "Currency" },
-    { key: "PlannedReceiptDate", label: "Planned Receipt" },
+    { key: "InventoryQuantity", label: "On Hand"},
+    { key: "ReferenceB", label: "Ref B" },   // ✅ FIX,
+    // { key: "Currency", label: "Currency" },
+    // { key: "PlannedReceiptDate", label: "Planned Receipt" },
 
   ];
 

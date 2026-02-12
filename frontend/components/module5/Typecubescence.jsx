@@ -10,101 +10,72 @@ const COLORS = [
   "#f97316",
   "#ec4899"
 ];
-const HIDDEN_TYPES = ["00", "BOIBOI"];
 
 const TypeCubeScene = ({ rows = [] }) => {
+
+  /* -------- Extract Unique Types -------- */
   const types = useMemo(() => {
     return [
       ...new Set(
         rows
-          .map(r => r.Type)
-          .filter(
-            t =>
-              t &&
-              !HIDDEN_TYPES.includes(t.trim().toUpperCase())
-          )
+          .map(r => String(r.Type || "").trim())
+          .filter(Boolean)
+          .map(t => t.substring(0, 2).toUpperCase())
+          .filter(t => t !== "00")
       )
-    ];
+    ].sort();
   }, [rows]);
 
-  // --- Layout config (SAFE FOR 220px HEIGHT)
-  const CENTER_ENABLED = true;
-  const INNER_RADIUS = 1.4;
-  const OUTER_RADIUS = 2.5;
-  const INNER_LIMIT = 7;
 
-  const centerType = CENTER_ENABLED ? types[0] : null;
-  const remainingTypes = CENTER_ENABLED ? types.slice(1) : types;
+  const CUBE_SIZE = 4;   // 👈 increase / decrease cube size here
+const GAP = 10;        // tiny breathing gap between cubes
 
-  const innerTypes = remainingTypes.slice(0, INNER_LIMIT);
-  const outerTypes = remainingTypes.slice(INNER_LIMIT);
+  /* -------- Layout -------- */
+const total = types.length;
+const SPACING = CUBE_SIZE + GAP; // auto spacing based on size
+const startX = -((total - 1) * SPACING) / 2;
+
+
+  /* -------- FIXED CAMERA (important) -------- */
+  const cameraZ = 14; // constant → cubes always same size
 
   return (
     <div
       style={{
-        height: "237px",
+        height: "100px",
         width: "100%",
-        fontSize: "13px",
         background: "#000",
         borderRadius: "12px",
         border: "1px solid #7e22ce",
         overflow: "hidden"
       }}
     >
-      <Canvas camera={{ position: [0, 0, 7], fov: 45 }}>
+      <Canvas camera={{ position: [0, 0, cameraZ], fov: 60 }}>
         {/* Lights */}
-        <ambientLight intensity={0.7} />
-        <directionalLight position={[5, 5, 5]} intensity={1} />
+        <ambientLight intensity={0.8} />
+        <directionalLight position={[5, 5, 5]} intensity={1.2} />
 
-        {/* 🟢 CENTER CUBE */}
-        {centerType && (
-          <TypeCube
-            key={centerType}
-            label={centerType}
-            color={COLORS[0]}
-            position={[0, 0, 0]}
-          />
-        )}
+        {/* Horizontal Row */}
+        {types.map((type, index) => (
+  <TypeCube
+    key={type}
+    label={type}
+    color={COLORS[index % COLORS.length]}
+    size={CUBE_SIZE} // 👈 important
+    position={[
+      startX + index * SPACING,
+      0,
+      0
+    ]}
+  />
+))}
 
-        {/* 🔵 INNER CIRCLE */}
-        {innerTypes.map((type, index) => {
-          const angle = (2 * Math.PI * index) / innerTypes.length;
-          return (
-            <TypeCube
-              key={type}
-              label={type}
-              color={COLORS[(index + 1) % COLORS.length]}
-              position={[
-                Math.cos(angle) * INNER_RADIUS,
-                Math.sin(angle) * INNER_RADIUS,
-                0
-              ]}
-              
-            />
-          );
-        })}
 
-        {/* 🟣 OUTER CIRCLE */}
-        {outerTypes.map((type, index) => {
-          const angle = (2 * Math.PI * index) / outerTypes.length;
-          return (
-            <TypeCube
-              key={type}
-              label={type}
-              color={COLORS[(index + innerTypes.length + 1) % COLORS.length]}
-              position={[
-                Math.cos(angle) * OUTER_RADIUS,
-                Math.sin(angle) * OUTER_RADIUS,
-                0
-              ]}
-            />
-          );
-        })}
-
+        {/* Locked controls */}
         <OrbitControls
           enablePan={false}
           enableZoom={false}
-          enableRotate
+          // enableRotate={false}
         />
       </Canvas>
     </div>
