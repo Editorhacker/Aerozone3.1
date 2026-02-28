@@ -449,26 +449,26 @@ const Module2Page1 = () => {
                             <div className="bg-gradient-to-br from-orange-600 to-orange-800 p-[1px] clip-angled h-full">
                                 <div className="bg-black clip-angled p-2 h-full relative">
                                     <div className="fixed mt-2 gap-2 mr-15 flex right-5 z-10 items-center">
-                   <div className="flex flex-row gap-2">
-                                        <button
-                                            onClick={() => setShowItemInsights(true)}
-                                            className=" text-sm w-full h-8  bg-gradient-to-br from-orange-600 to-orange-800 clip-angled  clip-angled shadow-lg z-20 transition-transform duration-200 hover:scale-[1.05]"
-                                        >
-                                            Item Insights
-                                        </button>
+                                        <div className="flex flex-row gap-2">
+                                            <button
+                                                onClick={() => setShowItemInsights(true)}
+                                                className=" text-sm w-full h-8  bg-gradient-to-br from-orange-600 to-orange-800 clip-angled  clip-angled shadow-lg z-20 transition-transform duration-200 hover:scale-[1.05]"
+                                            >
+                                                Item Insights
+                                            </button>
 
-                                        {/* Floating Upload Button */}
-                                        <button
-                                            onClick={() => setShowUploadModal(true)}
-                                            className="bg-gradient-to-br from-orange-600 to-orange-800 clip-angled w-18 h-8 clip-angled shadow-lg flex items-center justify-center z-20 transition-transform duration-300 hover:scale-[1.05]"
-                                            title="Upload Excel File"
-                                        >
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                                                <polyline points="17 8 12 3 7 8"></polyline>
-                                                <line x1="12" y1="3" x2="12" y2="15"></line>
-                                            </svg>
-                                        </button>
+                                            {/* Floating Upload Button */}
+                                            <button
+                                                onClick={() => setShowUploadModal(true)}
+                                                className="bg-gradient-to-br from-orange-600 to-orange-800 clip-angled w-18 h-8 clip-angled shadow-lg flex items-center justify-center z-20 transition-transform duration-300 hover:scale-[1.05]"
+                                                title="Upload Excel File"
+                                            >
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                                    <polyline points="17 8 12 3 7 8"></polyline>
+                                                    <line x1="12" y1="3" x2="12" y2="15"></line>
+                                                </svg>
+                                            </button>
                                         </div>
                                         <button
                                             className="h-8 p-2 bg-[var(--color-primary)] clip-angled text-[var(--color-primary-foreground)] transition-transform duration-200 hover:scale-[1.05] z-10  dark:bg-white dark:text-black"

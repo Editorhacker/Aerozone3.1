@@ -39,32 +39,32 @@ const RateSummary = ({ rows = [] }) => {
   }
 
   return (
-    <div className="bg-[var(--card)] border border-[var(--border)] rounded-lg p-4 w-full">
+    <div className="bg-[var(--card)] border border-[var(--border)] rounded-lg p-2 w-full shrink-0">
 
       {/* Average */}
-      <div className="mb-3">
-        <div className="text-xs text-gray-400">Average Rate</div>
-        <div className="text-2xl font-bold text-emerald-400">
+      <div className="mb-1.5">
+        <div className="text-sm text-gray-400">Average Rate</div>
+        <div className="text-lg font-bold text-emerald-400 leading-tight">
           {format(stats.avg)}
         </div>
       </div>
 
       {/* Divider */}
-      <div className="border-t border-[var(--border)] my-2"></div>
+      <div className="border-t border-[var(--border)] my-1"></div>
 
       {/* High Low */}
-      <div className="flex justify-between text-sm">
+      <div className="flex justify-between text-xs">
 
         <div>
-          <div className="text-gray-400 text-xs">Highest</div>
-          <div className="font-semibold text-red-400">
+          <div className="text-gray-400 text-[12px]">Highest</div>
+          <div className="font-semibold text-red-400 text-[12px]">
             {format(stats.highest)}
           </div>
         </div>
 
         <div>
-          <div className="text-gray-400 text-xs">Lowest</div>
-          <div className="font-semibold text-blue-400">
+          <div className="text-gray-400 text-[12px]">Lowest</div>
+          <div className="font-semibold text-blue-400 text-[12px]">
             {format(stats.lowest)}
           </div>
         </div>

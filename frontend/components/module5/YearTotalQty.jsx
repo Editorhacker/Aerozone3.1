@@ -59,29 +59,29 @@ const YearTotalQty = ({ rows = [] }) => {
   const oldestYear = yearTotals[yearTotals.length - 1][0];
 
   return (
-    <div className="bg-[var(--card)] border border-[var(--border)] rounded-lg p-4 w-full">
+    <div className="bg-[var(--card)] border border-[var(--border)] rounded-lg p-2 w-full">
 
       {/* Header */}
-      <div className="text-sm font-semibold mb-1 text-[var(--foreground)]">
+      <div className="text-sm font-semibold mb-0.5 text-[var(--foreground)]">
         TOTAL QTY
       </div>
 
-      <div className="text-[10px] text-gray-500 mb-3">
+      <div className="text-[10px] text-gray-500 mb-1.5">
         Range: {oldestYear} → {latestYear}
       </div>
 
       {/* Year rows */}
-      <div className="space-y-2">
+      <div className="space-y-1">
         {yearTotals.map(([year, qty]) => (
           <div
             key={year}
-            className="flex justify-between items-center bg-black/20 px-3 py-2 rounded-md"
+            className="flex justify-between items-center bg-black/20 px-2 py-1 rounded-md"
           >
-            <div className="text-xs text-gray-300 font-medium">
+            <div className="text-[12px] text-gray-300 font-medium">
               {year}
             </div>
 
-            <div className="text-sm font-bold text-purple-400">
+            <div className="text-[12px] font-bold text-purple-400">
               {format(qty)}
             </div>
           </div>

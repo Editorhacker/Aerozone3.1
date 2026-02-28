@@ -6,6 +6,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import { styleEffect } from "motion";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -39,8 +40,8 @@ const SupplierPieChart = ({ rows = [] }) => {
       {
         data: quantities,
         backgroundColor: [
-          "#60a5fa","#4ade80","#f87171","#facc15","#a78bfa",
-          "#fb923c","#22d3ee","#2dd4bf","#f472b6","#34d399"
+          "#60a5fa", "#4ade80", "#f87171", "#facc15", "#a78bfa",
+          "#fb923c", "#22d3ee", "#2dd4bf", "#f472b6", "#34d399"
         ],
         borderWidth: 1,
       },
@@ -55,8 +56,18 @@ const SupplierPieChart = ({ rows = [] }) => {
       legend: { display: false },
 
       tooltip: {
+        padding: 6,
+        boxPadding: 3,
+
+        titleFont: {
+          size: 12,
+          weight: "600"
+        },
+        bodyFont: {
+          size: 12
+        },
         callbacks: {
-          label: function(context) {
+          label: function (context) {
             const supplier = context.label;
             const d = supplierData[supplier];
 
@@ -76,9 +87,14 @@ const SupplierPieChart = ({ rows = [] }) => {
               currency: "USD",
               maximumFractionDigits: 2
             }).format(rate);
+            const wrapText = (text, maxLength = 10) => {
+              if (text.length <= maxLength) return text;
+              const parts = text.match(new RegExp(`.{1,${maxLength}}`, "g"));
+              return parts.join("\n");
+            };
 
             return [
-              `Supplier: ${supplier}`,
+              `Supplier: ${wrapText(supplier)}`,
               `Qty: ${formatQty}`,
               `Value: ${formatValue}`,
               `Rate: ${formatRate}`
@@ -98,12 +114,12 @@ const SupplierPieChart = ({ rows = [] }) => {
   }
 
   return (
-    <div className="bg-[var(--card)] border border-[var(--border)] rounded-lg p-3 h-[260px]">
-      <div className="text-sm font-semibold mb-2 text-[var(--foreground)]">
-        SUPPLIER DISTRIBUTION
+    <div className="bg-[var(--card)] w-[250px] border border-[var(--border)] rounded-lg p-2 h-full flex flex-col">
+      <div className="text-[11px] font-semibold mb-1 text-[var(--foreground)] shrink-0">
+        SUPPLIER DIST.
       </div>
 
-      <div className="relative h-[200px]">
+      <div className="relative flex-1 min-h-0">
         <Pie data={data} options={options} />
       </div>
     </div>

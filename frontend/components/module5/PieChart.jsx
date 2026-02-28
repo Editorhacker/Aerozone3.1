@@ -13,31 +13,30 @@ const ProjectBar = ({ project, qty, value, maxQty }) => {
   const percent = maxQty > 0 ? (qty / maxQty) * 100 : 0;
 
   return (
-    <div className="flex items-center gap-2 py-2">
+    <div className="flex items-center gap-3 py-2 group">
 
       {/* Project Name */}
-      <div className="w-20 text-xs font-semibold text-[var(--foreground)] truncate">
+      <div className="w-20 text-[11px] font-semibold text-[var(--foreground)] truncate">
         {project}
       </div>
 
       {/* Bar Area */}
-      <div className="flex-1 relative h-4 bg-gray-700/40 rounded overflow-hidden">
+      <div className="flex-1 relative h-5 bg-zinc-700/30 rounded-md overflow-hidden">
 
         {/* Filled Bar */}
         <div
-          className="absolute left-0 top-0 h-full bg-gradient-to-r from-green-400 to-emerald-500 rounded transition-all duration-700"
+          className="absolute left-0 top-0 h-full bg-gradient-to-r from-emerald-400 to-green-500 rounded-md transition-all duration-700 group-hover:brightness-110"
           style={{ width: `${percent}%` }}
         />
 
-        {/* Quantity Text centered inside bar */}
-        <div className="absolute inset-0 flex items-center justify-center text-[10px] font-bold text-white pointer-events-none">
+        {/* Quantity Text */}
+        <div className="absolute inset-0 flex items-center justify-center text-[10px] font-semibold text-white pointer-events-none">
           {qty}
         </div>
-
       </div>
 
       {/* Value */}
-      <div className="w-20 text-right text-xs font-bold text-[var(--foreground)]">
+      <div className="w-20 text-right text-[11px] font-semibold text-[var(--foreground)]">
         {value}
       </div>
     </div>
@@ -117,19 +116,18 @@ export default function PieCharts({ rows = [], singleChart = false }) {
 
   /* ---- Full Layout ---- */
   return (
-    <div className="w-full h-full flex gap-3 px-2">
-
+    <div className="w-full h-full flex gap-2 px-1">
 
       {/* PIE CHART CARD */}
-      <div className="bg-[var(--card)] w-[20%] rounded-lg border border-[var(--border)] p-2 hover:shadow-md transition-all duration-200">
-        <div className="flex items-center mb-3">
-          <div className="h-5 w-1 bg-[var(--primary)] mr-2 rounded-sm"></div>
-          <h2 className="text-sm md:text-[13px] font-semibold text-[var(--foreground)]">
-            PROJECT DISTRIBUTION
+      <div className="bg-[var(--card)] w-[250px] shrink-0 rounded-lg border border-[var(--border)] p-2 flex flex-col hover:shadow-md transition-all duration-200">
+        <div className="flex items-center mb-1">
+          <div className="h-4 w-1 bg-[var(--primary)] mr-1.5 rounded-sm"></div>
+          <h2 className="text-[11px] font-semibold text-[var(--foreground)] leading-tight">
+            PROJECT DIST.
           </h2>
         </div>
 
-        <div className="relative h-[120px] flex justify-center items-center">
+        <div className="relative flex-1 min-h-0 flex justify-center items-center">
           <Pie
             data={buildChartData(projectOrderQty, "Order Qty")}
             options={chartOptions}
@@ -138,34 +136,37 @@ export default function PieCharts({ rows = [], singleChart = false }) {
       </div>
 
       {/* PROJECT SCROLLABLE BAR PANEL */}
-      <div className="bg-[var(--card)] w-[400px] border border-[var(--border)] rounded-lg p-2 h-[260px] overflow-y-auto scrollbar-hide">
+      <div className="bg-[var(--card)] w-[400px] border border-[var(--border)] rounded-lg flex flex-col overflow-hidden">
 
+  {/* Header */}
+  <div className="px-3 py-2 sticky top-0 bg-[var(--card)] border-b border-[var(--border)] z-10">
+    <div className="text-xs font-semibold tracking-wide text-[var(--foreground)]">
+      PROJECT BREAKDOWN
+    </div>
+  </div>
 
-        <div className="text-xs -py-3  z-9 h-6 items-center sticky top-0 bg-black font-semibold text-[var(--foreground)] mb-2">
-         PROJECT BREAKDOWN
-        </div>
-        <div className="p-2 -top-2">
-           {(() => {
-         const values = Object.values(projectMetrics);
-const maxQty = values.length ? Math.max(...values.map(p => p.qty)) : 0;
+  {/* Scrollable Content */}
+  <div className="flex-1 overflow-y-auto px-3 py-2 scrollbar-hide">
+    {(() => {
+      const values = Object.values(projectMetrics);
+      const maxQty = values.length
+        ? Math.max(...values.map(p => p.qty))
+        : 0;
 
-
-          return Object.entries(projectMetrics)
-            .sort((a, b) => b[1].qty - a[1].qty) // highest first
-            .map(([project, data]) => (
-              <ProjectBar
-                key={project}
-                project={project}
-                qty={data.qty}
-                value={formatCurrency(data.value)}
-                maxQty={maxQty}
-              />
-            ));
-        })()}
-        </div>
-       
-      </div>
-
+      return Object.entries(projectMetrics)
+        .sort((a, b) => b[1].qty - a[1].qty)
+        .map(([project, data]) => (
+          <ProjectBar
+            key={project}
+            project={project}
+            qty={data.qty}
+            value={formatCurrency(data.value)}
+            maxQty={maxQty}
+          />
+        ));
+    })()}
+  </div>
+</div>
 
     </div>
   );

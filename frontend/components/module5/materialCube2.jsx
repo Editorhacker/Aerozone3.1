@@ -33,7 +33,7 @@ const TypeCube = ({ position, color, label,size }) => {
 
       {/* Label BELOW cube */}
       <Text
-  position={[0, -(size / 2 + 2), 0]}
+  position={[0, -(size / 1 + 0.5), 0]}
   fontSize={size * 0.50}
   color="white"
   anchorX="center"

@@ -47,8 +47,8 @@ export default function UploadForm({ setLoading }) {
   };
 
   return (
-    
-   <div className="bg-[var(--card)] rounded-xl border border-[var(--primary)]/20 shadow p-6 max-w-lg">
+
+    <div className="bg-[var(--card)] rounded-xl border border-[var(--primary)]/20 shadow p-6 max-w-lg">
 
       <div className="flex items-center mb-4">
         <div className="h-6 w-1 bg-[var(--primary)] mr-3"></div>
@@ -61,44 +61,44 @@ export default function UploadForm({ setLoading }) {
         Select and process your Excel file.
       </p>
 
-            {/* Upload form */}
-            <input
-              type="file"
-              ref={fileInputRef}
-              accept=".xlsx,.xls"
-              onChange={handleFileChange}
-              className="hidden"
-            />
+      {/* Upload form */}
+      <input
+        type="file"
+        ref={fileInputRef}
+        accept=".xlsx,.xls"
+        onChange={handleFileChange}
+        className="hidden"
+      />
 
-            {/* Select Button */}
-            <button
-              onClick={selectFileInput}
-              className="w-full bg-[var(--primary)] hover:opacity-90 text-[var(--primary-foreground)] py-3 px-6 rounded-lg mb-4 transition shadow"
-            >
-              Select File
-            </button>
+      {/* Select Button */}
+      <button
+        onClick={selectFileInput}
+        className="w-full bg-[var(--primary)] hover:opacity-90 text-[var(--primary-foreground)] py-3 px-6 rounded-lg mb-4 transition shadow"
+      >
+        Select File
+      </button>
 
-            {/* File Name */}
-            <div className="text-sm text-[var(--primary)] mb-4 font-mono">
-              {dumpFileName}
-            </div>
+      {/* File Name */}
+      <div className="text-sm text-[var(--primary)] mb-4 font-mono">
+        {dumpFileName}
+      </div>
 
-            {/* Process Button */}
-            <button
-              onClick={handleUpload}
-              disabled={!file}
-              className="w-full bg-[var(--success)] hover:opacity-90 text-[var(--success-foreground)] py-3 px-6 rounded-lg transition disabled:opacity-50 disabled:cursor-not-allowed shadow"
-            >
-              Process Data
-            </button>
+      {/* Process Button */}
+      <button
+        onClick={handleUpload}
+        disabled={!file}
+        className="w-full bg-[var(--success)] hover:opacity-90 text-[var(--success-foreground)] py-3 px-6 rounded-lg transition disabled:opacity-50 disabled:cursor-not-allowed shadow"
+      >
+        Process Data
+      </button>
 
-            {/* Message */}
-            {message && (
-              <p className="mt-4 bg-[var(--success)]/10 border border-[var(--success)]/30 text-[var(--success)] p-3 rounded-lg text-center">
-                {message}
-              </p>
-            )}
-          </div>
-       
+      {/* Message */}
+      {message && (
+        <p className="mt-4 bg-[var(--success)]/10 border border-[var(--success)]/30 text-[var(--success)] p-3 rounded-lg text-center">
+          {message}
+        </p>
+      )}
+    </div>
+
   );
 }

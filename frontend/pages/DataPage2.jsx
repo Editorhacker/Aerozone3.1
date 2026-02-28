@@ -568,14 +568,14 @@ const DataPage2 = () => {
                     <RMSupplier
 
                       value={`${filteredRows.length} `}
-                      
+
                       suppliers={suppliersByRM}
                     />
                   </div>
                   <div className="w-[60%]">
                     <BOISupplier
                       value={`${filteredRows.length} `}
-                      
+
                       suppliers={suppliersByBOI}
                     />
                   </div>
@@ -623,27 +623,27 @@ const DataPage2 = () => {
               <div className="w-[75%]  ">
                 <div className="bg-[var(--color-card)] p-4 rounded-[var(--radius)] shadow-md relative h-full">
                   <div className="fixed -mt-2 gap-2 mr-15 flex right-10 z-10 items-center">
-                   <div className="flex flex-row gap-2">
-                     <button
-                      onClick={() => setShowItemInsights(true)}
-                      className="h-fit text-xs font-semibold bg-[var(--color-primary)] text-[var(--color-primary-foreground)] px-4 py-2 rounded-[var(--radius)] shadow-lg z-20 transition-transform duration-200 hover:scale-[1.05]"
-                    >
-                      Item Insights
-                    </button>
+                    <div className="flex flex-row gap-2">
+                      <button
+                        onClick={() => setShowItemInsights(true)}
+                        className="h-fit text-xs font-semibold bg-[var(--color-primary)] text-[var(--color-primary-foreground)] px-4 py-2 rounded-[var(--radius)] shadow-lg z-20 transition-transform duration-200 hover:scale-[1.05]"
+                      >
+                        Item Insights
+                      </button>
 
-                    {/* Floating Upload Button */}
-                    <button
-                      onClick={() => setShowUploadModal(true)}
-                      className=" bg-[var(--color-primary)] text-[var(--color-primary-foreground)] w-9 h-9 rounded-full shadow-lg flex items-center justify-center z-20 transition-transform duration-300 hover:scale-[1.05]"
-                      title="Upload Excel File"
-                    >
-                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 23 23" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                        <polyline points="17 8 12 3 7 8"></polyline>
-                        <line x1="12" y1="3" x2="12" y2="15"></line>
-                      </svg>
-                    </button>
-                   </div>
+                      {/* Floating Upload Button */}
+                      <button
+                        onClick={() => setShowUploadModal(true)}
+                        className=" bg-[var(--color-primary)] text-[var(--color-primary-foreground)] w-9 h-9 rounded-full shadow-lg flex items-center justify-center z-20 transition-transform duration-300 hover:scale-[1.05]"
+                        title="Upload Excel File"
+                      >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 23 23" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                          <polyline points="17 8 12 3 7 8"></polyline>
+                          <line x1="12" y1="3" x2="12" y2="15"></line>
+                        </svg>
+                      </button>
+                    </div>
                     <button
                       className=" p-2  bg-[var(--color-primary)] rounded-[var(--radius)] text-[var(--color-primary-foreground)] transition-transform duration-200 hover:scale-[1.05] z-10"
                       title="Zoom Table"

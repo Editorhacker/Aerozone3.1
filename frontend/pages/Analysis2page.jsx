@@ -153,42 +153,42 @@ const Analysis2page = () => {
         if (!isNaN(end) && refVal > end) return false;
       }
 
-      for (const term of searchTerms) {
-        const numericTerm = parseFloat(term);
-        const isNumeric = !isNaN(numericTerm);
-        let matched = false;
+      // Split into OR groups
+const searchGroups = String(search || "")
+  .split(",")
+  .map(group =>
+    group
+      .trim()
+      .split(/\s+/)
+      .filter(Boolean)
+      .map(t => t.toLowerCase())
+  )
+  .filter(group => group.length);
 
-        for (const key of searchableFields) {
-          const value = row[key];
-          if (value == null) continue;
+      // AND Multi Search on specific fields only
+if (searchGroups.length) {
 
-          const text = String(value).toLowerCase();
+  const rowSearchString = [
+    row.ProjectCode,
+    row.ItemCode,
+    row.Type,
+    row.ItemShortDescription,
+    row.Description,
+    row.ReferenceB,
+    row.REF_B
+  ]
+    .filter(Boolean)
+    .join(" ")
+    .toLowerCase();
 
-          if (isNumeric) {
-            const extracted = parseFloat(
-              String(value).replace(/[^0-9.\-]/g, "")
-            );
-            if (!isNaN(extracted) && extracted === numericTerm) {
-              matched = true;
-              break;
-            }
+  const matchesAnyGroup = searchGroups.some(group =>
+    group.every(term =>
+      rowSearchString.includes(term)
+    )
+  );
 
-            const tokenRegex = new RegExp(
-              "\\b" + escapeRegExp(term) + "\\b",
-              "i"
-            );
-            if (tokenRegex.test(String(value))) {
-              matched = true;
-              break;
-            }
-          } else if (text.includes(term)) {
-            matched = true;
-            break;
-          }
-        }
-
-        if (!matched) return false;
-      }
+  if (!matchesAnyGroup) return false;
+}
 
       return true;
     };
@@ -284,9 +284,13 @@ const Analysis2page = () => {
 
       {renderZoomedComponent()}
 
-      <div className={`pt-12 px-2 sm:px-3 lg:px-3 pb-2 transition-all duration-300 ${activeComponent ? 'blur-sm' : ''} max-w-screen`}>
+      {/* ── Main content: fills viewport below navbar ── */}
+      <div
+        className={`pt-11 px-2 sm:px-3 lg:px-3 pb-1 transition-all duration-300 ${activeComponent ? 'blur-sm' : ''} flex flex-col`}
+        style={{ height: '100vh', overflow: 'hidden' }}
+      >
         {/* Filter Bar */}
-        <div className="mb-1">
+        <div className="mb-1 shrink-0">
           <Filters
             filters={filters}
             setFilters={setFilters}
@@ -295,56 +299,53 @@ const Analysis2page = () => {
           />
         </div>
 
-        <div className='flex flex-col gap-2'>
-          <div className='flex flex-row justify-between gap-2'>
-          <div className='text-2xl'><h1>Materials</h1></div>
-          
-          <div className='w-[50%] flex gap-2'>
-            
-           <TypeCubeScene rows={filteredRows} />
-           </div>
+        {/* Title + Cube row */}
+        
 
+        {/* Charts row — grows to fill available space, no scroll */}
+        <div className="flex justify-center gap-3 mb-2 shrink-0" style={{ height: '220px' }}>
+          {/* Pie + Project breakdown */}
+          <div className="w-fit">
+            <PieCharts rows={filteredRows} />
           </div>
-           <div className="flex gap-2 items-stretch">
-  <div className="flex-1">
-    <PieCharts rows={filteredRows}/>
-  </div>
+           <div className="h-[100%] w-[200px]">
+            <TypeCubeScene rows={filteredRows} />
+          </div>
 
-  <div className="w-[260px]">
-    <RateSummary rows={filteredRows}/>
-     <YearTotalQty rows={filteredRows}/>
-  </div>
-  <div className="flex gap-2">
-  <div className="flex-1">
-    <SupplierPieChart rows={filteredRows} />
-  </div>
-</div>
-
-</div>
-
-          <div className="w-full bg-[var(--color-muted)] min-h-50 p-2 rounded-[var(--radius)] shadow-md relative flex flex-col">
-
-            {/* Zoom Button */}
-            <div className="flex justify-end absolute top-2 right-2 z-10">
-              <button
-                className="p-1.5 bg-purple-600 rounded-[var(--radius)] text-white transition-transform duration-200 hover:scale-[1.05]"
-                title="Zoom Table"
-                onClick={() => setActiveComponent("dataTable")}
-              >
-                <ZoomIcon width={14} height={14} />
-              </button>
+          {/* Rate + Year summaries stacked */}
+          <div className="flex flex-col gap-2 w-[200px] shrink-0 overflow-hidden">
+            <RateSummary rows={filteredRows} />
+            <div className="flex-1 min-h-0 overflow-y-auto">
+              <YearTotalQty rows={filteredRows} />
             </div>
+          </div>
 
-            <div >
-              <DataTable2
-                rows={filteredRows}
-                fullView={activeComponent === "dataTable"}
-
-              />
-            </div>
+          {/* Supplier pie */}
+          <div className="shrink-0">
+            <SupplierPieChart rows={filteredRows} />
           </div>
         </div>
 
+        {/* DataTable — takes remaining height */}
+        <div className="flex-1 min-h-0 bg-[var(--color-muted)] p-1.5 rounded-[var(--radius)] shadow-md relative flex flex-col overflow-hidden">
+          {/* Zoom Button */}
+          <div className="flex justify-end absolute top-2 right-2 z-10">
+            <button
+              className="p-1.5 bg-purple-600 rounded-[var(--radius)] text-white transition-transform duration-200 hover:scale-[1.05]"
+              title="Zoom Table"
+              onClick={() => setActiveComponent("dataTable")}
+            >
+              <ZoomIcon width={14} height={14} />
+            </button>
+          </div>
+
+          <div className="w-full h-full">
+            <DataTable2
+              rows={filteredRows}
+              fullView={activeComponent === "dataTable"}
+            />
+          </div>
+        </div>
       </div>
     </div>
   )

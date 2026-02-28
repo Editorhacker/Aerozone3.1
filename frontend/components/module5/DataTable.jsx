@@ -13,15 +13,15 @@ export default function DataTable2({
     { key: "priority", label: "Priority" },
     { key: "ProjectCode", label: "Project Code" },
     { key: "ItemCode", label: "Item Code" },
-    { key: "Type", label: "Type"},
+    { key: "Type", label: "Type" },
     { key: "PONo", label: "PO No." },
     { key: "SupplierName", label: "Supplier" }, // Shortened label
     { key: "ItemShortDescription", label: "Description" },
-    { key: "Date", label: "Order Date"},
+    { key: "Date", label: "Order Date" },
     { key: "OrderedLineQuantity", label: " Qty" },
     { key: "UOM", label: "UOM" },
     { key: "OrderLineValue", label: "Order Value" },
-    { key: "InventoryQuantity", label: "On Hand"},
+    { key: "InventoryQuantity", label: "On Hand" },
     { key: "ReferenceB", label: "Ref B" },   // ✅ FIX,
     // { key: "Currency", label: "Currency" },
     // { key: "PlannedReceiptDate", label: "Planned Receipt" },
@@ -206,13 +206,13 @@ export default function DataTable2({
   };
 
   return (
-    <div className=" -mt-1 px-1 -mb-2 text-xs rounded-xl mx-auto">
+    <div className="flex flex-col h-full -mt-1 px-1 -mb-2 text-xs rounded-xl mx-auto">
       {/* Header + Buttons */}
       <div className="flex justify-between items-center mb-1">
-       <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center">
           <h2 className="text-lg font-semibold text-[var(--color-foreground)] flex items-center">
             <span className="h-5 w-1 bg-[var(--color-primary)] mr-2"></span>
-            DATA 
+            DATA
           </h2>
           <h4 className="p-2 font-semibold text-[var(--color-foreground)]">
             Total Rows : {sortedRows.length + prioritizedNotInFilter.length}
@@ -272,7 +272,7 @@ export default function DataTable2({
       )}
 
       {/* Table */}
-      <div className={`${fullView ? "h-[75vh]" : "h-[35vh]"} overflow-y-auto rounded-md scrollbar-hide bg-gray-800`}>
+      <div className={`${fullView ? "h-[75vh]" : "h-full"} overflow-y-auto rounded-md scrollbar-hide bg-gray-800`}>
 
         <table className="w-full ">
           <thead className="bg-[var(--color-muted)] z-10 sticky top-0">

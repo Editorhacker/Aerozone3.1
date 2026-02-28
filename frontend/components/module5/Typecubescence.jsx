@@ -27,22 +27,26 @@ const TypeCubeScene = ({ rows = [] }) => {
   }, [rows]);
 
 
-  const CUBE_SIZE = 4;   // 👈 increase / decrease cube size here
-const GAP = 10;        // tiny breathing gap between cubes
+  const CUBE_SIZE = 1.5;   // 👈 increase / decrease cube size here
+  const GAP = 2;        // tiny breathing gap between cubes
 
   /* -------- Layout -------- */
-const total = types.length;
-const SPACING = CUBE_SIZE + GAP; // auto spacing based on size
-const startX = -((total - 1) * SPACING) / 2;
+  const COLUMNS = 2;
+const SPACING = CUBE_SIZE + GAP;
+
+const rowsCount = Math.ceil(types.length / COLUMNS);
+
+const startX = -((COLUMNS - 1) * SPACING) / 2;
+const startY = ((rowsCount - 1) * SPACING) / 2;
 
 
   /* -------- FIXED CAMERA (important) -------- */
-  const cameraZ = 14; // constant → cubes always same size
+  const cameraZ = 10; // constant → cubes always same size
 
   return (
     <div
       style={{
-        height: "100px",
+        height: "100%",
         width: "100%",
         background: "#000",
         borderRadius: "12px",
@@ -56,26 +60,30 @@ const startX = -((total - 1) * SPACING) / 2;
         <directionalLight position={[5, 5, 5]} intensity={1.2} />
 
         {/* Horizontal Row */}
-        {types.map((type, index) => (
-  <TypeCube
-    key={type}
-    label={type}
-    color={COLORS[index % COLORS.length]}
-    size={CUBE_SIZE} // 👈 important
-    position={[
-      startX + index * SPACING,
-      0,
-      0
-    ]}
-  />
-))}
+        {types.map((type, index) => {
+  const row = Math.floor(index / COLUMNS);
+  const col = index % COLUMNS;
+
+  const x = startX + col * SPACING;
+  const y = startY - row * SPACING;
+
+  return (
+    <TypeCube
+      key={type}
+      label={type}
+      color={COLORS[index % COLORS.length]}
+      size={CUBE_SIZE}
+      position={[x, y, 0]}
+    />
+  );
+})}
 
 
         {/* Locked controls */}
         <OrbitControls
           enablePan={false}
           enableZoom={false}
-          // enableRotate={false}
+        // enableRotate={false}
         />
       </Canvas>
     </div>
