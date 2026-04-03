@@ -2,17 +2,17 @@ import React, { useEffect, useRef, useState } from "react";
 import './App.css';
 import { ThemeProvider } from "./context/ThemeContext";
 import GlobalLoader from "./components/GlobalLoader";
-import Navbar from "../components/module1/Navbar"; // Global Navbar for all pages
+import Navbar from "../components/home/Navbar"; // Global Navbar for all pages
 
-import DataPage from "../pages/DataPage";
+import MainChart from "../pages/MainChart";
 import Home from "../pages/Home";
-import PdfJson from "../pages/PdfJson";
-import DataPage2 from "../pages/DataPage2";
-import Module2Page1 from "../pages/Module2Page1";
+import PdfToJson from "../pages/PdfToJson";
+import PlannerChecker from "../pages/PlannerChecker";
+import Prism from "../pages/Prism";
 import { Routes, Route, useLocation } from "react-router-dom";
-import Module3Page1 from "../pages/Module3Page1";
-import Analysis1page from "../pages/Analysis1page";
-import Analysis2page from "../pages/Analysis2page";
+import Orbit from "../pages/Orbit";
+import Analysis1 from "../pages/Analysis1";
+import Analysis2 from "../pages/Analysis2";
 // import Lenis from "@studio-freight/lenis";
 
 function App() {
@@ -72,13 +72,13 @@ function App() {
 
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/data" element={<DataPage />} />
-            <Route path="/pdf-to-json" element={<PdfJson />} />
-            <Route path="/data2" element={<DataPage2 />} />
-            <Route path="/Module2Page1" element={<Module2Page1 />} />
-            <Route path="/Module3Page1" element={<Module3Page1 />} />
-            <Route path="/Analysis1page" element={<Analysis1page />} />
-            <Route path="/Analysis2page" element={<Analysis2page />} />
+            <Route path="/main-chart" element={<MainChart />} />
+            <Route path="/pdf-to-json" element={<PdfToJson />} />
+            <Route path="/planner-checker" element={<PlannerChecker />} />
+            <Route path="/prism" element={<Prism />} />
+            <Route path="/orbit" element={<Orbit />} />
+            <Route path="/analysis1" element={<Analysis1 />} />
+            <Route path="/analysis2" element={<Analysis2 />} />
           </Routes>
         </div>
       </div>
